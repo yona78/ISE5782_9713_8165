@@ -4,5 +4,4 @@ import Primitives.Vector;
 
 public interface Geometry {
     public Vector GetNormal(Point point);
-
 }
