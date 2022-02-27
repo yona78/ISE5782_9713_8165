@@ -29,15 +29,15 @@ public class Point {
 		return this.xyz.toString();
 	}
 
-	public Point add(Vector vec) {
-		Double3 other = this.xyz.add(vec.xyz);
-		return new Point(other.d1, other.d2, other.d3);
-	}
-
-	public Vector subtract(Point p) {
-		Double3 other = this.xyz.subtract(p.xyz);
-		return new Vector(other.d1, other.d2, other.d3);
-	}
+	Point add(Vector vec) {
+    	Double3 other = this.xyz.add(vec.xyz);
+    	return new Point(other);
+    }
+    
+    Vector subtract(Point p) {
+    	Double3 other = this.xyz.subtract(p.xyz);
+    	return new Vector(other);
+    }
 
 	public double distanceSquared(Point p) {
 		double x = (this.xyz.d1 - p.xyz.d1) * (this.xyz.d1 - p.xyz.d1);
