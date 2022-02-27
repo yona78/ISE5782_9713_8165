@@ -3,14 +3,14 @@
  */
 package Geometries;
 
+import Primitives.Point;
+import Primitives.Vector;
+
 /**
  * This class will serve all classes which contains in a plane.
  * 
  * @author Hillel Kroitoro
  */
-
-import Primitives.Point;
-import Primitives.Vector;
 
 public class Plane implements Geometry {
 	// #region Fields
