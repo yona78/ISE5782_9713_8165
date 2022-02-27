@@ -3,7 +3,7 @@
  */
 package Geometries;
 /**
- * This class will serve all classes based on sides
+ * This class will serve all classes which contains in a plane.
  * 
  * @author Hillel Kroitoro
  */
