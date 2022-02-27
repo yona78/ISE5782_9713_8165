@@ -1,27 +1,20 @@
-package Primitives;
-import java.lang.Math;
+package primitives;
+
 
 public class Vector extends Point {
-    Vector (Double3 xyz) {
-        super(xyz);
-    }
-	public Vector(double x, double y,double z) {
+	public
+    Vector(double x, double y,double z) {
     	super(x,y,z);
         if (this.xyz.equals(Double3.ZERO)) {
-        	throw new IllegalArgumentException();
+        	throw new IllegalArgumentException("cant create zero vector");
         }
     }
-    public Vector(Point p1, Point p2){
-        super(p2.xyz.d1 - p1.xyz.d1, p2.xyz.d2 - p1.xyz.d2, p2.xyz.d3 - p1.xyz.d3);
-        /*double x = p2.xyz.d1 - p1.xyz.d1;
-        double y = p2.xyz.d2 - p1.xyz.d2;
-        double z = p2.xyz.d3 - p1.xyz.d3;
-        super(x,y,z);*/
+	Vector(Double3 p) {
+    	super(p);
         if (this.xyz.equals(Double3.ZERO)) {
-        	throw new IllegalArgumentException();
+        	throw new IllegalArgumentException("cant create zero vector");
         }
     }
-    @Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -35,30 +28,52 @@ public class Vector extends Point {
     public String toString() {
     	return "Vector:" + super.toString();
     }
-    public Double3 get_point() {
+    Double3 get_point() {
     	return xyz;
     }
-    public Vector Normalize(){
-        double length = Length();
-        return new Vector(xyz.d1/length, xyz.d2/length, xyz.d3/length);
+    
+    Vector add (Vector vec) {
+    	Point other = this.add(vec);
+    	return new Vector(other.xyz.d1, other.xyz.d2, other.xyz.d3);
     }
-    public double Length(){
-        return Math.sqrt(LengthSquared());
+    
+    Vector subtract (Vector vec) {
+    	return this.subtract(vec);
     }
-    public double LengthSquared(){
-        return xyz.d1 * xyz.d1 + xyz.d2 * xyz.d2 + xyz.d3 * xyz.d3;
+    
+    Vector scale (double scale) {
+    	Double3 other = this.xyz.scale(scale);
+    	return new Vector(other.d1, other.d2, other.d3);
     }
-    public Vector CrossProduct(Vector vector)
-    {
-        double x = this.xyz.d1;
-        double y = this.xyz.d2;
-        double z = this.xyz.d3;
-        double x1 = vector.xyz.d1;
-        double y1 = vector.xyz.d2;
-        double z1 = vector.xyz.d3;
-        return new Vector(y*z1 - z*y1, z*x1 - x*z1, x*y1 - y*x1);
+    
+    double dotProduct(Vector vec) {
+    	double x = (this.xyz.d1 * vec.xyz.d1);
+    	double y = (this.xyz.d2 * vec.xyz.d2) ;
+    	double z = (this.xyz.d3 * vec.xyz.d3);
+    	return x + y + z;
     }
-    public int dotProduct(Vector v){
-        return 0;
+    
+    Vector crossProduct(Vector vec) {
+    	double x = (this.xyz.d2 * vec.xyz.d3) - (this.xyz.d3 * vec.xyz.d2);
+    	double y = (this.xyz.d3 * vec.xyz.d1) - (this.xyz.d1 * vec.xyz.d3);
+    	double z = (this.xyz.d1 * vec.xyz.d2) - (this.xyz.d2 * vec.xyz.d1);
+    	return new Vector(x, y, z);
     }
+    
+    double lengthSquared() {
+    	double x = (this.xyz.d1) * (this.xyz.d1);
+    	double y = (this.xyz.d2) * (this.xyz.d2);
+    	double z = (this.xyz.d3) * (this.xyz.d3);
+    	return  x + y +z;
+    }
+    
+   double length() {
+	   return Math.sqrt(this.lengthSquared());
+   }
+   
+   Vector normalize() {
+	   double len = this.length();
+	   Vector other = this.scale((1/len));
+	   return other;
+   }
 }
