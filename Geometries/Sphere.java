@@ -1,16 +1,10 @@
 /**
  * 
  */
-package Geometries;
+package geometries;
 
-/**
- * This class present a sphere
- * 
- * @author Hillel Kroitoro
- */
-
-import Primitives.Point;
-import Primitives.Vector;
+import primitives.Point;
+import primitives.Vector;
 
 public class Sphere implements Geometry {
     // #region Fields

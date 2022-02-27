@@ -1,17 +1,11 @@
 /**
  * 
  */
-package Geometries;
+package geometries;
 
-/**
- * This class present a tube.
- * 
- * @author Hillel Kroitoro
- */
-
-import Primitives.Point;
-import Primitives.Ray;
-import Primitives.Vector;
+import primitives.Point;
+import primitives.Ray;
+import primitives.Vector;
 
 public class Tube implements Geometry {
     // #region Fields

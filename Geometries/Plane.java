@@ -1,10 +1,10 @@
 /**
  * 
  */
-package Geometries;
+package geometries;
 
-import Primitives.Point;
-import Primitives.Vector;
+import primitives.Point;
+import primitives.Vector;
 
 /**
  * This class will serve all classes which contains in a plane.
@@ -26,7 +26,7 @@ public class Plane implements Geometry {
 	 */
 	public Plane(Point point, Vector vector) {
 		this.point = point;
-		this.vector = vector.Normalize();
+		this.vector = vector.normalize();
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class Plane implements Geometry {
 		this.point = point1;
 		Vector v1 = new Vector(point1, point2);
 		Vector v2 = new Vector(point1, point3);
-		this.vector = v1.CrossProduct(v2).Normalize();
+		this.vector = v1.CrossProduct(v2).normalize();
 	}
 
 	@Override

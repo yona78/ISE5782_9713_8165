@@ -6,7 +6,6 @@ package primitives;
  * @author Yona Orunov
  */
 public class Vector extends Point {
-	public
 	/**
 	 * Constructor to initialize Vector based object with its three number values
 	 * 
@@ -14,7 +13,7 @@ public class Vector extends Point {
 	 * @param d2 second number value
 	 * @param d3 third number value
 	 */
-    Vector(double x, double y,double z) {
+    public Vector(double x, double y,double z) {
     	super(x,y,z);
         if (this.xyz.equals(Double3.ZERO)) {
         	throw new IllegalArgumentException("cant create zero vector");
@@ -25,7 +24,7 @@ public class Vector extends Point {
 	 * 
 	 * @param p first number value
 	 */
-	Vector(Double3 p) {
+	public Vector(Double3 p) {
     	super(p);
         if (this.xyz.equals(Double3.ZERO)) {
         	throw new IllegalArgumentException("cant create zero vector");
@@ -51,7 +50,7 @@ public class Vector extends Point {
 	 *
 	 * @return field xyz
 	 */
-    Double3 get_point() {
+    public Double3 getPoint() {
     	return xyz;
     }
     /**
@@ -61,7 +60,7 @@ public class Vector extends Point {
 	 * @param vec right handle side operand for addition
 	 * @return result of add
 	 */
-    Vector add (Vector vec) {
+    public Vector add (Vector vec) {
     	Point other = super.add(vec);
     	return new Vector(other.xyz.d1, other.xyz.d2, other.xyz.d3);
     }
@@ -71,7 +70,7 @@ public class Vector extends Point {
 	 * @param scale right handle side operand for addition
 	 * @return new vector with point after scale
 	 */
-    Vector scale (double scale) {
+    public Vector scale (double scale) {
     	Double3 other = this.xyz.scale(scale);
     	return new Vector(other.d1, other.d2, other.d3);
     }
@@ -81,7 +80,7 @@ public class Vector extends Point {
 	 * @param vec right handle side operand for addition
 	 * @return result of dot product
 	 */
-    double dotProduct(Vector vec) {
+    public double dotProduct(Vector vec) {
     	double x = (this.xyz.d1 * vec.xyz.d1);
     	double y = (this.xyz.d2 * vec.xyz.d2) ;
     	double z = (this.xyz.d3 * vec.xyz.d3);
@@ -93,7 +92,7 @@ public class Vector extends Point {
 	 * @param vec right handle side operand for addition
 	 * @return result vector of cross product
 	 */
-    Vector crossProduct(Vector vec) {
+    public Vector crossProduct(Vector vec) {
     	double x = (this.xyz.d2 * vec.xyz.d3) - (this.xyz.d3 * vec.xyz.d2);
     	double y = (this.xyz.d3 * vec.xyz.d1) - (this.xyz.d1 * vec.xyz.d3);
     	double z = (this.xyz.d1 * vec.xyz.d2) - (this.xyz.d2 * vec.xyz.d1);
@@ -104,7 +103,7 @@ public class Vector extends Point {
 	 *
 	 * @return the squared length of the vector
 	 */
-    double lengthSquared() {
+    public double lengthSquared() {
     	double x = (this.xyz.d1) * (this.xyz.d1);
     	double y = (this.xyz.d2) * (this.xyz.d2);
     	double z = (this.xyz.d3) * (this.xyz.d3);
@@ -115,7 +114,7 @@ public class Vector extends Point {
 	 *
 	 * @return the length of the vector
 	 */
-   double length() {
+    public double length() {
 	   return Math.sqrt(this.lengthSquared());
    }
    /**
@@ -124,7 +123,7 @@ public class Vector extends Point {
 	 *
 	 * @return result vector after normalize the vector 
 	 */
-   Vector normalize() {
+    public Vector normalize() {
 	   double len = this.length();
 	   Vector other = this.scale((1/len));
 	   return other;

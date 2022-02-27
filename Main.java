@@ -1,6 +1,7 @@
-import Primitives.*;
 import static java.lang.System.out;
-import static Primitives.Util.*;
+import static primitives.Util.*;
+
+import primitives.*;
 
 /**
  * Test program for the 1st stage
@@ -27,9 +28,9 @@ public final class Main {
 		Vector v3 = new Vector(0, 3, -2);
 
 		// test length..
-		if (!isZero(v1.LengthSquared() - 14))
+		if (!isZero(v1.lengthSquared() - 14))
 			out.println("ERROR: LengthSquared() wrong value");
-		if (!isZero(new Vector(0, 3, 4).Length() - 5))
+		if (!isZero(new Vector(0, 3, 4).length() - 5))
 			out.println("ERROR: Length() wrong value");
 
 		// test Dot-Product
@@ -40,23 +41,23 @@ public final class Main {
 
 		// test Cross-Product
 		try { // test zero vector
-			v1.CrossProduct(v2);
+			v1.crossProduct(v2);
 			out.println("ERROR: crossProduct() for parallel vectors does not throw an exception");
 		} catch (Exception e) {
 		}
-		Vector vr = v1.CrossProduct(v3);
-		if (!isZero(vr.Length() - v1.Length() * v3.Length()))
+		Vector vr = v1.crossProduct(v3);
+		if (!isZero(vr.length() - v1.length() * v3.length()))
 			out.println("ERROR: crossProduct() wrong result length");
 		if (!isZero(vr.dotProduct(v1)) || !isZero(vr.dotProduct(v3)))
 			out.println("ERROR: crossProduct() result is not orthogonal to its operands");
 
 		// test vector normalization vs vector length and cross-product
 		Vector v = new Vector(1, 2, 3);
-		Vector u = v.Normalize();
-		if (!isZero(u.Length() - 1))
+		Vector u = v.normalize();
+		if (!isZero(u.length() - 1))
 			out.println("ERROR: the normalized vector is not a unit vector");
 		try { // test that the vectors are co-lined
-			v.CrossProduct(u);
+			v.crossProduct(u);
 			out.println("ERROR: the normalized vector is not parallel to the original one");
 		} catch (Exception e) {
 		}

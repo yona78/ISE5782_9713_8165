@@ -1,9 +1,9 @@
 /**
  * 
  */
-package Geometries;
+package geometries;
 
-import Primitives.Point;
+import primitives.Point;
 
 /**
  * This class present a triangle
