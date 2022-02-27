@@ -35,7 +35,7 @@ public class Vector extends Point {
     public Double3 get_point() {
     	return xyz;
     }
-    public Vector GetNormaledVector(){
+    public Vector Normalize(){
         double length = Length();
         return new Vector(xyz.d1/length, xyz.d2/length, xyz.d3/length);
     }

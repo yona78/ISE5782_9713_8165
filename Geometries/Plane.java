@@ -25,7 +25,7 @@ public class Plane implements Geometry{
 	 */
 	public Plane(Point point, Vector vector) {
 		this.point = point;
-		this.vector = vector.GetNormaledVector();
+		this.vector = vector.Normalize();
 	}
 
     /**
