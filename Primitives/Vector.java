@@ -40,7 +40,7 @@ public class Vector extends Point {
         return new Vector(xyz.d1/length, xyz.d2/length, xyz.d3/length);
     }
     public double Length(){
-        return Math.sqrt(xyz.d1 * xyz.d1 + xyz.d2 * xyz.d2 + xyz.d3 * xyz.d3);
+        return Math.sqrt(LengthSquared());
     }
     public double LengthSquared(){
         return xyz.d1 * xyz.d1 + xyz.d2 * xyz.d2 + xyz.d3 * xyz.d3;
@@ -54,9 +54,6 @@ public class Vector extends Point {
         double y1 = vector.xyz.d2;
         double z1 = vector.xyz.d3;
         return new Vector(y*z1 - z*y1, z*x1 - x*z1, x*y1 - y*x1);
-    }
-    public Vector GetNormaledVector() {
-        return null;
     }
     public int dotProduct(Vector v){
         return 0;
