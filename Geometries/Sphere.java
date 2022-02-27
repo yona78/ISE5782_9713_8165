@@ -2,6 +2,7 @@
  * 
  */
 package Geometries;
+
 /**
  * This class present a sphere
  * 
@@ -12,24 +13,24 @@ import Primitives.Point;
 import Primitives.Vector;
 
 public class Sphere implements Geometry {
-    //#region Fields
+    // #region Fields
     Point point;
     double radius;
-    //#endregion
+    // #endregion
 
     /**
-	 * Constructor to initialize sphere with its point and radius.
-	 * 
-	 * @param point the center of the sphere
-	 * @param radius the radius of the sphere
-	 */
-	public Sphere(Point point, Double radius) {
-		this.point = point;
-		this.radius = radius;
-	}
+     * Constructor to initialize sphere with its point and radius.
+     * 
+     * @param point  the center of the sphere
+     * @param radius the radius of the sphere
+     */
+    public Sphere(Point point, Double radius) {
+        this.point = point;
+        this.radius = radius;
+    }
 
     @Override
-    public Vector GetNormal(Point point){
+    public Vector GetNormal(Point point) {
         return null;
     }
 }

@@ -2,6 +2,7 @@
  * 
  */
 package Geometries;
+
 /**
  * This class will serve all classes which contains in a plane.
  * 
@@ -11,16 +12,16 @@ package Geometries;
 import Primitives.Point;
 import Primitives.Vector;
 
-public class Plane implements Geometry{
-    //#region Fields
-    Point point;
-    Vector vector;
-    //#endregion
+public class Plane implements Geometry {
+	// #region Fields
+	Point point;
+	Vector vector;
+	// #endregion
 
-    /**
+	/**
 	 * Constructor to initialize Plane based object with its point and vector
 	 * 
-	 * @param point one point on the plane
+	 * @param point  one point on the plane
 	 * @param vector the normal vector to the plane
 	 */
 	public Plane(Point point, Vector vector) {
@@ -28,7 +29,7 @@ public class Plane implements Geometry{
 		this.vector = vector.Normalize();
 	}
 
-    /**
+	/**
 	 * Constructor to initialize Plane based object with three points on the plane
 	 * 
 	 * @param point1 first point
@@ -37,21 +38,20 @@ public class Plane implements Geometry{
 	 */
 	public Plane(Point point1, Point point2, Point point3) {
 		this.point = point1;
-        Vector v1 = new Vector(point1, point2);
-        Vector v2 = new Vector(point1, point3);
+		Vector v1 = new Vector(point1, point2);
+		Vector v2 = new Vector(point1, point3);
 		this.vector = v1.CrossProduct(v2).Normalize();
 	}
 
+	@Override
+	public Vector GetNormal(Point point) {
+		return vector;
+	}
 
-    @Override
-    public Vector GetNormal(Point point){
-        return vector;
-    }
-
-    /**
-    * Method to return the normal vector to the plane
+	/**
+	 * Method to return the normal vector to the plane
 	 */
-	public Vector GetNormal(){
-        return vector;
-    }
+	public Vector GetNormal() {
+		return vector;
+	}
 }

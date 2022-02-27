@@ -2,6 +2,7 @@
  * 
  */
 package Geometries;
+
 /**
  * This class present a tube.
  * 
@@ -13,33 +14,34 @@ import Primitives.Ray;
 import Primitives.Vector;
 
 public class Tube implements Geometry {
-    //#region Fields
+    // #region Fields
     Ray ray;
     double radius;
-    //#endregion
+    // #endregion
 
     /**
-	 * Constructor to initialize sphere with its ray and radius.
-	 * 
-	 * @param ray the center of the sircle.
-	 * @param radius the radius of the sircle.
-	 */
-	public Tube(Ray ray, Double radius) {
-		this.ray = ray;
-		this.radius = radius;
-	}
+     * Constructor to initialize sphere with its ray and radius.
+     * 
+     * @param ray    the center of the sircle.
+     * @param radius the radius of the sircle.
+     */
+    public Tube(Ray ray, Double radius) {
+        this.ray = ray;
+        this.radius = radius;
+    }
 
-    //#region Get functions
-    public Ray GetRay(){
+    // #region Get functions
+    public Ray GetRay() {
         return ray;
     }
-    public double GetRadius(){
+
+    public double GetRadius() {
         return radius;
     }
-    //#endregion
+    // #endregion
 
     @Override
-    public Vector GetNormal(Point point){
+    public Vector GetNormal(Point point) {
         return null;
     }
 }
