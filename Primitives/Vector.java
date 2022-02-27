@@ -14,14 +14,14 @@ public class Vector extends Point {
     Vector(Double3 xyz) {
         super(xyz);
         if (this.xyz.equals(Double3.ZERO)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("cant create zero vector");
         }
     }
 
     public Vector(Point p1, Point p2) {
         super(p2.xyz.subtract(p1.xyz));
         if (this.xyz.equals(Double3.ZERO)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("cant create zero vector");
         }
     }
 
@@ -73,7 +73,7 @@ public class Vector extends Point {
         return new Vector(other.d1, other.d2, other.d3);
     }
     
-    Vector add (Vector vec) {
+    public Vector add (Vector vec) {
     	Point other = super.add(vec);
     	return new Vector(other.xyz.d1, other.xyz.d2, other.xyz.d3);
     }
