@@ -19,13 +19,7 @@ public class Vector extends Point {
     }
 
     public Vector(Point p1, Point p2) {
-        super(p2.xyz.d1 - p1.xyz.d1, p2.xyz.d2 - p1.xyz.d2, p2.xyz.d3 - p1.xyz.d3);
-        /*
-         * double x = p2.xyz.d1 - p1.xyz.d1;
-         * double y = p2.xyz.d2 - p1.xyz.d2;
-         * double z = p2.xyz.d3 - p1.xyz.d3;
-         * super(x,y,z);
-         */
+        super(p2.xyz.subtract(p1.xyz));
         if (this.xyz.equals(Double3.ZERO)) {
             throw new IllegalArgumentException();
         }
