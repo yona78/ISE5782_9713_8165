@@ -22,10 +22,22 @@ public class Vector extends Point {
 	/**
 	 * Constructor to initialize Vector based object with its Double3 value
 	 * 
-	 * @param p first number value
+	 * @param p the three parameters
 	 */
 	public Vector(Double3 p) {
     	super(p);
+        if (this.xyz.equals(Double3.ZERO)) {
+        	throw new IllegalArgumentException("cant create zero vector");
+        }
+    }
+    /**
+	 * Constructor to initialize Vector with 2 points
+	 * 
+	 * @param p1 the first point
+     * @param p2 the second point
+	 */
+	public Vector(Point p1, Point p2) {
+    	super(p2.xyz.subtract(p1.xyz));
         if (this.xyz.equals(Double3.ZERO)) {
         	throw new IllegalArgumentException("cant create zero vector");
         }
