@@ -4,6 +4,9 @@ import static Primitives.Util.isZero;
 
 public class Point {
     final Double3 xyz;
+	Point(Double3 xyz) {
+    	this.xyz = xyz;
+    }
     public Point(double x, double y,double z) {
     	Double3 other = new Double3(x,y,z);
     	this.xyz = other;

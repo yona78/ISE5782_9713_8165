@@ -2,6 +2,9 @@ package Primitives;
 import java.lang.Math;
 
 public class Vector extends Point {
+    Vector (Double3 xyz) {
+        super(xyz);
+    }
 	public Vector(double x, double y,double z) {
     	super(x,y,z);
         if (this.xyz.equals(Double3.ZERO)) {
