@@ -26,4 +26,5 @@ public class Sphere implements Geometry {
 		this.point = point;
 		this.radius = radius;
 	}
+    
 }

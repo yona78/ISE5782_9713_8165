@@ -39,7 +39,7 @@ public class Plane implements Geometry{
 		this.point = point1;
         Vector v1 = new Vector(point1, point2);
         Vector v2 = new Vector(point1, point3);
-		this.vector = v1.CrossProduct(v2).GetNormaledVector();
+		this.vector = v1.CrossProduct(v2).Normalize();
 	}
 
 

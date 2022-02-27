@@ -78,7 +78,7 @@ public class Polygon implements Geometry {
 			// Test the consequent edges have
 			edge1 = edge2;
 			edge2 = vertices[i].subtract(vertices[i - 1]);
-			if (positive != (edge1.CrossProduct(n) > 0))
+			if (positive != (edge1.CrossProduct(edge2).dotProduct(n) > 0))
 				throw new IllegalArgumentException("All vertices must be ordered and the polygon must be convex");
 		}
 		size = vertices.length;
