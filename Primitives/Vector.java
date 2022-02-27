@@ -36,11 +36,14 @@ public class Vector extends Point {
     	return xyz;
     }
     public Vector GetNormaledVector(){
-        double length = GetLength();
+        double length = Length();
         return new Vector(xyz.d1/length, xyz.d2/length, xyz.d3/length);
     }
-    public double GetLength(){
+    public double Length(){
         return Math.sqrt(xyz.d1 * xyz.d1 + xyz.d2 * xyz.d2 + xyz.d3 * xyz.d3);
+    }
+    public double LengthSquared(){
+        return xyz.d1 * xyz.d1 + xyz.d2 * xyz.d2 + xyz.d3 * xyz.d3;
     }
     public Vector CrossProduct(Vector vector)
     {
