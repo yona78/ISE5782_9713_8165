@@ -29,6 +29,15 @@ public class Tube implements Geometry {
 		this.radius = radius;
 	}
 
+    //#region Get functions
+    public Ray GetRay(){
+        return ray;
+    }
+    public double GetRadius(){
+        return radius;
+    }
+    //#endregion
+
     @Override
     public Vector GetNormal(Point point){
         return null;
