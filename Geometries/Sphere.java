@@ -3,12 +3,13 @@
  */
 package Geometries;
 /**
- * This class will serve all classes which contains in a plane.
+ * This class present a sphere
  * 
  * @author Hillel Kroitoro
  */
 
 import Primitives.Point;
+import Primitives.Vector;
 
 public class Sphere implements Geometry {
     //#region Fields
@@ -17,7 +18,7 @@ public class Sphere implements Geometry {
     //#endregion
 
     /**
-	 * Constructor to initialize Plane based object with its point and vector
+	 * Constructor to initialize sphere with its point and radius.
 	 * 
 	 * @param point the center of the sphere
 	 * @param radius the radius of the sphere
@@ -26,5 +27,9 @@ public class Sphere implements Geometry {
 		this.point = point;
 		this.radius = radius;
 	}
-    
+
+    @Override
+    public Vector GetNormal(Point point){
+        return null;
+    }
 }
