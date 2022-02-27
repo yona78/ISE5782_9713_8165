@@ -55,4 +55,10 @@ public class Vector extends Point {
         double z1 = vector.xyz.d3;
         return new Vector(y*z1 - z*y1, z*x1 - x*z1, x*y1 - y*x1);
     }
+    public Vector GetNormaledVector() {
+        return null;
+    }
+    public int dotProduct(Vector v){
+        return 0;
+    }
 }
