@@ -10,7 +10,6 @@ import static primitives.Util.isZero;
 
 public class Point {
     final Double3 xyz;
-    public
     /**
 	 * Constructor to initialize Point based object with its three number values
 	 * 
@@ -18,7 +17,7 @@ public class Point {
 	 * @param d2 second number value
 	 * @param d3 third number value
 	 */
-    Point(double x, double y,double z) {
+    public Point(double x, double y,double z) {
     	Double3 other = new Double3(x,y,z);
     	this.xyz = other;
     }
@@ -28,7 +27,7 @@ public class Point {
 	 * 
 	 * @param p first number value
 	 */
-    Point(Double3 p) {
+    public Point(Double3 p) {
     	this.xyz = p;
     }
     @Override
@@ -53,7 +52,7 @@ public class Point {
 	 * @param vec right handle side operand for addition
 	 * @return result of add
 	 */
-    Point add(Vector vec) {
+    public Point add(Vector vec) {
     	Double3 other = this.xyz.add(vec.xyz);
     	return new Point(other);
     }
@@ -64,7 +63,7 @@ public class Point {
 	 * @param p right handle side operand for addition
 	 * @return result of add
 	 */
-    Vector subtract(Point p) {
+    public Vector subtract(Point p) {
     	Double3 other = this.xyz.subtract(p.xyz);
     	return new Vector(other);
     }
@@ -74,7 +73,7 @@ public class Point {
 	 * @param p right handle side operand for addition
 	 * @return result of distance squared
 	 */
-    double distanceSquared(Point p) {
+    public double distanceSquared(Point p) {
     	double x = (this.xyz.d1 - p.xyz.d1) * (this.xyz.d1 - p.xyz.d1);
     	double y = (this.xyz.d2 - p.xyz.d2) * (this.xyz.d2 - p.xyz.d2);
     	double z = (this.xyz.d3 - p.xyz.d3) * (this.xyz.d3 - p.xyz.d3);
@@ -86,9 +85,7 @@ public class Point {
 	 * @param p right handle side operand for addition
 	 * @return result of distance 
 	 */
-   double distance(Point p) {
+   public double distance(Point p) {
 	   return Math.sqrt(this.distanceSquared(p));
    }
-    
-    
 }
