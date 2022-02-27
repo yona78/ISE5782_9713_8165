@@ -1,6 +1,6 @@
-package primitives;
+package Primitives;
 
-import static primitives.Util.isZero;
+import static Primitives.Util.isZero;
 
 public class Point {
     final Double3 xyz;
