@@ -4,8 +4,7 @@ public class Ray {
     Point p0;
     Vector dir;
     public
-    Ray(Point p, Vector vec)
-    {
+    Ray(Point p, Vector vec) {
     	p0 = p;
     	dir = vec.normalize();
     }
