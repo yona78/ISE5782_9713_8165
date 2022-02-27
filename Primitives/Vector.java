@@ -78,6 +78,11 @@ public class Vector extends Point {
         Double3 other = this.xyz.scale(scale);
         return new Vector(other.d1, other.d2, other.d3);
     }
+    
+    Vector add (Vector vec) {
+    	Point other = super.add(vec);
+    	return new Vector(other.xyz.d1, other.xyz.d2, other.xyz.d3);
+    }
 
     public double dotProduct(Vector vec) {
         double x = (this.xyz.d1 * vec.xyz.d1);
