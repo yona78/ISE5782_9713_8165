@@ -1,5 +1,7 @@
 /**
- * 
+ * @author Hillel Kroitoro
+ * @author Yona orunov
+ * the basic interface 
  */
 package geometries;
 
