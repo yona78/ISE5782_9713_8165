@@ -1,5 +1,7 @@
 /**
- * 
+ * @author Hillel Kroitoro
+ * @author Yona orunov
+ * class for cylinder
  */
 package geometries;
 
