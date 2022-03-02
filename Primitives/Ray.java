@@ -2,6 +2,7 @@ package primitives;
 /**
  * This class will serve all primitive classes based on three numbers
  * 
+ * @author Hillel Kroitoro
  * @author Yona orunov
  */
 public class Ray {
