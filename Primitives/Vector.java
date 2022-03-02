@@ -3,7 +3,8 @@ package primitives;
 /**
  * This class will serve all primitive classes based on three numbers
  * 
- * @author Yona Orunov
+ * @author Hillel Kroitoro
+ * @author Yona orunov
  */
 public class Vector extends Point {
 	/**
