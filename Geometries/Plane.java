@@ -49,7 +49,7 @@ public class Plane implements Geometry {
 	}
 
 	/**
-	 * Method to return the normal vector to the plane
+	 * @return the normal vector to the plane
 	 */
 	public Vector GetNormal() {
 		return vector;

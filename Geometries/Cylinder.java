@@ -7,8 +7,6 @@ import primitives.Ray;
 
 public class Cylinder extends Tube {
 	// #region Fields
-	Ray ray;
-	double radius;
 	double high;
 	// #endregion
 
@@ -23,4 +21,13 @@ public class Cylinder extends Tube {
 		this.high = high;
 	}
 
+	// #region Get functions
+    /***
+     * 
+     * @return the hight of the cylinder
+     */
+    public double GetHigh() {
+        return high;
+    }
+    // #endregion
 }

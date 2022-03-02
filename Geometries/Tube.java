@@ -25,10 +25,18 @@ public class Tube implements Geometry {
     }
 
     // #region Get functions
+    /***
+     * 
+     * @return the ray (direction and position) of the tube
+     */
     public Ray GetRay() {
         return ray;
     }
 
+    /***
+     * 
+     * @return the radius of the Tube
+     */
     public double GetRadius() {
         return radius;
     }
