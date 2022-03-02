@@ -9,6 +9,7 @@ import primitives.Point;
  * This class present a triangle
  * 
  * @author Hillel Kroitoro
+ * @author Yona orunov
  */
 
 public class Triangle extends Polygon {
