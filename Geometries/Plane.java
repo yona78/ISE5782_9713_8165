@@ -10,6 +10,7 @@ import primitives.Vector;
  * This class will serve all classes which contains in a plane.
  * 
  * @author Hillel Kroitoro
+ * @author Yona orunov
  */
 
 public class Plane implements Geometry {
