@@ -1,9 +1,10 @@
 package primitives;
 
 /**
- * This class will serve all primitive classes based on three numbers
+ * This class will represented Ray object in the project by Point and diraction Vector 
  * 
  * @author Yona orunov
+ * @author Hillel Kroitoro
  */
 public class Ray {
 	final private Point p0;
@@ -12,7 +13,8 @@ public class Ray {
 	/**
 	 * Constructor to initialize Ray based object with its Point value and vector
 	 * 
-	 * @param p first number value @para, vec secound object to initialize
+	 * @param p - Point to initialize in p0
+	 * @para vec - Vector to initialize in diraction vector of Ray
 	 */
 	public Ray(Point p, Vector vec) {
 		p0 = p;
@@ -37,8 +39,7 @@ public class Ray {
 	}
 
 	/**
-	 * get the point of the ray
-	 *
+	 * Get the point of the ray
 	 * @return field p0
 	 */
 	public Point getP0() {
@@ -46,11 +47,11 @@ public class Ray {
 	}
 
 	/**
-	 * get the vector of the ray
+	 * Get the diraction vector of the ray
 	 *
 	 * @return field dir
 	 */
-	public Vector get_dir() {
+	public Vector getDir() {
 		return dir;
 	}
 }

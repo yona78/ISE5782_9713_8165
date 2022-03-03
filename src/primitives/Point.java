@@ -1,20 +1,21 @@
 package primitives;
 
 /**
- * This class will serve all primitive classes based on three numbers
+ * This class will represented Point object in the project by 3 double values (Double3)
  * 
  * @author Yona orunov
+ * @author Hillel Kroitoro
  */
 
 public class Point {
 	final Double3 xyz;
 
 	/**
-	 * Constructor to initialize Point based object with its three number values
+	 * Constructor to initialize Point based object with three number values
 	 * 
-	 * @param d1 first number value
-	 * @param d2 second number value
-	 * @param d3 third number value
+	 * @param x first number value 
+	 * @param y second number value
+	 * @param z third number value
 	 */
 	public Point(double x, double y, double z) {
 		Double3 other = new Double3(x, y, z);
@@ -22,9 +23,9 @@ public class Point {
 	}
 
 	/**
-	 * Constructor to initialize Point based object with its Double3 value
+	 * Constructor to initialize Point based object with Double3 value
 	 * 
-	 * @param p first number value
+	 * @param p - Double3 object to set in xyz field of the point
 	 */
 	Point(Double3 p) {
 		this.xyz = p;
@@ -48,45 +49,43 @@ public class Point {
 	}
 
 	/**
-	 * Sum two floating point triads into a new triad where each couple of numbers
-	 * is summarized
+	 * Calcultes the sum of vector and point
 	 * 
-	 * @param vec right handle side operand for addition
-	 * @return result of add
+	 * @param vec - the vector to add to the point
+	 * @return result Point after adding the point vector
 	 */
 	public Point add(Vector vec) {
 		return new Point(this.xyz.add(vec.xyz));
 	}
 
 	/**
-	 * Subtract two floating point triads into a new triad where each couple of
-	 * numbers is subtracted
+	 * Calcultes the subtraction between 2 points
 	 * 
-	 * @param p right handle side operand for addition
-	 * @return result of add
+	 * @param p the second Point for the calcultions
+	 * @return result Vector of the subtraction of the points 
 	 */
 	public Vector subtract(Point p) {
 		return new Vector(this.xyz.subtract(p.xyz));
 	}
 
 	/**
-	 * return the distance squared of 2 points
+	 * Calcultes the distance squared of 2 points
 	 *
-	 * @param p right handle side operand for addition
-	 * @return result of distance squared
+	 * @param p the second Point for the calcultions
+	 * @return the distance squared
 	 */
 	public double distanceSquared(Point p) {
 		double dx = this.xyz.d1 - p.xyz.d1;
-		double y = (this.xyz.d2 - p.xyz.d2) * (this.xyz.d2 - p.xyz.d2);
-		double z = (this.xyz.d3 - p.xyz.d3) * (this.xyz.d3 - p.xyz.d3);
-		return dx * dx + y + z;
+		double dy = (this.xyz.d2 - p.xyz.d2);
+		double dz = (this.xyz.d3 - p.xyz.d3);
+		return dx * dx + dy * dy + dz * dz;
 	}
 
 	/**
-	 * return the distance of 2 points
+	 * Calcultes the distance between 2 points
 	 *
-	 * @param p right handle side operand for addition
-	 * @return result of distance
+	 * @param p the second Point for the calcultions
+	 * @return the distance
 	 */
 	public double distance(Point p) {
 		return Math.sqrt(this.distanceSquared(p));

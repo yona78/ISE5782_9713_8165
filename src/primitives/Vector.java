@@ -1,17 +1,18 @@
 package primitives;
 
 /**
- * This class will serve all primitive classes based on three numbers
+ * This class will extends Point  and represented Vector object in the project
  * 
  * @author Yona Orunov
+ * @author Hillel Kroitoro
  */
 public class Vector extends Point {
 	/**
 	 * Constructor to initialize Vector based object with its three number values
 	 * 
-	 * @param d1 first number value
-	 * @param d2 second number value
-	 * @param d3 third number value
+	 * @param x first number value
+	 * @param y second number value
+	 * @param z third number value
 	 */
 	public Vector(double x, double y, double z) {
 		super(x, y, z);
@@ -21,9 +22,9 @@ public class Vector extends Point {
 	}
 
 	/**
-	 * Constructor to initialize Vector based object with its Double3 value
+	 * Constructor to initialize Vector based object with Double3 value
 	 * 
-	 * @param p first number value
+	 * @param p - Double3 object to set in xyz field of the point
 	 */
 	Vector(Double3 p) {
 		super(p);
@@ -53,7 +54,7 @@ public class Vector extends Point {
 	 * Sum two vectors triads into a new vector where each couple of numbers is
 	 * summarized
 	 * 
-	 * @param vec right handle side operand for addition
+	 * @param vec - the other vector to add
 	 * @return result of add
 	 */
 	public Vector add(Vector vec) {
@@ -61,54 +62,54 @@ public class Vector extends Point {
 	}
 
 	/**
-	 * scale the vector's point by value
+	 * Scale the vector's point by value
 	 * 
-	 * @param scale right handle side operand for addition
-	 * @return new vector with point after scale
+	 * @param scale - the number to scale the values of the vector
+	 * @return new vector after scale all the values 
 	 */
 	public Vector scale(double scale) {
 		return new Vector(this.xyz.scale(scale));
 	}
 
 	/**
-	 * dot product by 2 vectors
+	 * Calculates the dot product by 2 vectors
 	 * 
-	 * @param vec right handle side operand for addition
+	 * @param vec - the second vector for the dotProduct 
 	 * @return result of dot product
 	 */
 	public double dotProduct(Vector vec) {
-		double x = (this.xyz.d1 * vec.xyz.d1);
-		double y = (this.xyz.d2 * vec.xyz.d2);
-		double z = (this.xyz.d3 * vec.xyz.d3);
-		return x + y + z;
+		double dx = this.xyz.d1 * vec.xyz.d1;
+		double dy = this.xyz.d2 * vec.xyz.d2;
+		double dz = this.xyz.d3 * vec.xyz.d3;
+		return dx + dy + dz ;
 	}
 
 	/**
-	 * cross product by 2 vectors
+	 * Calculates the cross product by 2 vectors
 	 * 
-	 * @param vec right handle side operand for addition
+	 * @param vec - the second vector for the crossProduct 
 	 * @return result vector of cross product
 	 */
 	public Vector crossProduct(Vector vec) {
-		double x = (this.xyz.d2 * vec.xyz.d3) - (this.xyz.d3 * vec.xyz.d2);
-		double y = (this.xyz.d3 * vec.xyz.d1) - (this.xyz.d1 * vec.xyz.d3);
-		double z = (this.xyz.d1 * vec.xyz.d2) - (this.xyz.d2 * vec.xyz.d1);
-		return new Vector(x, y, z);
+		double dx = (this.xyz.d2 * vec.xyz.d3) - (this.xyz.d3 * vec.xyz.d2);
+		double dy = (this.xyz.d3 * vec.xyz.d1) - (this.xyz.d1 * vec.xyz.d3);
+		double dz = (this.xyz.d1 * vec.xyz.d2) - (this.xyz.d2 * vec.xyz.d1);
+		return new Vector(dx, dy, dz);
 	}
 
 	private double lengthSquared = 0;
 
 	/**
-	 * calculate the squared length of the vector
+	 * Calculates the squared length of the vector
 	 *
 	 * @return the squared length of the vector
 	 */
 	public double lengthSquared() {
 		if (lengthSquared == 0.0) {
-			double x = (this.xyz.d1) * (this.xyz.d1);
-			double y = (this.xyz.d2) * (this.xyz.d2);
-			double z = (this.xyz.d3) * (this.xyz.d3);
-			lengthSquared = x + y + z;
+			double dx = (this.xyz.d1);
+			double dy = (this.xyz.d2);
+			double dz = (this.xyz.d3);
+			lengthSquared = dx * dx + dy * dy + dz * dz;
 		}
 		return lengthSquared;
 	}
@@ -127,7 +128,8 @@ public class Vector extends Point {
 	}
 
 	/**
-	 * Calculates the normalized vector - i.e. a vector of length 1 in the same direction
+	 * Calculates the normalized vector - i.e. a vector of length 1 in the same
+	 * direction
 	 * 
 	 * @return the normalized vector
 	 */
