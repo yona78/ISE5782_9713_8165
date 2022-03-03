@@ -6,14 +6,13 @@ package geometries;
 import primitives.Point;
 
 /**
- * This class present a triangle
+ * This class represents a triangle
  * 
  * @author Hillel Kroitoro
  */
-
 public class Triangle extends Polygon {
 	/**
-	 * Constructor to initialize Triangle based Poligon with its three points
+	 * Constructor to initialize Triangle with its three points
 	 * 
 	 * @param p1 first point.
 	 * @param p2 second point.

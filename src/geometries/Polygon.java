@@ -85,7 +85,7 @@ public class Polygon implements Geometry {
 	}
 
 	@Override
-	public Vector GetNormal(Point point) {
+	public Vector getNormal(Point point) {
 		return plane.GetNormal();
 	}
 }

@@ -24,13 +24,13 @@ public class Sphere implements Geometry {
      * @param point  the center of the sphere
      * @param radius the radius of the sphere
      */
-    public Sphere(Point point, Double radius) {
+    public Sphere(Point point, double radius) {
         this.point = point;
         this.radius = radius;
     }
 
     @Override
-    public Vector GetNormal(Point point) {
+    public Vector getNormal(Point point) {
         return null;
     }
 }

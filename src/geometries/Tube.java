@@ -41,7 +41,7 @@ public class Tube implements Geometry {
     // #endregion
 
     @Override
-    public Vector GetNormal(Point point) {
+    public Vector getNormal(Point point) {
         return null;
     }
 }

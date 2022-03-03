@@ -9,8 +9,7 @@ package geometries;
  * @author Hillel Kroitoro
  */
 
-import primitives.Point;
-import primitives.Vector;
+import primitives.*;
 
 public class Plane implements Geometry {
 	// #region Fields
@@ -35,16 +34,17 @@ public class Plane implements Geometry {
 	 * @param point1 first point
 	 * @param point2 second point
 	 * @param point3 third point
+	 * @exception IllegalArgumentException if all the three points are on the same line
 	 */
 	public Plane(Point point1, Point point2, Point point3) {
 		this.point = point1;
-		Vector v1 = new Vector(point1, point2);
-		Vector v2 = new Vector(point1, point3);
+		Vector v1 = point1.subtract(point2);
+		Vector v2 = point1.subtract(point3);
 		this.vector = v1.crossProduct(v2).normalize();
 	}
 
 	@Override
-	public Vector GetNormal(Point point) {
+	public Vector getNormal(Point point) {
 		return vector;
 	}
 
