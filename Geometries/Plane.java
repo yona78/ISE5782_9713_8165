@@ -8,7 +8,7 @@ import primitives.Vector;
 
 /**
  * This class will serve all classes which contains in a plane.
- * 
+ * hi
  * @author Hillel Kroitoro
  * @author Yona orunov
  */
