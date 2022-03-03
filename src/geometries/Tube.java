@@ -1,9 +1,13 @@
 /**
- * @author Hillel Kroitoro
- * @author Yona orunov
- * class for tube
+ * 
  */
 package geometries;
+
+/**
+ * This class present a tube.
+ * 
+ * @author Hillel Kroitoro
+ */
 
 import primitives.Point;
 import primitives.Ray;
@@ -27,18 +31,10 @@ public class Tube implements Geometry {
     }
 
     // #region Get functions
-    /***
-     * 
-     * @return the ray (direction and position) of the tube
-     */
     public Ray GetRay() {
         return ray;
     }
 
-    /***
-     * 
-     * @return the radius of the Tube
-     */
     public double GetRadius() {
         return radius;
     }

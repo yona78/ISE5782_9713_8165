@@ -3,15 +3,14 @@
  */
 package geometries;
 
-import primitives.Point;
-import primitives.Vector;
-
 /**
  * This class will serve all classes which contains in a plane.
  * 
  * @author Hillel Kroitoro
- * @author Yona orunov
  */
+
+import primitives.Point;
+import primitives.Vector;
 
 public class Plane implements Geometry {
 	// #region Fields
@@ -50,7 +49,7 @@ public class Plane implements Geometry {
 	}
 
 	/**
-	 * @return the normal vector to the plane
+	 * Method to return the normal vector to the plane
 	 */
 	public Vector GetNormal() {
 		return vector;

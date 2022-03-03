@@ -1,7 +1,7 @@
+package main;
+import primitives.*;
 import static java.lang.System.out;
 import static primitives.Util.*;
-
-import primitives.*;
 
 /**
  * Test program for the 1st stage
@@ -29,9 +29,9 @@ public final class Main {
 
 		// test length..
 		if (!isZero(v1.lengthSquared() - 14))
-			out.println("ERROR: LengthSquared() wrong value");
+			out.println("ERROR: lengthSquared() wrong value");
 		if (!isZero(new Vector(0, 3, 4).length() - 5))
-			out.println("ERROR: Length() wrong value");
+			out.println("ERROR: length() wrong value");
 
 		// test Dot-Product
 		if (!isZero(v1.dotProduct(v3)))

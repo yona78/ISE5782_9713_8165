@@ -1,9 +1,13 @@
 /**
- * @author Hillel Kroitoro
- * @author Yona orunov
- * class to sphere
+ * 
  */
 package geometries;
+
+/**
+ * This class present a sphere
+ * 
+ * @author Hillel Kroitoro
+ */
 
 import primitives.Point;
 import primitives.Vector;
