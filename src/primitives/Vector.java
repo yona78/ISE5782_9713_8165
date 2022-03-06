@@ -1,7 +1,7 @@
 package primitives;
 
 /**
- * This class will extends Point  and represented Vector object in the project
+ * This class extends Point  and represented Vector object in the project
  * 
  * @author Yona Orunov
  * @author Hillel Kroitoro

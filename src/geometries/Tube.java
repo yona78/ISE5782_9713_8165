@@ -3,39 +3,45 @@
  */
 package geometries;
 
-/**
- * This class present a tube.
- * 
- * @author Hillel Kroitoro
- */
-
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+/**
+ * This class present a tube.
+ * 
+ * @author Hillel Kroitoro,Yona Orunov
+ */
+
 public class Tube implements Geometry {
     // #region Fields
-    Ray ray;
-    double radius;
+    final private Ray centerLine;
+    final private double radius;
     // #endregion
 
     /**
      * Constructor to initialize sphere with its ray and radius.
      * 
-     * @param ray    the center of the sircle.
-     * @param radius the radius of the sircle.
+     * @param centerLine the center of the tube.
+     * @param radius     the radius of the tube.
      */
-    public Tube(Ray ray, Double radius) {
-        this.ray = ray;
+    public Tube(Ray centerLine, double radius) {
+        this.centerLine = centerLine;
         this.radius = radius;
     }
 
     // #region Get functions
-    public Ray GetRay() {
-        return ray;
+    /**
+     * @return the center line of the tube.
+     */
+    public Ray getCenterLine() {
+        return centerLine;
     }
 
-    public double GetRadius() {
+    /**
+     * @return the radius line of the tube.
+     */
+    public double getRadius() {
         return radius;
     }
     // #endregion

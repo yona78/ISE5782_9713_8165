@@ -3,30 +3,35 @@
  */
 package geometries;
 
+import primitives.Ray;
+
 /**
  * This class present a cylinder.
  * 
- * @author Hillel Kroitoro
+ * @author Hillel Kroitoro, Yona Orunov
  */
-
-import primitives.Ray;
 
 public class Cylinder extends Tube {
 	// #region Fields
-	Ray ray;
-	double radius;
-	double height;
+	final private double height;
 	// #endregion
 
 	/**
-	 * Constructor to initialize sphere with its ray and radius.
+	 * Constructor to initialize cylinder with its ray radius and height.
 	 * 
 	 * @param ray    the center of the base of the sircle base.
 	 * @param radius the radius of the sircle base.
+	 * @param height the height of the cylinder.
 	 */
 	public Cylinder(Ray ray, double radius, double height) {
 		super(ray, radius);
 		this.height = height;
 	}
 
+	/**
+	 * @return the height of the cylinder.
+	 */
+	public double getHeight() {
+		return height;
+	}
 }

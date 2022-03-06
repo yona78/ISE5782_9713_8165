@@ -76,8 +76,8 @@ public class Point {
 	 */
 	public double distanceSquared(Point p) {
 		double dx = this.xyz.d1 - p.xyz.d1;
-		double dy = (this.xyz.d2 - p.xyz.d2);
-		double dz = (this.xyz.d3 - p.xyz.d3);
+		double dy = this.xyz.d2 - p.xyz.d2;
+		double dz = this.xyz.d3 - p.xyz.d3;
 		return dx * dx + dy * dy + dz * dz;
 	}
 

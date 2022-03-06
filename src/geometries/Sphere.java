@@ -4,9 +4,10 @@
 package geometries;
 
 /**
- * This class present a sphere
+ * This class represents a sphere.
  * 
- * @author Hillel Kroitoro
+ * @author Hillel Kroitoro, Yona Orunov
+ * 
  */
 
 import primitives.Point;
@@ -14,8 +15,8 @@ import primitives.Vector;
 
 public class Sphere implements Geometry {
     // #region Fields
-    Point point;
-    double radius;
+    final private Point center;
+    final private double radius;
     // #endregion
 
     /**
@@ -24,10 +25,26 @@ public class Sphere implements Geometry {
      * @param point  the center of the sphere
      * @param radius the radius of the sphere
      */
-    public Sphere(Point point, double radius) {
-        this.point = point;
+    public Sphere(Point center, double radius) {
+        this.center = center;
         this.radius = radius;
     }
+
+    //#region Get functions
+    /**
+     * @return the center point of the sphere.
+     */
+    public Point getCenter() {
+        return center;
+    }
+
+    /**
+     * @return the radius line of the sphere.
+     */
+    public double getRadius() {
+        return radius;
+    }
+    //#endregion
 
     @Override
     public Vector getNormal(Point point) {
