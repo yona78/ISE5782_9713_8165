@@ -10,7 +10,11 @@ import primitives.Vector;
 /**
  * This class present a tube.
  * 
+<<<<<<< HEAD
  * @author Hillel Kroitoro,Yona Orunov
+=======
+ * @author Hillel Kroitoro
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
  */
 
 public class Tube implements Geometry {

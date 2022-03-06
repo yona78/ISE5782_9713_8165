@@ -1,7 +1,11 @@
 package primitives;
 
 /**
+<<<<<<< HEAD
  * This class extends Point  and represented Vector object in the project
+=======
+ * This class extends Point and represented Vector object in the project
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
  * 
  * @author Yona Orunov
  * @author Hillel Kroitoro
@@ -10,9 +14,9 @@ public class Vector extends Point {
 	/**
 	 * Constructor to initialize Vector based object with its three number values
 	 * 
-	 * @param x first number value
-	 * @param y second number value
-	 * @param z third number value
+	 * @param x first number cordinate
+	 * @param y second number cordinate
+	 * @param z third number cordinate
 	 */
 	public Vector(double x, double y, double z) {
 		super(x, y, z);
