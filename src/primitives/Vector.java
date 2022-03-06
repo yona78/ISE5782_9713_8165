@@ -1,11 +1,6 @@
 package primitives;
 
 /**
-<<<<<<< HEAD
- * This class extends Point  and represented Vector object in the project
-=======
- * This class extends Point and represented Vector object in the project
->>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
  * 
  * @author Yona Orunov
  * @author Hillel Kroitoro
