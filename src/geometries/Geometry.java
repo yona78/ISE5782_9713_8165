@@ -11,6 +11,7 @@ import primitives.Vector;
  * 
  * @author Hillel Kroitoro
  */
+
 public interface Geometry {
 	/**
      * @return the normal vector to the point.

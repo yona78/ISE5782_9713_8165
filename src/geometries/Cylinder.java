@@ -3,13 +3,13 @@
  */
 package geometries;
 
+import primitives.Ray;
+
 /**
  * This class present a cylinder.
  * 
  * @author Hillel Kroitoro
  */
-
-import primitives.Ray;
 
 public class Cylinder extends Tube {
 	// #region Fields
