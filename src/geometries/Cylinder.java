@@ -24,7 +24,7 @@ public class Cylinder extends Tube {
 	 * @param height the height of the cylinder.
 	 */
 	public Cylinder(Ray ray, double radius, double height) {
-		super(ray.normalize(), radius);
+		super(ray, radius);
 		this.height = height;
 	}
 

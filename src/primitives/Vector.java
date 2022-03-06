@@ -10,9 +10,9 @@ public class Vector extends Point {
 	/**
 	 * Constructor to initialize Vector based object with its three number values
 	 * 
-	 * @param x first number value
-	 * @param y second number value
-	 * @param z third number value
+	 * @param x first number cordinate
+	 * @param y second number cordinate
+	 * @param z third number cordinate
 	 */
 	public Vector(double x, double y, double z) {
 		super(x, y, z);

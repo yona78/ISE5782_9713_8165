@@ -29,6 +29,22 @@ public class Sphere implements Geometry {
         this.radius = radius;
     }
 
+    //#region Get functions
+    /**
+     * @return the center point of the sphere.
+     */
+    public Point getCenter() {
+        return center;
+    }
+
+    /**
+     * @return the radius line of the sphere.
+     */
+    public double getRadius() {
+        return radius;
+    }
+    //#endregion
+
     @Override
     public Vector getNormal(Point point) {
         return null;
