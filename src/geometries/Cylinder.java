@@ -24,13 +24,14 @@ public class Cylinder extends Tube {
 	 * @param height the height of the cylinder.
 	 */
 	public Cylinder(Ray ray, double radius, double height) {
-		super(ray.normalize() height, radius);
+		super(ray.normalize(), radius);
+		this.height = height;
 	}
 
-	 /**
-     * @return the height of the cylinder.
-     */
-    public double getHeight() {
-        return (super.getCenterLine());
-    }
+	/**
+	 * @return the height of the cylinder.
+	 */
+	public double getHeight() {
+		return height;
+	}
 }
