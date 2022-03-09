@@ -1,7 +1,7 @@
 /**
  * 
  */
-package unittests.geometries;
+package src.unittests.geometries;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,8 +24,9 @@ class PlaneTests {
 	void testGetNormalPoint() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: There is a simple single test here
-		Plane p = new Plane(new Point(0,0,1), new Point(0,1,0), new Point(1,0,0));
-		assertEquals(1, p.getNormal(new Point(0, 0, 1)).dotProduct(new Vector(1, 1, 1)),0.00001, "Bad normal to plane");
+		Plane p = new Plane(new Point(0, 0, 1), new Point(0, 1, 0), new Point(1, 0, 0));
+		assertEquals(1, p.getNormal(new Point(0, 0, 1)).dotProduct(new Vector(1, 1, 1)), 0.00001,
+				"Bad normal to plane");
 	}
 
 }
