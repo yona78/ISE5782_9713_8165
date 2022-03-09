@@ -102,9 +102,9 @@ class VectorTests {
 		Vector v2 = new Vector(-2,-2,-1);
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test that squared length of the vector
-		assertEquals( v1.lengthSquared(), 14, "lengthSquared wrong result length");
-		// TC02: Test that squared length of the  vector
-		assertEquals( v2.length(), 9, "length wrong result length");
+		assertEquals( v1.lengthSquared(), 14,0.00001, "lengthSquared wrong result length");
+		// TC02: Test that squared length of the negtive vector
+		assertEquals( v2.lengthSquared(), 9,0.00001, "length wrong result length");
 	}
 
 	/**
