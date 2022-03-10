@@ -7,12 +7,8 @@ import primitives.*;
 
 /**
  * This class represents a plane.
- * 
-<<<<<<< HEAD
  * @author Hillel Kroitoro, Yona Orunov
-=======
  * @author Hillel Kroitoro
->>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
  */
 
 public class Plane implements Geometry {
