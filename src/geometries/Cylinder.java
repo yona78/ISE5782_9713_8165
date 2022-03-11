@@ -3,7 +3,10 @@
  */
 package geometries;
 
+import primitives.PMath;
 import primitives.Ray;
+import primitives.Util;
+import primitives.Vector;
 
 /**
  * This class present a cylinder.
@@ -14,6 +17,9 @@ import primitives.Ray;
 public class Cylinder extends Tube {
 	// #region Fields
 	final private double height;
+
+	final private Plane base;
+	final private Plane top;
 	// #endregion
 
 	/**
@@ -26,6 +32,9 @@ public class Cylinder extends Tube {
 	public Cylinder(Ray ray, double radius, double height) {
 		super(ray, radius);
 		this.height = height;
+
+		base = null;
+		top = null;
 	}
 
 	/**
@@ -33,5 +42,33 @@ public class Cylinder extends Tube {
 	 */
 	public double getHeight() {
 		return height;
+	}
+
+	@Override
+	public Vector getNormal(Point point) {
+		if (base == null)
+			base = new Plane(super.getCenterLine().getP0(), super.getCenterLine().getDir().scale(-1));
+		double baseDis = PMath.getDistance(base, point);
+		if (Util.isZero(baseDis)) {
+			if (Util.alignZero(PMath.getDistance(super.getCenterLine().getP0(), point) - super.getRadius()) > 0)
+				throw new IllegalArgumentException("The point is not on the base or on the edge");
+			return base.getNormal();
+		}
+
+		if (top == null) {
+			Vector v = super.getCenterLine().getDir();
+			top = new Plane(super.getCenterLine().getP0().add(v.scale(height)), v);
+		}
+		double topDis = PMath.getDistance(top, point);
+		if (Util.isZero(topDis)) {
+			if (Util.alignZero(PMath.getDistance(super.getCenterLine().getP0(), point) - super.getRadius()) > 0)
+				throw new IllegalArgumentException("The point is not on the top or on the edge");
+			return top.getNormal();
+		}
+
+		if (baseDis > height || topDis > height)
+			throw new IllegalArgumentException("The point is not on the body");
+
+		return super.getNormal(point);
 	}
 }
