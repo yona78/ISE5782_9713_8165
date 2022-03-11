@@ -3,10 +3,7 @@
  */
 package geometries;
 
-import primitives.PMath;
-import primitives.Ray;
-import primitives.Util;
-import primitives.Vector;
+import primitives.*;
 
 /**
  * This class present a cylinder.
@@ -18,8 +15,8 @@ public class Cylinder extends Tube {
 	// #region Fields
 	final private double height;
 
-	final private Plane base;
-	final private Plane top;
+	private Plane base;
+	private Plane top;
 	// #endregion
 
 	/**

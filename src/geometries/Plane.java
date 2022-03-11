@@ -9,7 +9,6 @@ import primitives.*;
  * This class represents a plane.
  * 
  * @author Hillel Kroitoro, Yona Orunov
- * @author Hillel Kroitoro
  */
 
 public class Plane implements Geometry {
@@ -76,7 +75,7 @@ public class Plane implements Geometry {
 	 */
 	public double distance(Point point) {
 		Vector v = new Vector(this.point);
-		double distance = v.dotProduct(new Vector(point));
+		double distance = v.dotProduct(new Vector(point)) + d;
 		distance /= v.length();
 		if (distance < 0)
 			distance *= -1;

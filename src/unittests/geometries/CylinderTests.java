@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import geometries.*;
 import primitives.Point;
 import primitives.Vector;
+import primitives.Ray;
 
 /**
  * Testing Cylinder
