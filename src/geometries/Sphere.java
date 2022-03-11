@@ -11,6 +11,7 @@ package geometries;
  */
 
 import primitives.Point;
+import primitives.Util;
 import primitives.Vector;
 
 public class Sphere implements Geometry {
@@ -30,7 +31,7 @@ public class Sphere implements Geometry {
         this.radius = radius;
     }
 
-    //#region Get functions
+    // #region Get functions
     /**
      * @return the center point of the sphere.
      */
@@ -44,10 +45,12 @@ public class Sphere implements Geometry {
     public double getRadius() {
         return radius;
     }
-    //#endregion
+    // #endregion
 
     @Override
     public Vector getNormal(Point point) {
-        return null;
+        if (!Util.isZero(center.distance(point) - radius))
+            throw new IllegalArgumentException("The point is not on the body");
+        return point.subtract(center).normalize();
     }
 }
