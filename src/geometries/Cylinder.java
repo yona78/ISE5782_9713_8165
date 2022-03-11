@@ -8,7 +8,7 @@ import primitives.Ray;
 /**
  * This class present a cylinder.
  * 
- * @author Hillel Kroitoro, Yona Orunov
+ * @author Hillel Kroitoro
  */
 
 public class Cylinder extends Tube {
@@ -19,7 +19,7 @@ public class Cylinder extends Tube {
 	/**
 	 * Constructor to initialize cylinder with its ray radius and height.
 	 * 
-	 * @param ray    the center of the base of the sircle base.
+	 * @param ray    the center of the cylinder.
 	 * @param radius the radius of the sircle base.
 	 * @param height the height of the cylinder.
 	 */
