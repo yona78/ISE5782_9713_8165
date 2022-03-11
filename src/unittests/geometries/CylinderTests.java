@@ -4,13 +4,14 @@
 package unittests.geometries;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 import geometries.*;
-import primitives.*;
-
+import primitives.Point;
+import primitives.Vector;
 /**
- * Testing Spere
+ * Testing Cylinder
  * 
  * @author Hillel
  *
@@ -22,23 +23,34 @@ public class CylinderTests {
     @Test
     public void testGetNormal() {
 
-        Cylinder pl = new Cylinder(new Point(0, 0, 1), 1);
+        Cylinder cylinder = new Cylinder(new Ray(new Point(0, 0, 1), new Vector(0, 0, 1)), 1.0, 1.0);
 
         // ============ Equivalence Partitions Tests ==============
 
-        // TC1: There is a simple single test here
-        assertEquals(new Vector(0, 0, 1), pl.getNormal(new Point(0, 0, 2)), "The normal vector is wrong");
+        // TC1: Test if the point is on the top base.
+        assertEquals(new Vector(0, 0, 1), cylinder.getNormal(new Point(0, 0, 2)), "The normal vector to the top base is wrong");
+
+        // TC2: Test if the point is on the bottom base.
+        assertEquals(new Vector(0, 0, -1), cylinder.getNormal(new Point(0, 0, 1)), "The normal vector to the bottom base is wrong");
+
+        // TC3: There is a simple single test here
+        assertEquals(new Vector(0, 0, 1), cylinder.getNormal(new Point(0, 1, 1.5)), "The normal vector to the side is wrong");
 
         // =============== Boundary Values Tests ==================
 
-        // TC2: Test if the point is out the speher
+        // TC4: Test if the point is out the cylinder
         assertThrows(IllegalArgumentException.class, //
-                () -> pl.getNormal(new Point(0, 0, 3)),
-                "The point is not on the sphere, it's too far away");
+                () -> cylinder.getNormal(new Point(0, 0, 3)),
+                "The point is not on the cylinder, it's too far away");
 
-        // TC3: Test if the point is in the speher
+        // TC5: Test if the point is in the cylinder
         assertThrows(IllegalArgumentException.class, //
-            () -> pl.getNormal(new Point(0, 0, 1.5)),
-            "The point is not on the sphere, it's too close");
+            () -> cylinder.getNormal(new Point(0, 0, 1.5)),
+            "The point is not on the cylinder, it's too close");
+        
+        // TC6: Test if the point is in the edge of the cylinder
+        assertThrows(IllegalArgumentException.class, //
+            () -> cylinder.getNormal(new Point(0, 1, 2)),
+            "The normal vector to the edge of the cylinder is wrong");
     }
 }
