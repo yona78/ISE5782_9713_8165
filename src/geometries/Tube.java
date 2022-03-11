@@ -3,18 +3,16 @@
  */
 package geometries;
 
+import primitives.PMath;
 import primitives.Point;
 import primitives.Ray;
+import primitives.Util;
 import primitives.Vector;
 
 /**
  * This class present a tube.
  * 
-<<<<<<< HEAD
- * @author Hillel Kroitoro,Yona Orunov
-=======
  * @author Hillel Kroitoro
->>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
  */
 
 public class Tube implements Geometry {
@@ -52,6 +50,8 @@ public class Tube implements Geometry {
 
     @Override
     public Vector getNormal(Point point) {
-        return null;
+        if (!Util.isZero(PMath.getDistance(centerLine, point) - radius))
+            throw new IllegalArgumentException("The point is not on the body");
+        return (PMath.getClosessPoint(centerLine, point)).subtract(point).normalize();
     }
 }
