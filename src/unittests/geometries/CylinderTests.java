@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import geometries.*;
 import primitives.Point;
 import primitives.Vector;
+
 /**
  * Testing Cylinder
  * 
@@ -28,13 +29,16 @@ public class CylinderTests {
         // ============ Equivalence Partitions Tests ==============
 
         // TC1: Test if the point is on the top base.
-        assertEquals(new Vector(0, 0, 1), cylinder.getNormal(new Point(0, 0, 2)), "The normal vector to the top base is wrong");
+        assertEquals(new Vector(0, 0, 1), cylinder.getNormal(new Point(0, 0, 2)),
+                "The normal vector to the top base is wrong");
 
         // TC2: Test if the point is on the bottom base.
-        assertEquals(new Vector(0, 0, -1), cylinder.getNormal(new Point(0, 0, 1)), "The normal vector to the bottom base is wrong");
+        assertEquals(new Vector(0, 0, -1), cylinder.getNormal(new Point(0, 0, 1)),
+                "The normal vector to the bottom base is wrong");
 
         // TC3: There is a simple single test here
-        assertEquals(new Vector(0, 0, 1), cylinder.getNormal(new Point(0, 1, 1.5)), "The normal vector to the side is wrong");
+        assertEquals(new Vector(0, 0, 1), cylinder.getNormal(new Point(0, 1, 1.5)),
+                "The normal vector to the side is wrong");
 
         // =============== Boundary Values Tests ==================
 
@@ -45,12 +49,12 @@ public class CylinderTests {
 
         // TC5: Test if the point is in the cylinder
         assertThrows(IllegalArgumentException.class, //
-            () -> cylinder.getNormal(new Point(0, 0, 1.5)),
-            "The point is not on the cylinder, it's too close");
-        
+                () -> cylinder.getNormal(new Point(0, 0, 1.5)),
+                "The point is not on the cylinder, it's too close");
+
         // TC6: Test if the point is in the edge of the cylinder
         assertThrows(IllegalArgumentException.class, //
-            () -> cylinder.getNormal(new Point(0, 1, 2)),
-            "The normal vector to the edge of the cylinder is wrong");
+                () -> cylinder.getNormal(new Point(0, 1, 2)),
+                "The normal vector to the edge of the cylinder is wrong");
     }
 }
