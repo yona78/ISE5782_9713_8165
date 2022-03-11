@@ -1,7 +1,8 @@
 package primitives;
 
 /**
- * This class will represented Ray object in the project by Point and diraction Vector 
+ * This class will represented Ray object in the project by Point and diraction
+ * Vector
  * 
  * @author Yona orunov
  * @author Hillel Kroitoro
@@ -40,6 +41,7 @@ public class Ray {
 
 	/**
 	 * Get the point of the ray
+	 * 
 	 * @return field p0
 	 */
 	public Point getP0() {

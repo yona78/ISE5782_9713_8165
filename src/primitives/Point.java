@@ -1,7 +1,8 @@
 package primitives;
 
 /**
- * This class will represented Point object in the project by 3 double values (Double3)
+ * This class will represented Point object in the project by 3 double values
+ * (Double3)
  * 
  * @author Yona orunov
  * @author Hillel Kroitoro
@@ -13,7 +14,7 @@ public class Point {
 	/**
 	 * Constructor to initialize Point based object with three number values
 	 * 
-	 * @param x first number value 
+	 * @param x first number value
 	 * @param y second number value
 	 * @param z third number value
 	 */
@@ -62,7 +63,7 @@ public class Point {
 	 * Calcultes the subtraction between 2 points
 	 * 
 	 * @param p the second Point for the calcultions
-	 * @return result Vector of the subtraction of the points 
+	 * @return result Vector of the subtraction of the points
 	 */
 	public Vector subtract(Point p) {
 		return new Vector(this.xyz.subtract(p.xyz));

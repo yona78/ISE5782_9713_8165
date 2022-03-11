@@ -23,10 +23,22 @@ public class Vector extends Point {
 	/**
 	 * Constructor to initialize Vector based object with Double3 value
 	 * 
-	 * @param p - Double3 object to set in xyz field of the point
+	 * @param p - Double3 object to set in xyz field of the vector
 	 */
 	Vector(Double3 p) {
 		super(p);
+		if (this.xyz.equals(Double3.ZERO)) {
+			throw new IllegalArgumentException("cant create zero vector");
+		}
+	}
+
+	/**
+	 * Constructor to initialize Vector based point
+	 * 
+	 * @param p - point object to set in xyz field of the vector
+	 */
+	public Vector(Point p) {
+		super(p.xyz);
 		if (this.xyz.equals(Double3.ZERO)) {
 			throw new IllegalArgumentException("cant create zero vector");
 		}
@@ -64,7 +76,7 @@ public class Vector extends Point {
 	 * Scale the vector's point by value
 	 * 
 	 * @param scale - the number to scale the values of the vector
-	 * @return new vector after scale all the values 
+	 * @return new vector after scale all the values
 	 */
 	public Vector scale(double scale) {
 		return new Vector(this.xyz.scale(scale));
@@ -73,20 +85,20 @@ public class Vector extends Point {
 	/**
 	 * Calculates the dot product by 2 vectors
 	 * 
-	 * @param vec - the second vector for the dotProduct 
+	 * @param vec - the second vector for the dotProduct
 	 * @return result of dot product
 	 */
 	public double dotProduct(Vector vec) {
 		double dx = this.xyz.d1 * vec.xyz.d1;
 		double dy = this.xyz.d2 * vec.xyz.d2;
 		double dz = this.xyz.d3 * vec.xyz.d3;
-		return dx + dy + dz ;
+		return dx + dy + dz;
 	}
 
 	/**
 	 * Calculates the cross product by 2 vectors
 	 * 
-	 * @param vec - the second vector for the crossProduct 
+	 * @param vec - the second vector for the crossProduct
 	 * @return result vector of cross product
 	 */
 	public Vector crossProduct(Vector vec) {
