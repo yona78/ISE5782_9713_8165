@@ -7,6 +7,7 @@ import primitives.*;
 
 /**
  * This class represents a plane.
+ * 
  * @author Hillel Kroitoro, Yona Orunov
  * @author Hillel Kroitoro
  */
@@ -15,6 +16,8 @@ public class Plane implements Geometry {
 	// #region Fields
 	final private Point point;
 	final private Vector normalVector;
+
+	private double d;
 	// #endregion
 
 	/**
@@ -26,6 +29,8 @@ public class Plane implements Geometry {
 	public Plane(Point point, Vector normalVector) {
 		this.point = point;
 		this.normalVector = normalVector.normalize();
+
+		this.d = -(new Vector(point).dotProduct(normalVector));
 	}
 
 	/**
@@ -42,6 +47,8 @@ public class Plane implements Geometry {
 		Vector v1 = point1.subtract(point2);
 		Vector v2 = point1.subtract(point3);
 		this.normalVector = v1.crossProduct(v2).normalize();
+
+		this.d = -(new Vector(this.point).dotProduct(normalVector));
 	}
 
 	@Override
@@ -62,6 +69,18 @@ public class Plane implements Geometry {
 	 */
 	public Point getPoint() {
 		return point;
+	}
+
+	/**
+	 * @return the distance from the point to the plane.
+	 */
+	public double distance(Point point) {
+		Vector v = new Vector(this.point);
+		double distance = v.dotProduct(new Vector(point));
+		distance /= v.length();
+		if (distance < 0)
+			distance *= -1;
+		return distance;
 	}
 	// #endregion
 }
