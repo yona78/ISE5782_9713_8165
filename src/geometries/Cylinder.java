@@ -37,15 +37,16 @@ public class Cylinder extends Tube {
 
 	@Override
 	public Vector getNormal(Point point) {
-		Point help1 = centerLine.getP0();
-		Point help2 = help1.add(centerLine.getDir().scale(height));
-		if(point.subtract(help1).dotProduct(centerLine.getDir()) == 0) {
-			return centerLine.getDir().scale(-1).normalize();
+		if(centerLine.getP0().distanceSquared(point) == 0) {
+			return centerLine.getDir().scale(-1);
 		}
-		else if(point.subtract(help2).dotProduct(centerLine.getDir()) == 0) {
-			return centerLine.getDir().normalize();
+		double t = centerLine.getDir().dotProduct(point.subtract(centerLine.getP0()));
+		if(t == 0) {
+			return centerLine.getDir().scale(-1);
 		}
-
-		return super.getNormal(point);
+		if(t == this.height) {
+			return centerLine.getDir();
+		}
+		return point.subtract(centerLine.getP0().add(centerLine.getDir().scale(t))).normalize();
 	}
 }
