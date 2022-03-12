@@ -43,8 +43,8 @@ public class Plane implements Geometry {
 	 */
 	public Plane(Point point1, Point point2, Point point3) {
 		this.point = point1;
-		Vector v1 = point1.subtract(point2);
-		Vector v2 = point1.subtract(point3);
+		Vector v1 = point2.subtract(point1);
+		Vector v2 = point3.subtract(point1);
 		this.normalVector = v1.crossProduct(v2).normalize();
 
 		this.d = -(new Vector(this.point).dotProduct(normalVector));

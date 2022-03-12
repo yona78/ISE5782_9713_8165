@@ -13,8 +13,8 @@ import primitives.*;
 
 public class Tube implements Geometry {
     // #region Fields
-    final private Ray centerLine;
-    final private double radius;
+    protected final Ray centerLine;
+    protected final double radius;
     // #endregion
 
     /**
@@ -46,8 +46,13 @@ public class Tube implements Geometry {
 
     @Override
     public Vector getNormal(Point point) {
-        if (!Util.isZero(PMath.getDistance(centerLine, point) - radius))
-            throw new IllegalArgumentException("The point is not on the body");
-        return PMath.getNormal(centerLine, point).normalize();
+    	Point help1;
+        if (point.subtract(centerLine.getP0()).dotProduct(centerLine.getDir()) == 0)
+            help1 = centerLine.getP0();
+        else {
+        	double t = centerLine.getDir().dotProduct(point.subtract(centerLine.getP0()));
+            help1 = centerLine.getP0().add(centerLine.getDir().scale(t));
+        }
+        return (point.subtract(help1)).normalize();
     }
 }

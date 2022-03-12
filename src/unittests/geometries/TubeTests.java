@@ -28,8 +28,8 @@ class TubeTests {
 
 	     // ============ Equivalence Partitions Tests ==============
 	     // TC01: Test that the getNormal() function on Tube works.
-	     Point p1 = new Point(0,2,0.8);
-	     assertEquals(tube.getNormal(p1),new Vector(0,2,0), "Tube.getNormal() gives wrong normal.");
+	     Point p1 = new Point(0,2,-0.8);
+	     assertEquals(tube.getNormal(p1),new Vector(0,1,0), "Tube.getNormal() gives wrong normal.");
 
 	      // =============== Boundary Values Tests ==================
 	      // TC11: Test that the getNormal() function on Tube works for vertical points
