@@ -50,7 +50,7 @@ public class Point {
 	}
 
 	/**
-	 * Calcultes the sum of vector and point
+	 * Calculates the sum of vector and point
 	 * 
 	 * @param vec - the vector to add to the point
 	 * @return result Point after adding the point vector
@@ -60,9 +60,9 @@ public class Point {
 	}
 
 	/**
-	 * Calcultes the subtraction between 2 points
+	 * Calculates the subtraction between 2 points
 	 * 
-	 * @param p the second Point for the calcultions
+	 * @param p the second Point for the calculations
 	 * @return result Vector of the subtraction of the points
 	 */
 	public Vector subtract(Point p) {
@@ -70,9 +70,9 @@ public class Point {
 	}
 
 	/**
-	 * Calcultes the distance squared of 2 points
+	 * Calculates the distance squared of 2 points
 	 *
-	 * @param p the second Point for the calcultions
+	 * @param p the second Point for the calculations
 	 * @return the distance squared
 	 */
 	public double distanceSquared(Point p) {
@@ -83,13 +83,22 @@ public class Point {
 	}
 
 	/**
-	 * Calcultes the distance between 2 points
+	 * Calculates the distance between 2 points
 	 *
-	 * @param p the second Point for the calcultions
+	 * @param p the second Point for the calculations
 	 * @return the distance
 	 */
 	public double distance(Point p) {
 		return Math.sqrt(this.distanceSquared(p));
+	}
+	
+	/**
+	 * return the cordinate x of point
+	 *
+	 * @return the value of the cordinate
+	 */
+	public double getX() {
+		return this.xyz.d1;
 	}
 
 }

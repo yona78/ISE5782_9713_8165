@@ -1,7 +1,7 @@
 package primitives;
 
 /**
- * This class will represented Ray object in the project by Point and diraction
+ * This class will represented Ray object in the project by Point and direction
  * Vector
  * 
  * @author Yona orunov
@@ -15,7 +15,7 @@ public class Ray {
 	 * Constructor to initialize Ray based object with its Point value and vector
 	 * 
 	 * @param p - Point to initialize in p0
-	 * @para vec - Vector to initialize in diraction vector of Ray
+	 * @param vec - Vector to initialize in direction vector of Ray
 	 */
 	public Ray(Point p, Vector vec) {
 		p0 = p;
@@ -40,7 +40,7 @@ public class Ray {
 	}
 
 	/**
-	 * Get the point of the ray
+	 * Getter of the point of the ray
 	 * 
 	 * @return field p0
 	 */
@@ -49,7 +49,7 @@ public class Ray {
 	}
 
 	/**
-	 * Get the diraction vector of the ray
+	 * Getter of the direction vector of the ray
 	 *
 	 * @return field dir
 	 */

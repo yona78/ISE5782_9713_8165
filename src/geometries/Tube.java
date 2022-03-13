@@ -3,10 +3,12 @@
  */
 package geometries;
 
+import java.util.List;
+
 import primitives.*;
 
 /**
- * This class present a tube.
+ * This class represent a tube.
  * 
  * @author Hillel Kroitoro
  */
@@ -30,14 +32,18 @@ public class Tube implements Geometry {
 
     // #region Get functions
     /**
-     * @return the center line of the tube.
+     * Getter of the center line of the tube.
+     * 
+     * @return the center line.
      */
     public Ray getCenterLine() {
         return centerLine;
     }
 
     /**
-     * @return the radius line of the tube.
+     * Getter of the radius of the tube.
+     * 
+     * @return the radius.
      */
     public double getRadius() {
         return radius;
@@ -55,4 +61,10 @@ public class Tube implements Geometry {
         }
         return (point.subtract(help1)).normalize();
     }
+
+	@Override
+	public List<Point> findIntsersections(Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

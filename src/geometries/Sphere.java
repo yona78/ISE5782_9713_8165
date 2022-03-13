@@ -3,16 +3,19 @@
  */
 package geometries;
 
+import java.util.List;
+
+import primitives.Point;
+import primitives.Ray;
+import primitives.Util;
+import primitives.Vector;
+
 /**
  * This class represents a sphere.
  * 
  * @author Hillel Kroitoro, Yona Orunov
  * 
  */
-
-import primitives.Point;
-import primitives.Util;
-import primitives.Vector;
 
 public class Sphere implements Geometry {
     // #region Fields
@@ -40,7 +43,9 @@ public class Sphere implements Geometry {
     }
 
     /**
-     * @return the radius line of the sphere.
+     * Getter of the radius of the sphere.
+     * 
+     * @return the radius.
      */
     public double getRadius() {
         return radius;
@@ -53,4 +58,10 @@ public class Sphere implements Geometry {
             throw new IllegalArgumentException("The point is not on the body");
         return point.subtract(center).normalize();
     }
+
+	@Override
+	public List<Point> findIntsersections(Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
