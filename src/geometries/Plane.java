@@ -71,6 +71,4 @@ public class Plane implements Geometry {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	// #endregion
 }
