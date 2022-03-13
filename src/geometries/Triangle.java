@@ -3,7 +3,7 @@
  */
 package geometries;
 
-import primitives.*;
+import primitives.Point;
 
 /**
  * This class represents a triangle

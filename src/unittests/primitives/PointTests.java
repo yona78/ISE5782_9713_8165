@@ -22,7 +22,7 @@ class PointTests {
 	void testAdd() {
 		Point p1 = new Point(1, 2, 3);
 		// ============ Equivalence Partitions Tests ==============
-		//TC01: Test that reslut of sun between point and vectcor is proper
+		//TC01: Test that result of sun between point and vector is proper
 		assertEquals(p1.add(new Vector(-1, -2, -3)), new Point(0, 0, 0), "ERROR: Point + Vector does not work correctly");
 		
 
@@ -36,7 +36,7 @@ class PointTests {
 	void testSubtract() {
 		Point p1 = new Point(1, 2, 3);
 		// ============ Equivalence Partitions Tests ==============
-		//TC01: Test that reslut of subtract between 2 points is proper
+		//TC01: Test that result of subtract between 2 points is proper
 		assertEquals(new Vector(1, 1, 1), new Point(2, 3, 4).subtract(p1), "ERROR: Point - Point does not work correctly");
 	}
 
@@ -49,6 +49,11 @@ class PointTests {
 		// ============ Equivalence Partitions Tests ==============
 		//TC01: Test if squared distance between 2 points is right
 		assertEquals(3, p1.distanceSquared(new Point(2,3,4)),0.000001, "ERROR: distanceSquared does not work correctly");
+		
+		// =============== Boundary Values Tests ==================
+		//TC02: Test if the distance from point to itself is 0
+		if(!Util.isZero(p1.distance(p1)))
+			fail("ERROR: distanceSquared does not work correctly when the points are equals");
 	}
 
 	/**
@@ -60,6 +65,11 @@ class PointTests {
 		// ============ Equivalence Partitions Tests ==============
 		//TC01: Test if distance between 2 points is right
 		assertEquals(3, p1.distance(new Point(3,4,2)),0.000001, "ERROR: distance does not work correctly");
+		
+		// =============== Boundary Values Tests ==================
+		//TC02: Test if the distance from point to itself is 0
+		if(!Util.isZero(p1.distance(p1)))
+			fail("ERROR: distance does not work correctly when the points are equals");
 	}
 
 }

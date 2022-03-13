@@ -20,7 +20,7 @@ public class Cylinder extends Tube {
 	 * Constructor to initialize cylinder with its ray radius and height.
 	 * 
 	 * @param ray    the center of the cylinder.
-	 * @param radius the radius of the sircle base.
+	 * @param radius the radius of the circle base.
 	 * @param height the height of the cylinder.
 	 */
 	public Cylinder(Ray ray, double radius, double height) {
@@ -29,6 +29,8 @@ public class Cylinder extends Tube {
 	}
 
 	/**
+	 * Getter of the height of the cylinder.
+	 * 
 	 * @return the height of the cylinder.
 	 */
 	public double getHeight() {

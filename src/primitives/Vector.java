@@ -1,6 +1,7 @@
 package primitives;
 
 /**
+ * This class represent Vector in 3D
  * 
  * @author Yona Orunov
  * @author Hillel Kroitoro
@@ -9,9 +10,9 @@ public class Vector extends Point {
 	/**
 	 * Constructor to initialize Vector based object with its three number values
 	 * 
-	 * @param x first number cordinate
-	 * @param y second number cordinate
-	 * @param z third number cordinate
+	 * @param x first number coordinate
+	 * @param y second number coordinate
+	 * @param z third number coordinate
 	 */
 	public Vector(double x, double y, double z) {
 		super(x, y, z);

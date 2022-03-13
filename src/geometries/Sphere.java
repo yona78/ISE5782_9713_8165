@@ -3,16 +3,16 @@
  */
 package geometries;
 
+import primitives.Point;
+import primitives.Util;
+import primitives.Vector;
+
 /**
  * This class represents a sphere.
  * 
  * @author Hillel Kroitoro, Yona Orunov
  * 
  */
-
-import primitives.Point;
-import primitives.Util;
-import primitives.Vector;
 
 public class Sphere implements Geometry {
     // #region Fields
@@ -40,7 +40,9 @@ public class Sphere implements Geometry {
     }
 
     /**
-     * @return the radius line of the sphere.
+     * Getter of the radius of the sphere.
+     * 
+     * @return the radius.
      */
     public double getRadius() {
         return radius;
