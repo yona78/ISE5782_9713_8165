@@ -55,7 +55,7 @@ public class Tube implements Geometry {
     	Point help1;
     	Point p1 = axis.getP0();
     	Vector dir1 = axis.getDir();
-        if (point.subtract(p1).dotProduct(dir1) == 0)
+        if (Util.isZero(point.subtract(p1).dotProduct(dir1)) )
             help1 = p1;
         else {
         	double t = dir1.dotProduct(point.subtract(p1));

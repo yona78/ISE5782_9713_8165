@@ -54,6 +54,8 @@ public class Plane implements Geometry {
 
 	// #region Get functions
 	/**
+	 * The function return the normal vactor for the plane
+	 * 
 	 * @return the normal vector to the plane.
 	 */
 	public Vector getNormal() {
@@ -61,6 +63,8 @@ public class Plane implements Geometry {
 	}
 
 	/**
+	 * The function return the point of the plane
+	 * 
 	 * @return point on the plane.
 	 */
 	public Point getPoint() {

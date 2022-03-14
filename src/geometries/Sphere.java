@@ -37,6 +37,8 @@ public class Sphere implements Geometry {
 
     // #region Get functions
     /**
+     * The function return the center point of the sphere
+     * 
      * @return the center point of the sphere.
      */
     public Point getCenter() {
@@ -74,7 +76,7 @@ public class Sphere implements Geometry {
         if (Util.alignZero(t1) > 0) lst.add(ray.getPoint(t1));
         if (Util.alignZero(t2) > 0) lst.add(ray.getPoint(t2));
 
-        if (lst.size() == 0) return null;
+        if (Util.isZero(lst.size())) return null;
 
         return lst;
 	}
