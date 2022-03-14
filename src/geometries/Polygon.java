@@ -92,7 +92,30 @@ public class Polygon implements Geometry {
 
 	@Override
 	public List<Point> findIntsersections(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
+	        List<Point> lst = plane.findIntsersections(ray);
+	        if (lst == null || !isPointOnPolygon(ray)) return null;
+	        return lst;
+
+	    }
+
+	
+	
+    boolean isPointOnPolygon(Ray ray) {
+	        Vector v1, v2;
+	        Point p0 = ray.getP0();
+	        v1 = vertices.get(0).subtract(p0);
+	        v2 = vertices.get(1).subtract(p0);
+	        double prevN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize()), curN;
+	        if (Util.alignZero(prevN) == 0) return false;
+
+	        for (int i = 1; i < vertices.size(); i++) {
+	        	v1 = v2;
+	            v2 = vertices.get((i + 1) % vertices.size()).subtract(p0);;
+	            curN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize());
+	            if (Util.alignZero(curN) == 0 || curN * prevN < 0)
+	                return false;
+	        }
+
+	        return true;
 	}
 }
