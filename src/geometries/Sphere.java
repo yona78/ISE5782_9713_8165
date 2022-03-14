@@ -3,6 +3,7 @@
  */
 package geometries;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import primitives.Point;
@@ -61,7 +62,20 @@ public class Sphere implements Geometry {
 
 	@Override
 	public List<Point> findIntsersections(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
+		Vector u = center.subtract(ray.getP0());
+        double tm = u.dotProduct(ray.getDir());
+        double d = Math.sqrt(u.lengthSquared() - tm * tm);
+        if (d >= radius) return null; 
+
+        List<Point> lst = new LinkedList<Point>();
+        double th = Math.sqrt(radius * radius - d * d);
+
+        double t1 = tm + th, t2 = tm - th;
+        if (Util.alignZero(t1) > 0) lst.add(ray.getPoint(t1));
+        if (Util.alignZero(t2) > 0) lst.add(ray.getPoint(t2));
+
+        if (lst.size() == 0) return null;
+
+        return lst;
 	}
 }

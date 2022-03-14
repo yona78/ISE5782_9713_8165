@@ -90,8 +90,10 @@ public class SphereTests {
         assertEquals(res.size(), 1, "Ray from the sphere inwards BVA doesn't work.");
         
         assertEquals(expRes, res, "Ray from the sphere inwards BVA doesn't work.");
+        
         // TC12: Ray starts at sphere and goes outside (0 points)
         ray = new Ray(new Point(0,0,0),new Vector(-1,0,-1));
+        
         assertNull(sphere.findIntsersections(ray), "Ray from the sphere outwards BVA doesn't work.");
         // **** Group: Ray's line goes through the center
         // TC13: Ray starts before the sphere (2 points)

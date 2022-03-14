@@ -100,5 +100,23 @@ public class Point {
 	public double getX() {
 		return this.xyz.d1;
 	}
+	
+	/**
+	 * return the cordinate y of point
+	 *
+	 * @return the value of the cordinate
+	 */
+	public double getY() {
+		return this.xyz.d2;
+	}
+	
+	/**
+	 * return the cordinate z of point
+	 *
+	 * @return the value of the cordinate
+	 */
+	public double getZ() {
+		return this.xyz.d3;
+	}
 
 }
