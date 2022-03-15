@@ -99,7 +99,12 @@ public class Polygon implements Geometry {
 	    }
 
 	
-	
+	/**
+     * Help function to check if the ray is on the polygon or not
+     * 
+     * @param ray - Ray to check if the p0 is on the plane
+     * @return boolean value if the po 0f the ray is in the polygon
+     */
     boolean isPointOnPolygon(Ray ray) {
 	        Vector v1, v2;
 	        Point p0 = ray.getP0();

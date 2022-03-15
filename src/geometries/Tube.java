@@ -52,16 +52,16 @@ public class Tube implements Geometry {
 
     @Override
     public Vector getNormal(Point point) {
-    	Point help1;
+    	Point O;
     	Point p1 = axis.getP0();
     	Vector dir1 = axis.getDir();
-        if (Util.isZero(point.subtract(p1).dotProduct(dir1)) )
-            help1 = p1;
+    	double t = dir1.dotProduct(point.subtract(p1));
+        if (Util.isZero(t) )
+            O = p1;
         else {
-        	double t = dir1.dotProduct(point.subtract(p1));
-            help1 = p1.add(dir1.scale(t));
+            O = p1.add(dir1.scale(t));
         }
-        return (point.subtract(help1)).normalize();
+        return (point.subtract(O)).normalize();
     }
 
 	@Override

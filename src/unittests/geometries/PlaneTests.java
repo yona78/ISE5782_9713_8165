@@ -21,6 +21,25 @@ import java.util.List;
 class PlaneTests {
 
 	/**
+	 * Test method for {@link geometries.Polygon#Polygon(primitives.Point...)}.
+	 */
+	@Test
+	public void testConstructor() {
+		// =============== Boundary Values Tests ==================
+			// TC02: two Points are the same 
+			assertThrows(IllegalArgumentException.class, //
+			() -> new Polygon(new Point(0, 0, 1), new Point(0, 0, 1), new Point(0, 1,0), new Point(0, 0.5, 0.5)),
+			"Constructed a plane that 2 of his points are the same ");	
+		// TC03: Vertex that creates colinear vectors 
+		assertThrows(IllegalArgumentException.class, //
+				() -> new Polygon(new Point(0, 0, 1), new Point(0, 0, 0), new Point(0, 0,2), new Point(0, 0.5, 0.5)),
+				"Constructed a plane that his base vectors are colinear");	
+
+	}
+
+	
+	
+	/**
 	 * Test method for {@link geometries.Plane#getNormal(primitives.Point)}.
 	 */
 	@Test
@@ -28,6 +47,7 @@ class PlaneTests {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: There is a simple single test here
 		Plane p = new Plane(new Point(0, 0, 1), new Point(0, 1, 0), new Point(1, 0, 0));
+		
 		assertEquals(1, Math.abs(p.getNormal(new Point(0, 1, 2)).dotProduct(new Vector(1,1,1).normalize())), 0.00001, "Plane.getNormal() gives wrong normal.");
 	}
 	

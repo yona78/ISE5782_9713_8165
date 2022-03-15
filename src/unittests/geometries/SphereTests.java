@@ -29,18 +29,6 @@ public class SphereTests {
 
         // TC01: There is a simple single test here
         assertEquals(new Vector(0, 0, 1), pl.getNormal(new Point(0, 0, 2)), "The normal vector is wrong");
-
-        // =============== Boundary Values Tests ==================
-
-        // TC11: Test if the point is out the speher
-        assertThrows(IllegalArgumentException.class, //
-                () -> pl.getNormal(new Point(0, 0, 3)),
-                "The point is not on the sphere, it's too far away");
-
-        // TC12: Test if the point is in the speher
-        assertThrows(IllegalArgumentException.class, //
-            () -> pl.getNormal(new Point(0, 0, 1.5)),
-            "The point is not on the sphere, it's too close");
     }
     
     /**
@@ -121,7 +109,7 @@ public class SphereTests {
         
         assertEquals(expRes, res, "Ray in sphere through center BVA doesn't work.");
         // TC16: Ray starts at the center (1 points)
-        ray = new Ray(new Point(1,0,0),new Vector(1,0,0));
+        ray = new Ray(new Point(1,0,0),new Vector(2,0,0));
         expRes = List.of(new Point(2,0,0));
         res = sphere.findIntsersections(ray);
         

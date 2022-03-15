@@ -57,8 +57,6 @@ public class Sphere implements Geometry {
 
     @Override
     public Vector getNormal(Point point) {
-        if (!Util.isZero(center.distance(point) - radius))
-            throw new IllegalArgumentException("The point is not on the body");
         return point.subtract(center).normalize();
     }
 

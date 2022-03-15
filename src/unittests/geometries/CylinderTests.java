@@ -29,11 +29,11 @@ public class CylinderTests {
 
         // ============ Equivalence Partitions Tests ==============
 
-        // TC01: Test if the point is on the top base.
+        // TC01: Test if the point is on the bottom base.
         assertEquals(new Vector(0, 0, -1), cylinder.getNormal(new Point(0, 0.1, 1)),
                 "The normal vector to the top base is wrong");
 
-        // TC02: Test if the point is on the bottom base.
+        // TC02: Test if the point is on the top base.
         assertEquals(new Vector(0, 0, 1), cylinder.getNormal(new Point(0, 0.1, 2)),
                 "The normal vector to the bottom base is wrong");
 
