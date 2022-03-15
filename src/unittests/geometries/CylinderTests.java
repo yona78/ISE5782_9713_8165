@@ -49,8 +49,11 @@ public class CylinderTests {
         
         // TC12: Test if the point is in the center of the bottom base
         assertEquals(new Vector(0, 0, 1), cylinder.getNormal(new Point(0, 0, 2)),
-                "The normal vector to the side is wrong");
+                "The normal vector to the bottom base is wrong");
         
-        
+        // TC13: Test if the point is on the edge between the base and the side
+        assertThrows(IllegalArgumentException.class, //
+				() -> cylinder.getNormal(new Point(0, 1, 2)), //
+				"Test if the point is on the edge");
     }
 }

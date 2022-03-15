@@ -61,7 +61,7 @@ class PointTests {
 		
 		// =============== Boundary Values Tests ==================
 		//TC02: Test if the distance from point to itself is 0
-		if(!Util.isZero(p1.distance(p1)))
+		if(!Util.isZero(p1.distanceSquared(p1)))
 			fail("ERROR: distanceSquared does not work correctly when the points are equals");
 	}
 
