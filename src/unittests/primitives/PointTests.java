@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import geometries.Polygon;
 import primitives.*;
 
 /**
@@ -22,7 +23,7 @@ class PointTests {
 	void testAdd() {
 		Point p1 = new Point(1, 2, 3);
 		// ============ Equivalence Partitions Tests ==============
-		//TC01: Test that result of sun between point and vector is proper
+		//TC01: Test that result of sum between point and vector is proper
 		assertEquals(p1.add(new Vector(-1, -2, -3)), new Point(0, 0, 0), "ERROR: Point + Vector does not work correctly");
 		
 
@@ -36,8 +37,16 @@ class PointTests {
 	void testSubtract() {
 		Point p1 = new Point(1, 2, 3);
 		// ============ Equivalence Partitions Tests ==============
+		
 		//TC01: Test that result of subtract between 2 points is proper
 		assertEquals(new Vector(1, 1, 1), new Point(2, 3, 4).subtract(p1), "ERROR: Point - Point does not work correctly");
+		
+		// =============== Boundary Values Tests ==================
+		
+		//TC02: Test if the point minus itself is 0.
+		assertThrows(IllegalArgumentException.class, //
+				() -> p1.subtract(p1),
+				"ERROR: subtract does not work correctly when the points are equals");
 	}
 
 	/**

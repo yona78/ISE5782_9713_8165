@@ -10,9 +10,9 @@ import geometries.*;
 import primitives.*;
 
 /**
- * Testing Spere
+ * Testing Sphere
  * 
- * @author Hillel
+ * @author Hillel Kroitoro
  *
  */
 public class SphereTests {
@@ -28,17 +28,5 @@ public class SphereTests {
 
         // TC01: There is a simple single test here
         assertEquals(new Vector(0, 0, 1), pl.getNormal(new Point(0, 0, 2)), "The normal vector is wrong");
-
-        // =============== Boundary Values Tests ==================
-
-        // TC11: Test if the point is out the speher
-        assertThrows(IllegalArgumentException.class, //
-                () -> pl.getNormal(new Point(0, 0, 3)),
-                "The point is not on the sphere, it's too far away");
-
-        // TC12: Test if the point is in the speher
-        assertThrows(IllegalArgumentException.class, //
-            () -> pl.getNormal(new Point(0, 0, 1.5)),
-            "The point is not on the sphere, it's too close");
     }
 }
