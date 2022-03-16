@@ -3,7 +3,11 @@
  */
 package geometries;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import primitives.Point;
+import primitives.Ray;
 import primitives.Util;
 import primitives.Vector;
 
@@ -33,6 +37,8 @@ public class Sphere implements Geometry {
 
     // #region Get functions
     /**
+     * The function return the center point of the sphere
+     * 
      * @return the center point of the sphere.
      */
     public Point getCenter() {
@@ -51,8 +57,25 @@ public class Sphere implements Geometry {
 
     @Override
     public Vector getNormal(Point point) {
-        if (!Util.isZero(center.distance(point) - radius))
-            throw new IllegalArgumentException("The point is not on the body");
         return point.subtract(center).normalize();
     }
+
+	@Override
+	public List<Point> findIntsersections(Ray ray) {
+		Vector u = center.subtract(ray.getP0());
+        double tm = u.dotProduct(ray.getDir());
+        double d = Math.sqrt(u.lengthSquared() - tm * tm);
+        if (d >= radius) return null; 
+
+        List<Point> lst = new LinkedList<Point>();
+        double th = Math.sqrt(radius * radius - d * d);
+
+        double t1 = tm + th, t2 = tm - th;
+        if (Util.alignZero(t1) > 0) lst.add(ray.getPoint(t1));
+        if (Util.alignZero(t2) > 0) lst.add(ray.getPoint(t2));
+
+        if (Util.isZero(lst.size())) return null;
+
+        return lst;
+	}
 }

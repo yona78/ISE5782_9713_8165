@@ -3,6 +3,8 @@
  */
 package geometries;
 
+import java.util.List;
+
 import primitives.*;
 
 /**
@@ -13,7 +15,7 @@ import primitives.*;
 
 public class Tube implements Geometry {
     // #region Fields
-    protected final Ray centerLine;
+    protected final Ray axis;
     protected final double radius;
     // #endregion
 
@@ -24,7 +26,7 @@ public class Tube implements Geometry {
      * @param radius     the radius of the tube.
      */
     public Tube(Ray centerLine, double radius) {
-        this.centerLine = centerLine;
+        this.axis = centerLine;
         this.radius = radius;
     }
 
@@ -34,8 +36,8 @@ public class Tube implements Geometry {
      * 
      * @return the center line.
      */
-    public Ray getCenterLine() {
-        return centerLine;
+    public Ray getAxis() {
+        return axis;
     }
 
     /**
@@ -50,13 +52,21 @@ public class Tube implements Geometry {
 
     @Override
     public Vector getNormal(Point point) {
-    	Point help1;
-        if (point.subtract(centerLine.getP0()).dotProduct(centerLine.getDir()) == 0)
-            help1 = centerLine.getP0();
+    	Point O;
+    	Point p1 = axis.getP0();
+    	Vector dir1 = axis.getDir();
+    	double t = dir1.dotProduct(point.subtract(p1));
+        if (Util.isZero(t) )
+            O = p1;
         else {
-        	double t = centerLine.getDir().dotProduct(point.subtract(centerLine.getP0()));
-            help1 = centerLine.getP0().add(centerLine.getDir().scale(t));
+            O = p1.add(dir1.scale(t));
         }
-        return (point.subtract(help1)).normalize();
+        return (point.subtract(O)).normalize();
     }
+
+	@Override
+	public List<Point> findIntsersections(Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

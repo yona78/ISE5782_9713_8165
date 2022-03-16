@@ -3,6 +3,9 @@
  */
 package geometries;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import primitives.*;
 
 /**
@@ -51,6 +54,8 @@ public class Plane implements Geometry {
 
 	// #region Get functions
 	/**
+	 * The function return the normal vactor for the plane
+	 * 
 	 * @return the normal vector to the plane.
 	 */
 	public Vector getNormal() {
@@ -58,11 +63,24 @@ public class Plane implements Geometry {
 	}
 
 	/**
+	 * The function return the point of the plane
+	 * 
 	 * @return point on the plane.
 	 */
 	public Point getPoint() {
 		return point;
 	}
 
-	// #endregion
+	@Override
+	public List<Point> findIntsersections(Ray ray) {
+		double nv = normalVector.dotProduct(ray.getDir());
+        if (Util.isZero(nv)) return null;
+
+        double t = Util.alignZero(normalVector.dotProduct(point.subtract(ray.getP0())) / normalVector.dotProduct(ray.getDir()));
+        if (t <= 0) return null;
+
+        List<Point> lst = new LinkedList<Point>();
+        lst.add(ray.getPoint(t));
+        return lst;
+	}
 }

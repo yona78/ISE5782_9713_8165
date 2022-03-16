@@ -56,4 +56,15 @@ public class Ray {
 	public Vector getDir() {
 		return dir;
 	}
+	
+	
+	
+	/**
+	 * Calclution for point on ray - used for findIntersections in geometry objects
+	 *
+	 * @return field dir
+	 */
+	 public Point getPoint(double t) {
+	        return p0.add(dir.scale(t));
+	    }
 }

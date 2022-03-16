@@ -21,14 +21,21 @@ class VectorTests {
 	void testAddVector() {
 		// TC01: Test the vector after adding 2 vectors
 		Vector v1 = new Vector(1, 2, 3);
-		assertEquals( v1.add(new Vector(2,6,7)),new Vector(3,8,10), "Adding opration has failed");
-		// TC02: Test the vector after adding 2 vectors
-		assertEquals( v1.add(new Vector(-2,-6,7)),new Vector(-1,-4,10), "Adding opration has failed");
+		
+		assertEquals( new Vector(3,8,10),v1.add(new Vector(2,6,7)), "Adding opration has failed");
+		
 		// =============== Boundary Values Tests ==================
 		// TC11: Test the vector after adding opisite vector
+		
 		assertThrows(IllegalArgumentException.class,() -> v1.add(v1.scale(-1)), "Can't add opisite vector to himself");
 		// TC12: Test the vector after adding himself
-		assertEquals( v1.add(v1),v1.scale(2), "Adding opration has failed");
+		
+		assertEquals( v1.scale(2),v1.add(v1), "Adding opration has failed");
+		
+		//TC13: Test add vector to himself after sacle
+		Vector v = new Vector(1,1,1);
+		
+		assertEquals( new Vector(3,3,3),v.add(v.scale(2)), "Adding opration has failed");
 	    
 	}
 
@@ -40,11 +47,16 @@ class VectorTests {
 		Vector v1 = new Vector(1, 2, 3);
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test the vector after scale his point with positive number
+		
 		assertEquals( v1.scale(2),new Vector(2,4,6), "scale() wrong result vector");
-		// TC01: Test the vector after scale his point with negtive number
+		
+		// TC02: Test the vector after scale his point with negtive number
+		
 		assertEquals( v1.scale(-3),new Vector(-3,-6,-9), "scale() wrong result vector");
+		
 		// =============== Boundary Values Tests ==================
 		// TC11: Test the vector after scale his point with 0
+		
 		assertThrows(IllegalArgumentException.class, () -> v1.scale(0),"Constructed a zero vector");
 	}
 
@@ -58,13 +70,19 @@ class VectorTests {
 		Vector v3 = new Vector(0, 3, -2);
 		Vector v4 = new Vector(2, 4, 6);
 		// ============ Equivalence Partitions Tests ==============
-		// TC01: Test the value of dot product between two vectors
-		assertEquals( v1.dotProduct(v2),-28,0.00001, "dotProduct() return wrong result");
-		// TC02: Test the value of dot product between two vectors
-		assertEquals( v1.dotProduct(v4),28,0.00001, "dotProduct() return wrong result");
+		// TC01: Test the value of dot product between two vectors with more then 90 degress
+		
+		
+		assertEquals( -28, v1.dotProduct(v2),0.00001, "dotProduct() return wrong result");
+		
+		// TC02: Test the value of dot product between two vectors with under 90 degress
+		
+		assertEquals( 28,v1.dotProduct(v4),0.00001, "dotProduct() return wrong result");
+		
 		// =============== Boundary Values Tests ==================
+		
 		// TC11: Test the value of dot product between two orthogonal vectors
-		assertEquals( v1.dotProduct(v3),0,0.00001, "ERROR: dotProduct() for orthogonal vectors is not zero");
+		assertEquals(0, v1.dotProduct(v3),0.00001, "ERROR: dotProduct() for orthogonal vectors is not zero");
 		
 	}
 
@@ -88,7 +106,7 @@ class VectorTests {
         assertTrue(vr.dotProduct(v2) == 0, "crossProduct() result is not orthogonal to 2nd operand" );
 
         // =============== Boundary Values Tests ==================
-        // TC11: test zero vector from cross-productof co-lined vectors
+        // TC11: Test zero vector from cross-productof co-lined vectors
         Vector v3 = new Vector(-2, -4, -6);
         assertThrows(IllegalArgumentException.class, () -> v1.crossProduct(v3),"crossProduct() for parallel vectors does not throw an exception");
 	}
@@ -102,9 +120,13 @@ class VectorTests {
 		Vector v2 = new Vector(-2,-2,-1);
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test that squared length of the vector
-		assertEquals( v1.lengthSquared(), 14,0.00001, "lengthSquared wrong result length");
+		
+		assertEquals( 14, v1.lengthSquared(), 0.00001, "lengthSquared wrong result length");
+		
 		// TC02: Test that squared length of the negtive vector
-		assertEquals( v2.lengthSquared(), 9,0.00001, "length wrong result length");
+		
+		assertEquals( 9, v2.lengthSquared(), 0.00001, "length wrong result length");
+		
 	}
 
 	/**
@@ -130,9 +152,9 @@ class VectorTests {
 		Vector v1 = new Vector(-1,-2,-3).normalize();
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test that length of the normalized vector ( should be 1)
-		assertEquals( v.length() - 1, 0, "normalize wrong result");
+		assertEquals(0, v.length() - 1,  "normalize wrong result");
 		// TC02: Test that length of the normalized vector ( should be 1)
-		assertEquals( v1.length() - 1, 0, "normalize wrong result");
+		assertEquals(0,v1.length() - 1, "normalize wrong result");
 	}
 
 }

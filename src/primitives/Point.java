@@ -91,5 +91,32 @@ public class Point {
 	public double distance(Point p) {
 		return Math.sqrt(this.distanceSquared(p));
 	}
+	
+	/**
+	 * return the cordinate x of point
+	 *
+	 * @return the value of the cordinate
+	 */
+	public double getX() {
+		return this.xyz.d1;
+	}
+	
+	/**
+	 * return the cordinate y of point
+	 *
+	 * @return the value of the cordinate
+	 */
+	public double getY() {
+		return this.xyz.d2;
+	}
+	
+	/**
+	 * return the cordinate z of point
+	 *
+	 * @return the value of the cordinate
+	 */
+	public double getZ() {
+		return this.xyz.d3;
+	}
 
 }
