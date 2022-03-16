@@ -62,12 +62,16 @@ public class Sphere implements Geometry {
 
 	@Override
 	public List<Point> findIntsersections(Ray ray) {
+		List<Point> lst = new LinkedList<Point>();
+		if(center.equals(ray.getP0())) {
+			lst.add(center.add(ray.getDir().scale(radius)));
+			return lst;
+		}
 		Vector u = center.subtract(ray.getP0());
         double tm = u.dotProduct(ray.getDir());
         double d = Math.sqrt(u.lengthSquared() - tm * tm);
         if (d >= radius) return null; 
 
-        List<Point> lst = new LinkedList<Point>();
         double th = Math.sqrt(radius * radius - d * d);
 
         double t1 = tm + th, t2 = tm - th;
