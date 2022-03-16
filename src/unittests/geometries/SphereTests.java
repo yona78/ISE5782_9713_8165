@@ -29,8 +29,6 @@ public class SphereTests {
 
         // TC01: There is a simple single test here
         assertEquals(new Vector(0, 0, 1), pl.getNormal(new Point(0, 0, 2)), "The normal vector is wrong");
-<<<<<<< HEAD
-=======
     }
     
     /**
@@ -150,8 +148,6 @@ public class SphereTests {
         ray = new Ray(new Point(2,0,0),new Vector(0,0,1));
         assertNull(sphere.findIntsersections(ray), "Ray outside orthogonal to sphere center line BVA doesn't work.");
 
-
->>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
     }
 
 
