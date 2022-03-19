@@ -38,7 +38,7 @@ class TriangleTests {
 		// ============ Equivalence Partitions Tests ==============
 		
 		// TC01: There is a simple single test here
-		assertEquals(new Point(0.25, 0.25, -1), tr.findIntsersections(new Ray(new Point(0.25, 0.25, -1), v)).get(0), "Bad Point to trinagle");//checks on the triangle 
+		assertEquals(new Point(0.25, 0.25, 0), tr.findIntsersections(new Ray(new Point(0.25, 0.25, -1), v)).get(0), "Bad Point to trinagle");//checks on the triangle 
 		
 		// =============== Boundary Values Tests ==================
 		
