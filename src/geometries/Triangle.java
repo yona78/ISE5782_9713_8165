@@ -3,7 +3,11 @@
  */
 package geometries;
 
+import java.util.List;
+
 import primitives.Point;
+import primitives.Ray;
+import primitives.Util;
 
 /**
  * This class represents a triangle
@@ -26,4 +30,14 @@ public class Triangle extends Polygon {
     public boolean equals(Object obj) {//checks if equals
         return (obj instanceof Triangle) && super.equals(obj);
     }
+	
+	@Override
+	public List<Point> findIntsersections(Ray ray){
+		List<Point> points = super.plane.findIntsersections(ray);
+		if(points == null)
+			return points;
+		if(super.isPointOnPolygon(ray))
+			return points;
+		return null;
+	}
 }
