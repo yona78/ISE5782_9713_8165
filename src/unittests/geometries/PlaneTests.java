@@ -115,7 +115,12 @@ class PlaneTests {
        assertNull(plane.findIntsersections(ray), "Ray is orthogonal to the plane and after the plane BVA doesn't work.");
        
        //**** Group:Ray is neither orthogonal nor parallel to and ) begins at the plane
-       // TC16: Ray begins in the same point which appears as the plane's reference point.
+       //TC16: Ray is neither orthogonal nor parallel to and  begins at the plane
+       ray = new Ray(new Point(0,0,0), new Vector(0,1,1));
+       
+       assertNull(plane.findIntsersections(ray), "Ray is neither orthogonal nor parallel to and  begins at the plane BVA doesn't work.");
+       
+       // TC17: Ray begins in the same point which appears as the plane's reference point.
        ray = new Ray(plane.getPoint(), new Vector(1,1,1));
        
        assertNull(plane.findIntsersections(ray), "Ray begins in the same point which appears as the plane's reference point BVA doesn't work.");

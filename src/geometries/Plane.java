@@ -73,6 +73,9 @@ public class Plane implements Geometry {
 
 	@Override
 	public List<Point> findIntsersections(Ray ray) {
+		if (ray.getP0() == this.getPoint()) {
+			return null;
+		}
 		double nv = normalVector.dotProduct(ray.getDir());
         if (Util.isZero(nv)) return null;
         
