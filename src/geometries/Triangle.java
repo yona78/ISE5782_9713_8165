@@ -26,11 +26,6 @@ public class Triangle extends Polygon {
 	}
 
 	@Override
-	public boolean equals(Object obj) {// checks if equals
-		return (obj instanceof Triangle) && super.equals(obj);
-	}
-
-	@Override
 	public List<Point> findIntsersections(Ray ray) {
 		List<Point> points = super.plane.findIntsersections(ray);
 		if (points == null)

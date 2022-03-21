@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * This class will use for interface for intersectable geometries.
  * 
- * @author Hillel Kroitoro, Yona
+ * @author Hillel Kroitoro, Yona Orunov
  */
 public interface Intersectable {
 	/**

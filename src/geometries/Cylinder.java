@@ -8,7 +8,7 @@ import primitives.*;
 /**
  * This class present a cylinder.
  * 
- * @author Hillel Kroitoro, Yona
+ * @author Hillel Kroitoro, Yona Orunov
  */
 
 public class Cylinder extends Tube {

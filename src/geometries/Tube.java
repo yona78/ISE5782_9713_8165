@@ -10,7 +10,7 @@ import primitives.*;
 /**
  * This class represent a tube.
  * 
- * @author Hillel Kroitoro, Yona
+ * @author Hillel Kroitoro, Yona Orunov
  */
 
 public class Tube implements Geometry {
