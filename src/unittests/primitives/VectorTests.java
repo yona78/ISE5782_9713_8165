@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import primitives.*;
 /**
- * @author yonao
+ * @author Yona, Hillel
  *
  */
 class VectorTests {
