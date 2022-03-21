@@ -92,33 +92,34 @@ public class Polygon implements Geometry {
 
 	@Override
 	public List<Point> findIntsersections(Ray ray) {
-	        List<Point> lst = plane.findIntsersections(ray);
-	        return lst == null || pointOutOfPolygon(ray) ? null : lst;
-	    }
+		List<Point> lst = plane.findIntsersections(ray);
+		return lst == null || pointOutOfPolygon(ray) ? null : lst;
+	}
 
-	
 	/**
-     * Help function to check if the ray is on the polygon or not
-     * 
-     * @param ray - Ray to check if the p0 is on the plane
-     * @return boolean value if the po 0f the ray is in the polygon
-     */
-    boolean pointOutOfPolygon(Ray ray) {
-	        Vector v1, v2;
-	        Point p0 = ray.getP0();
-	        v1 = vertices.get(0).subtract(p0);
-	        v2 = vertices.get(1).subtract(p0);
-	        double prevN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize()), curN;
-	        if (Util.alignZero(prevN) == 0) return true;
+	 * Help function to check if the ray is on the polygon or not
+	 * 
+	 * @param ray - Ray to check if the p0 is on the plane
+	 * @return boolean value if the po 0f the ray is in the polygon
+	 */
+	boolean pointOutOfPolygon(Ray ray) {
+		Vector v1, v2;
+		Point p0 = ray.getP0();
+		v1 = vertices.get(0).subtract(p0);
+		v2 = vertices.get(1).subtract(p0);
+		double prevN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize()), curN;
+		if (Util.alignZero(prevN) == 0)
+			return true;
 
-	        for (int i = 1; i < size; i++) {
-	        	v1 = v2;
-	            v2 = vertices.get((i + 1) % size).subtract(p0);;
-	            curN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize());
-	            if (Util.alignZero(curN) == 0 || curN * prevN < 0)
-	                return true;
-	        }
+		for (int i = 1; i < size; i++) {
+			v1 = v2;
+			v2 = vertices.get((i + 1) % size).subtract(p0);
+			;
+			curN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize());
+			if (Util.alignZero(curN) == 0 || curN * prevN < 0)
+				return true;
+		}
 
-	        return false;
+		return false;
 	}
 }

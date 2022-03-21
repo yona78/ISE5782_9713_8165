@@ -14,48 +14,44 @@ import primitives.*;
  */
 
 public class Tube implements Geometry {
-    // #region Fields
-    protected final Ray axis;
-    protected final double radius;
-    // #endregion
+	protected final Ray axis;
+	protected final double radius;
 
-    /**
-     * Constructor to initialize sphere with its ray and radius.
-     * 
-     * @param centerLine the center of the tube.
-     * @param radius     the radius of the tube.
-     */
-    public Tube(Ray centerLine, double radius) {
-        this.axis = centerLine;
-        this.radius = radius;
-    }
+	/**
+	 * Constructor to initialize sphere with its ray and radius.
+	 * 
+	 * @param centerLine the center of the tube.
+	 * @param radius     the radius of the tube.
+	 */
+	public Tube(Ray centerLine, double radius) {
+		this.axis = centerLine;
+		this.radius = radius;
+	}
 
-    // #region Get functions
-    /**
-     * Getter of the center line of the tube.
-     * 
-     * @return the center line.
-     */
-    public Ray getAxis() {
-        return axis;
-    }
+	/**
+	 * Getter of the center line of the tube.
+	 * 
+	 * @return the center line.
+	 */
+	public Ray getAxis() {
+		return axis;
+	}
 
-    /**
-     * Getter of the radius of the tube.
-     * 
-     * @return the radius.
-     */
-    public double getRadius() {
-        return radius;
-    }
-    // #endregion
+	/**
+	 * Getter of the radius of the tube.
+	 * 
+	 * @return the radius.
+	 */
+	public double getRadius() {
+		return radius;
+	}
 
-    @Override
-    public Vector getNormal(Point point) {
-    	double t = axis.getDir().dotProduct(point.subtract(axis.getP0()));
-    	Point o = axis.getPoint(t);
-        return point.subtract(o).normalize();
-    }
+	@Override
+	public Vector getNormal(Point point) {
+		double t = axis.getDir().dotProduct(point.subtract(axis.getP0()));
+		Point o = axis.getPoint(t);
+		return point.subtract(o).normalize();
+	}
 
 	@Override
 	public List<Point> findIntsersections(Ray ray) {

@@ -16,7 +16,7 @@ public class Ray {
 	/**
 	 * Constructor to initialize Ray based object with its Point value and vector
 	 * 
-	 * @param p - Point to initialize in p0
+	 * @param p   - Point to initialize in p0
 	 * @param vec - Vector to initialize in direction vector of Ray
 	 */
 	public Ray(Point p, Vector vec) {
@@ -58,15 +58,13 @@ public class Ray {
 	public Vector getDir() {
 		return dir;
 	}
-	
-	
-	
+
 	/**
-	 * Calclution for point on ray - used for findIntersections in geometry objects
+	 * Calculation for point on ray - used for findIntersections in geometry objects
 	 *
 	 * @return field dir
 	 */
-	 public Point getPoint(double t) {
-	        return isZero(t) ? p0 : p0.add(dir.scale(t));
-	    }
+	public Point getPoint(double t) {
+		return isZero(t) ? p0 : p0.add(dir.scale(t));
+	}
 }

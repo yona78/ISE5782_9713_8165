@@ -16,11 +16,9 @@ import static primitives.Util.*;
  */
 
 public class Sphere implements Geometry {
-	// #region Fields
 	final private Point center;
 	final private double radius;
 	final private double radius2; // square radius
-	// #endregion
 
 	/**
 	 * Constructor to initialize sphere with its point and radius.
@@ -34,7 +32,6 @@ public class Sphere implements Geometry {
 		this.radius2 = radius * radius;
 	}
 
-	// #region Get functions
 	/**
 	 * The function return the center point of the sphere
 	 * 
@@ -52,7 +49,6 @@ public class Sphere implements Geometry {
 	public double getRadius() {
 		return radius;
 	}
-	// #endregion
 
 	@Override
 	public Vector getNormal(Point point) {

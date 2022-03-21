@@ -24,18 +24,18 @@ public class Triangle extends Polygon {
 	public Triangle(Point p1, Point p2, Point p3) {
 		super(p1, p2, p3);
 	}
-	
+
 	@Override
-    public boolean equals(Object obj) {//checks if equals
-        return (obj instanceof Triangle) && super.equals(obj);
-    }
-	
+	public boolean equals(Object obj) {// checks if equals
+		return (obj instanceof Triangle) && super.equals(obj);
+	}
+
 	@Override
-	public List<Point> findIntsersections(Ray ray){
+	public List<Point> findIntsersections(Ray ray) {
 		List<Point> points = super.plane.findIntsersections(ray);
-		if(points == null)
+		if (points == null)
 			return points;
-		if(super.isPointOnPolygon(ray))
+		if (super.isPointOnPolygon(ray))
 			return points;
 		return null;
 	}
