@@ -15,10 +15,8 @@ import primitives.*;
  */
 
 public class Plane implements Geometry {
-	// #region Fields
 	final private Point point;
 	final private Vector normalVector;
-	// #endregion
 
 	/**
 	 * Constructor to initialize Plane based object with its point and vector
@@ -52,7 +50,6 @@ public class Plane implements Geometry {
 		return normalVector;
 	}
 
-	// #region Get functions
 	/**
 	 * The function return the normal vactor for the plane
 	 * 

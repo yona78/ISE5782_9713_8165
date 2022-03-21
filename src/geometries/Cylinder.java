@@ -8,13 +8,11 @@ import primitives.*;
 /**
  * This class present a cylinder.
  * 
- * @author Hillel Kroitoro
+ * @author Hillel Kroitoro, Yona
  */
 
 public class Cylinder extends Tube {
-	// #region Fields
 	final private double height;
-	// #endregion
 
 	/**
 	 * Constructor to initialize cylinder with its ray radius and height.
