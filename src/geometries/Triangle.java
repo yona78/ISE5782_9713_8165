@@ -7,7 +7,6 @@ import java.util.List;
 
 import primitives.Point;
 import primitives.Ray;
-import primitives.Util;
 
 /**
  * This class represents a triangle
