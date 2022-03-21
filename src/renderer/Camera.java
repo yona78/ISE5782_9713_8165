@@ -129,11 +129,11 @@ public class Camera {
 		Point pIJ = pc;
 	    double jX = (j - (nX - 1d) / 2) * rX;
 	    if (jX != 0) {
-	    	pIJ.add(vR.scale(jX));
+	    	pIJ = pIJ.add(vR.scale(jX));
 	    }
 	    double iY = -(i - (nY - 1d) / 2) * rY;
 	    if (iY != 0) {
-	    	pIJ.add(vUp.scale(iY));
+	    	pIJ = pIJ.add(vUp.scale(iY));
 	    }
 	    return new Ray(p0, pIJ.subtract(p0));
 		
