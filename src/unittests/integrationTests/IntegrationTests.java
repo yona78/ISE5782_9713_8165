@@ -29,50 +29,24 @@ class IntegrationTests {
 	static Camera camera = new Camera(p0, v1, v2);
 
 	/**
-	 * Help function, creates a new ray to the ViewPlane
-	 * 
-	 * @param i the number of the pixel
-	 * @return ray to the middle of the pixel from the camera
-	 */
-	static Ray ray(int i) {
-		return camera.constructRay(3, 3, i/3, i%3);
-	}
-
-	/**
-	 * Help function, creates n new rays to the ViewPlane
-	 * 
-	 * @param n the amount of pixels
-	 * @return List of the rays to the middle of every pixel from the camera
-	 */
-	static List<Ray> Rays() {
-		List<Ray> l = List.of(ray(1));
-		for (int i = 2; i <= Num_Of_Pixels; ++i)
-			l.add(ray(i));
-		return l;
-	}
-
-	/**
 	 * Help function, finds the intersection points
 	 * 
 	 * @param g the geometry
 	 * @return List of the points
 	 */
-	static List<Point> intersections(Geometry g) {
-		List<Point> l = List.of();
+	static int intersections(Intersectable g) {
 		List<Point> l1;
-		int size;
-		for (int i = 0; i < Num_Of_Pixels;) {
-			l1 = g.findIntersections(rays.get(i));
-			if (l1 != null) {
-				size = l1.size();
-				for (int j = 0; j < size; ++j)
-					l.add(l1.get(j));
+		int size = 0;
+		for (int i = 0; i < 3; ++i) {
+			for(int j = 0; j<3; ++j) {
+				l1 = g.findIntersections(camera.constructRay(3, 3, j, i));
+				if (l1 != null) {
+					size = l1.size();
+				}
 			}
 		}
-		return l;
+		return size;
 	}
-
-	static List<Ray> rays = Rays();
 
 	/**
 	 * Test method for {@link elements.Camera#constructRay(int, int, int, int)}.
