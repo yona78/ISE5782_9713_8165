@@ -59,7 +59,7 @@ class PlaneTests {
 		// TC01: Ray intersects the plane.
 		Ray ray = new Ray(new Point(1, 1, 1), new Vector(-1, 0, -1));
 		List<Point> expRes = List.of(new Point(0, 1, 0));
-		List<Point> res = plane.findIntsersections(ray);
+		List<Point> res = plane.findIntersections(ray);
 
 		assertEquals(res.size(), 1, "Ray intersects the plane EP doesn't work.");
 
@@ -68,35 +68,35 @@ class PlaneTests {
 		// TC02: Ray does not intersects the plane.
 		ray = new Ray(new Point(1, 1, 1), new Vector(1, 1, 1));
 
-		assertNull(plane.findIntsersections(ray), "Ray does not intersects the plane EP doesn't work.");
+		assertNull(plane.findIntersections(ray), "Ray does not intersects the plane EP doesn't work.");
 
 		// =============== Boundary Values Tests ==================
 		// ****Ray is the plane parallel to the plane
 		// TC11: Ray is parallel and included in the plane.
 		ray = new Ray(new Point(0, 1, 0), new Vector(1, 0, 0));
 
-		assertNull(plane.findIntsersections(ray), "Ray is parallel and included in the plane BVA doesn't work.");
+		assertNull(plane.findIntersections(ray), "Ray is parallel and included in the plane BVA doesn't work.");
 
 		// TC12: Ray is parallel and not included in the plane.
 		ray = new Ray(new Point(0, 1, 1), new Vector(1, 0, 0));
 
-		assertNull(plane.findIntsersections(ray), "Ray is parallel and not included in the plane BVA doesn't work.");
+		assertNull(plane.findIntersections(ray), "Ray is parallel and not included in the plane BVA doesn't work.");
 
 		// ****Group: Ray is orthogonal to the plane
 		// TC11: Ray is parallel and included in the plane.
 		ray = new Ray(new Point(0, 1, 0), new Vector(1, 0, 0));
 
-		assertNull(plane.findIntsersections(ray), "Ray is parallel and included in the plane BVA doesn't work.");
+		assertNull(plane.findIntersections(ray), "Ray is parallel and included in the plane BVA doesn't work.");
 
 		// TC12: Ray is parallel and not included in the plane.
 		ray = new Ray(new Point(0, 1, 1), new Vector(1, 0, 0));
 
-		assertNull(plane.findIntsersections(ray), "Ray is parallel and not included in the plane BVA doesn't work.");
+		assertNull(plane.findIntersections(ray), "Ray is parallel and not included in the plane BVA doesn't work.");
 		// **** Group:Ray is orthogonal to the plane
 		// TC13: Ray is orthogonal to the plane and before the plane.
 		ray = new Ray(new Point(0, 1, 1), new Vector(0, 0, -1));
 		expRes = List.of(new Point(0, 1, 0));
-		res = plane.findIntsersections(ray);
+		res = plane.findIntersections(ray);
 
 		assertEquals(res.size(), 1, "Ray is orthogonal to the plane and before the plane BVA doesn't work.");
 
@@ -105,12 +105,12 @@ class PlaneTests {
 		// TC14: Ray is orthogonal to the plane and on the plane.
 		ray = new Ray(new Point(0, 2, 0), new Vector(0, 0, -1));
 
-		assertNull(plane.findIntsersections(ray), "Ray is orthogonal to the plane and in the plane BVA doesn't work.");
+		assertNull(plane.findIntersections(ray), "Ray is orthogonal to the plane and in the plane BVA doesn't work.");
 
 		// TC15: Ray is orthogonal to the plane and after the plane.
 		ray = new Ray(new Point(0, 2, -1), new Vector(0, 0, -1));
 
-		assertNull(plane.findIntsersections(ray),
+		assertNull(plane.findIntersections(ray),
 				"Ray is orthogonal to the plane and after the plane BVA doesn't work.");
 
 		// **** Group:Ray is neither orthogonal nor parallel to and ) begins at the
@@ -118,14 +118,14 @@ class PlaneTests {
 		// TC16: Ray is neither orthogonal nor parallel to and begins at the plane
 		ray = new Ray(new Point(0, 0, 0), new Vector(0, 1, 1));
 
-		assertNull(plane.findIntsersections(ray),
+		assertNull(plane.findIntersections(ray),
 				"Ray is neither orthogonal nor parallel to and  begins at the plane BVA doesn't work.");
 
 		// TC17: Ray begins in the same point which appears as the plane's reference
 		// point.
 		ray = new Ray(new Point(-0.5, -0.5, 0), new Vector(1, 1, 1));
 
-		assertNull(plane.findIntsersections(ray),
+		assertNull(plane.findIntersections(ray),
 				"Ray begins in the same point which appears as the plane's reference point BVA doesn't work.");
 
 	}

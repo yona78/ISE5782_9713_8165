@@ -31,7 +31,7 @@ class TriangleTests {
 
 	/**
 	 * Test method for
-	 * {@link geometries.Triangle#findIntsersections(primitives.Ray)}.
+	 * {@link geometries.Triangle#findIntersections(primitives.Ray)}.
 	 */
 	@Test
 	public void testFindIntsersections() {
@@ -40,28 +40,28 @@ class TriangleTests {
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: There is a simple single test here
-		assertEquals(new Point(0.25, 0.25, 0), tr.findIntsersections(new Ray(new Point(0.25, 0.25, -1), v)).get(0),
+		assertEquals(new Point(0.25, 0.25, 0), tr.findIntersections(new Ray(new Point(0.25, 0.25, -1), v)).get(0),
 				"Bad Point to trinagle");// checks on the triangle
 
 		// TC02: Test when the point is out of the triangle(against edge)
-		assertNull(tr.findIntsersections(new Ray(new Point(-1, 0.5, -1), v)), //
+		assertNull(tr.findIntersections(new Ray(new Point(-1, 0.5, -1), v)), //
 				"Test when the point is out of triangle (against edge) failed\n");
 
 		// TC03: Test when the point is out of the triangle(against vertex)
-		assertNull(tr.findIntsersections(new Ray(new Point(-1, -1, -1), v)), //
+		assertNull(tr.findIntersections(new Ray(new Point(-1, -1, -1), v)), //
 				"Test when the point is out of triangle (against vertex) failed");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test when the point is in the edge of the triangle
-		assertNull(tr.findIntsersections(new Ray(new Point(0, 0.5, 1), v)), //
+		assertNull(tr.findIntersections(new Ray(new Point(0, 0.5, 1), v)), //
 				"Test when the point is in the edge of the triangle failed");
 
 		// TC12: Test when the point is in the angle of the triangle
-		assertNull(tr.findIntsersections(new Ray(new Point(0, 0, 1), v)), //
+		assertNull(tr.findIntersections(new Ray(new Point(0, 0, 1), v)), //
 				"Test when the point is in the angle of the triangle failed");
 
 		// TC13: Test when the point is on edge's continuation
-		assertNull(tr.findIntsersections(new Ray(new Point(0, -1, 1), v)), //
+		assertNull(tr.findIntersections(new Ray(new Point(0, -1, 1), v)), //
 				"Test when the point is on edge's continuation failed");
 
 	}

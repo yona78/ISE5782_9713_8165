@@ -28,8 +28,8 @@ public class Triangle extends Polygon {
 	}
 
 	@Override
-	public List<Point> findIntsersections(Ray ray) {
-		List<Point> points = super.plane.findIntsersections(ray);
+	public List<Point> findIntersections(Ray ray) {
+		List<Point> points = super.plane.findIntersections(ray);
 		return points == null || pointOutOfTriangle(ray) ? null : points;
 	}
 
