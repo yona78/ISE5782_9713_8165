@@ -1,7 +1,7 @@
 /**
  * 
  */
-package unittests.combinations;
+package unittests.integrationTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
  * @author yonao
  * @author Hillel
  */
-class CamraRayTests {
+class IntegrationTests {
 	static int Num_Of_Pixels = 9;
 
 	static Vector v1 = new Vector(1, 0, 0);
@@ -35,18 +35,7 @@ class CamraRayTests {
 	 * @return ray to the middle of the pixel from the camera
 	 */
 	static Ray ray(int i) {
-		Point p1 = new Point(0, 1, 0);
-		if (i < 4)
-			p1.add(v2);
-		else if (i > 6)
-			p1.add(mv2);
-
-		if (i % 3 == 0)
-			p1.add(v1);
-		else if (i % 3 == 1)
-			p1.add(mv1);
-
-		return new Ray(p0, p0.subtract(p1));
+		return camera.constructRay(3, 3, i/3, i%3);
 	}
 
 	/**
@@ -90,14 +79,29 @@ class CamraRayTests {
 	 * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
 	 */
 	@Test
-	void testCameraAndSphereIntsersections() {
-		List<Point> p;
-		Sphere sp;
+	void CameraSphereIntersections() {
+		Point center = new Point(0, 3, 0);
 		
 		// ============ Equivalence Partitions Tests ==============
 
-		// TC01: Simple test
-		assertEquals(1, intersections(new Sphere(new Point(0, 3, 0), 1)).size(), "Simple test failed");
+		// TC01: Simple test(2)
+		assertEquals(2, intersections(new Sphere(center, 1)).size(), "Simple test(2) failed");
+		
+		// TC02: Test when their are intersection points in front of the plane(18)
+		assertEquals(18, intersections(new Sphere(center, 2.5)).size(),
+				"Test when their are intersection points in front of the plane(18) failed");
+		
+		// TC03: Test when their are intersection points in front of the plane(10)
+		assertEquals(10, intersections(new Sphere(new Point(0, 2.5, 0), 2)).size(),
+				"Test when their are intersection points in front of the plane(10) failed");
+		
+		// TC04: Test when the camera is in the body(9)
+				assertEquals(9, intersections(new Sphere(center, 4)).size(),
+						"Test when the camera is in the body(9) failed");
+		
+		// TC05: Test when the the body is behind the camera(0)
+		assertEquals(0, intersections(new Sphere(new Point(0, -1, 0), 0.5)).size(),
+				"Test when the the body is behind the camera(0)");
 		
 		
 	}
