@@ -40,24 +40,26 @@ public class Triangle extends Polygon {
 	 * @return boolean value if the p0 of the ray is in the triangle
 	 */
 	boolean pointOutOfTriangle(Ray ray) {
-		Vector v1, v2;
+		Vector v1 ;
+		Vector v2;
 		Point p0 = ray.getP0();
 		v1 = vertices.get(0).subtract(p0);
 		v2 = vertices.get(1).subtract(p0);
+		Vector v3  = ray.getDir();
 
-		double prevN = Util.alignZero(ray.getDir().dotProduct((v1.crossProduct(v2)).normalize()));
+		double prevN = Util.alignZero(v3.dotProduct((v1.crossProduct(v2)).normalize()));
 		if (prevN == 0)
 			return true;
 		
 		v1 = vertices.get(2).subtract(p0);
 
-		double curN = ray.getDir().dotProduct((v2.crossProduct(v1)).normalize());
+		double curN = v3.dotProduct((v2.crossProduct(v1)).normalize());
 		if (curN * prevN <= 0)
 			return true;
 
 		v2 = vertices.get(0).subtract(p0);
 
-		curN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize());
+		curN = v3.dotProduct((v1.crossProduct(v2)).normalize());
 		if (curN * prevN <= 0)
 			return true;
 		
