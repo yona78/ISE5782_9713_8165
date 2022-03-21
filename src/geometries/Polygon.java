@@ -97,10 +97,10 @@ public class Polygon implements Geometry {
 	}
 
 	/**
-	 * Help function to check if the ray is on the polygon or not
+	 * Help function to check if the ray is not on the polygon
 	 * 
 	 * @param ray - Ray to check if the p0 is on the plane
-	 * @return boolean value if the po 0f the ray is in the polygon
+	 * @return boolean value if the p0 of the ray is in the polygon
 	 */
 	boolean pointOutOfPolygon(Ray ray) {
 		Vector v1, v2;
@@ -108,14 +108,13 @@ public class Polygon implements Geometry {
 		v1 = vertices.get(0).subtract(p0);
 		v2 = vertices.get(1).subtract(p0);
 		double prevN = Util.alignZero(ray.getDir().dotProduct((v1.crossProduct(v2)).normalize()));
-		double curN;
 		if (prevN == 0)
 			return true;
+		double curN;
 
 		for (int i = 1; i < size; i++) {
 			v1 = v2;
 			v2 = vertices.get((i + 1) % size).subtract(p0);
-			;
 			curN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize());
 			if (curN * prevN <= 0)
 				return true;
