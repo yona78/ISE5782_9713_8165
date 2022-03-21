@@ -107,8 +107,9 @@ public class Polygon implements Geometry {
 		Point p0 = ray.getP0();
 		v1 = vertices.get(0).subtract(p0);
 		v2 = vertices.get(1).subtract(p0);
-		double prevN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize()), curN;
-		if (Util.alignZero(prevN) == 0)
+		double prevN = Util.alignZero(ray.getDir().dotProduct((v1.crossProduct(v2)).normalize()));
+		double curN;
+		if (prevN == 0)
 			return true;
 
 		for (int i = 1; i < size; i++) {
@@ -116,7 +117,7 @@ public class Polygon implements Geometry {
 			v2 = vertices.get((i + 1) % size).subtract(p0);
 			;
 			curN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize());
-			if (Util.alignZero(curN) == 0 || curN * prevN < 0)
+			if (curN * prevN <= 0)
 				return true;
 		}
 
