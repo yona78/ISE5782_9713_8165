@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
  */
 class GeometriesTests {
 
-
 	/**
 	 * Test method for {@link geometries.Geometries#findIntsersections(primitives.Ray)}.
 	 */

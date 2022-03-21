@@ -1,5 +1,7 @@
 package primitives;
 
+import static primitives.Util.*;
+
 /**
  * This class will represented Ray object in the project by Point and direction
  * Vector
@@ -65,6 +67,6 @@ public class Ray {
 	 * @return field dir
 	 */
 	 public Point getPoint(double t) {
-	        return p0.add(dir.scale(t));
+	        return isZero(t) ? p0 : p0.add(dir.scale(t));
 	    }
 }

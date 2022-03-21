@@ -11,43 +11,47 @@ import java.util.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 
-public class Geometries implements Intersectable{
-	
-	private List<Intersectable> lst;
-	
-	
+public class Geometries implements Intersectable {
+
+	private List<Intersectable> lst = new LinkedList<>();
+
+	/**
+	 * Constructor to initialize Geometries empty list of geometries
+	 * 
+	 */
+	public Geometries() {
+	}
+
 	/**
 	 * Constructor to initialize Geometries with few geometries
 	 * 
-	 * @param geometries       few geometries to add to the list of the object
+	 * @param geometries few geometries to add to the list of the object
 	 */
 	public Geometries(Intersectable... geometries) {
-		lst = new LinkedList<Intersectable>(Arrays.asList(geometries));
+		add(geometries);
 	}
 
-	
 	/**
 	 * Add to the list of the object more geometries
 	 * 
 	 * @param geometries - the objects to add to the list
 	 */
 	public void add(Intersectable... geometries) {
-		lst.addAll(Arrays.asList(geometries));
+		lst.addAll(List.of(geometries));
 	}
-	
-	
+
 	@Override
 	public List<Point> findIntsersections(Ray ray) {
-	    List<Point> lst1 = new LinkedList<Point>();
-        for (Intersectable geometry: lst) {
-        	List<Point> tmp = geometry.findIntsersections(ray);
-            if (tmp != null)
-                lst1.addAll(tmp);
-        }
-
-        if (lst1.size() == 0) return null;
-
-        return lst1;
+		List<Point> lst1 = null;
+		for (Intersectable geometry : lst) {
+			List<Point> tmp = geometry.findIntsersections(ray);
+			if (tmp != null) {
+				if (lst1 == null)
+					lst1 = new LinkedList<>();
+				lst1.addAll(tmp);
+			}
+		}
+		return lst1;
 	}
 
 }

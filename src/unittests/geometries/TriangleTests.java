@@ -62,14 +62,6 @@ class TriangleTests {
 		assertNull(tr.findIntsersections(new Ray(new Point(0, -1, 1), v)), //
 				"Test when the point is on edge's continuation failed");
 		
-		
-		/*		// TC16: Test when the ray's point is on the triangle
-		assertNull(tr.findIntsersections(new Ray(new Point(0.25, 0.25, 0), v)), //
-				"Test when the ray is on the triangle failed");
-		
-		// TC17: Test when the ray's point is above the triangle
-		assertNull(tr.findIntsersections(new Ray(new Point(0.25, 0.25, 1), v)), //
-				"Test when the ray is above the triangle faild");*/
 
 	}
 }

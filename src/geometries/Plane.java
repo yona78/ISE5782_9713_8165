@@ -73,17 +73,21 @@ public class Plane implements Geometry {
 
 	@Override
 	public List<Point> findIntsersections(Ray ray) {
-		if (ray.getP0() == this.getPoint()) {
+		Vector u;
+		try {
+			u = point.subtract(ray.getP0());
+		} catch (IllegalArgumentException ignore) {
+			// ray's p0 is the same as plane's reference point
 			return null;
 		}
-		double nv = normalVector.dotProduct(ray.getDir());
-        if (Util.isZero(nv)) return null;
-        
-        double t = Util.alignZero(normalVector.dotProduct(ray.getP0().subtract(point)) /nv) * -1;
-        if (t <= 0) return null;
 
-        List<Point> lst = new LinkedList<Point>();
-        lst.add(ray.getPoint(t));
-        return lst;
+		// denominator for the t formula
+		double nv = normalVector.dotProduct(ray.getDir());
+		if (Util.isZero(nv)) // can't divide by zero
+			// the ray is parallel to the plane
+			return null;
+
+		double t = Util.alignZero(normalVector.dotProduct(u) / nv);
+		return t <= 0 ? null : List.of(ray.getPoint(t));
 	}
 }

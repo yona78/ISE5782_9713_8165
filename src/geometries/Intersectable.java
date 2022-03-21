@@ -9,10 +9,11 @@ import java.util.List;
  */
 public interface Intersectable {
 	/**
-	 * The function will return all the intsersections of the ray with the object
+	 * The function will calculate all the intsersection points
+	 * of the ray with the object
 	 * 
      * @param ray The ray to check intersection points with.
-     * @return List of intersection points between the ray and the intersectable geometries.
+     * @return list of intersection points
      */
 	public List<Point> findIntsersections(Ray ray);
 }
