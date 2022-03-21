@@ -45,7 +45,7 @@ class TriangleTests {
 
 		// TC02: Test when the point is out of the triangle(against edge)
 		assertNull(tr.findIntsersections(new Ray(new Point(-1, 0.5, -1), v)), //
-				"Test when the point is out of triangle (against edge) failed");
+				"Test when the point is out of triangle (against edge) failed\n");
 
 		// TC03: Test when the point is out of the triangle(against vertex)
 		assertNull(tr.findIntsersections(new Ray(new Point(-1, -1, -1), v)), //

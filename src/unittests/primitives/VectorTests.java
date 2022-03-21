@@ -46,19 +46,20 @@ class VectorTests {
 	@Test
 	void testScale() {
 		Vector v1 = new Vector(1, 2, 3);
-		// ============ Equivalence Partitions Tests ==============
-		// TC01: Test the vector after scale his point with positive number
 
+		// ============ Equivalence Partitions Tests ==============
+
+		// TC01: Test the vector after scale his point with positive number
 		assertEquals(v1.scale(2), new Vector(2, 4, 6), "scale() wrong result vector");
 
-		// TC02: Test the vector after scale his point with negtive number
-
+		// TC02: Test the vector after scale his point with negative number
 		assertEquals(v1.scale(-3), new Vector(-3, -6, -9), "scale() wrong result vector");
 
 		// =============== Boundary Values Tests ==================
-		// TC11: Test the vector after scale his point with 0
 
-		assertThrows(IllegalArgumentException.class, () -> v1.scale(0), "Constructed a zero vector");
+		// TC11: Test the vector after scale his point with 0
+		assertThrows(IllegalArgumentException.class, //
+				() -> v1.scale(0), "Constructed a zero vector");
 	}
 
 	/**

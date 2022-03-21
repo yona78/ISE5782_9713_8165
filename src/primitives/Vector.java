@@ -50,6 +50,18 @@ public class Vector extends Point {
 		return "(" + super.toString() + ")";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Point))
+			return false;
+		Vector other = (Vector) obj;
+		return this.xyz.equals(other.xyz);
+	}
+
 	/**
 	 * Sum two vectors triads into a new vector where each couple of numbers is
 	 * summarized

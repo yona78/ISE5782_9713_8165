@@ -44,16 +44,23 @@ public class Triangle extends Polygon {
 		Point p0 = ray.getP0();
 		v1 = vertices.get(0).subtract(p0);
 		v2 = vertices.get(1).subtract(p0);
-		v1 = v2;
-		v2 = vertices.get(2).subtract(p0);
 
 		double prevN = Util.alignZero(ray.getDir().dotProduct((v1.crossProduct(v2)).normalize()));
 		if (prevN == 0)
 			return true;
-		double curN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize());
+		
+		v1 = vertices.get(2).subtract(p0);
+
+		double curN = ray.getDir().dotProduct((v2.crossProduct(v1)).normalize());
 		if (curN * prevN <= 0)
 			return true;
 
+		v2 = vertices.get(0).subtract(p0);
+
+		curN = ray.getDir().dotProduct((v1.crossProduct(v2)).normalize());
+		if (curN * prevN <= 0)
+			return true;
+		
 		return false;
 	}
 }
