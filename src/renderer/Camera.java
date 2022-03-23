@@ -84,8 +84,8 @@ public class Camera {
 	 * Contractor for the camera object
 	 *
 	 * @param p - Point to set in p0 of the object
-	 * @param vU - vector to set in vUp vector of the object
 	 * @param vT - vector to set in vTo vector of the object
+	 * @param vU - vector to set in vUp vector of the object
 	 */
 	public Camera(Point p, Vector vT, Vector vU) {
 		if(!Util.isZero(vU.dotProduct(vT))) {
@@ -112,8 +112,8 @@ public class Camera {
 	/**
 	 * The function use for set to width and height user's values and return the new camera
 	 *
-	 * @param width - The width to set in width of the object.
 	 * @param height - The height to set in width of the object.
+	 * @param width - The width to set in width of the object.
 	 * @return the camera
 	 */
 	public Camera setVPSize(double width, double height) {
