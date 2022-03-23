@@ -87,7 +87,7 @@ public class Camera {
 	 * @param vU - vector to set in vUp vector of the object
 	 * @param vT - vector to set in vTo vector of the object
 	 */
-	public Camera(Point p, Vector vU, Vector vT) {
+	public Camera(Point p, Vector vT, Vector vU) {
 		if(!Util.isZero(vU.dotProduct(vT))) {
 		    throw new IllegalArgumentException("vUp and vTo must be vertical");
 		}
@@ -122,20 +122,29 @@ public class Camera {
 		return this;
 	}
 	
+	/**
+     * Creates a ray that goes through a given pixel
+     * @param nX number of pixels on X axis in the view plane
+     * @param nY number of pixels on Y axis in the view plane
+     * @param j Y coordinate of the pixel
+     * @param i X coordinate of the pixel
+     * @return The ray from the camera to the pixel
+     */
 	public Ray constructRay(int nX, int nY, int j, int i) {
 		Point pc = p0.add(vTo.scale(distance));
 		double rY = height / nY;
 		double rX = width / nX;
 		Point pIJ = pc;
 	    double jX = (j - (nX - 1d) / 2) * rX;
-	    if (jX != 0) {
+	    if (!Util.isZero(jX)) {
 	    	pIJ = pIJ.add(vR.scale(jX));
 	    }
 	    double iY = -(i - (nY - 1d) / 2) * rY;
-	    if (iY != 0) {
+	    if (!Util.isZero(iY)) {
 	    	pIJ = pIJ.add(vUp.scale(iY));
 	    }
-	    return new Ray(p0, pIJ.subtract(p0));
+	    Vector vIJ = pIJ.subtract(p0);
+	    return new Ray(p0, vIJ);
 		
 	}
 
