@@ -24,7 +24,7 @@ class IntegrationTests {
 	 * Help function, finds the intersection points
 	 * 
 	 * @param g the geometry
-	 * @return List of the points
+	 * @return the amount of intersection 2points
 	 */
 	static int intersections(Intersectable g) {
 		List<Point> l1;
@@ -33,7 +33,7 @@ class IntegrationTests {
 			for (int j = 0; j < 3; ++j) {
 				l1 = g.findIntersections(camera.constructRay(3, 3, j, i));
 				if (l1 != null) {
-					size = l1.size();
+					size += l1.size();
 				}
 			}
 		}
@@ -46,7 +46,7 @@ class IntegrationTests {
 	 */
 	@Test
 	void CameraSphereIntersections() {
-		camera = new Camera(new Point(0, 0, 0), new Vector(1, 0, 0), new Vector(0, 0, 1)).setVPDistance(1).setVPSize(3,
+		camera = new Camera(new Point(0, 0, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)).setVPDistance(1).setVPSize(3,
 				3);
 		Point center = new Point(0, 3, 0);
 
@@ -79,12 +79,11 @@ class IntegrationTests {
 	 */
 	@Test
 	void CameraPlaneIntersections() {
-		camera = new Camera(new Point(0, -0.5, 0), new Vector(1, 0, 0), new Vector(0, 1, 0)).setVPDistance(1)
-				.setVPSize(3, 3);
+		camera = new Camera(new Point(0, -0.5, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)).setVPDistance(1).setVPSize(3, 3);
 		Point center = new Point(0, 5, 0);
 
 		// TC01: Simple test(9)
-		assertEquals(9, intersections(new Plane(center, new Vector(1, 2, 3))), "Simple test(9) failed");
+		assertEquals(9, intersections(new Plane(center, new Vector(1, 2, 0))), "Simple test(9) failed");
 
 		// TC02: Test when the plane is parallel to the view plane(9)
 		assertEquals(9, intersections(new Plane(center, new Vector(0, 1, 0))), //
@@ -101,15 +100,14 @@ class IntegrationTests {
 	 */
 	@Test
 	void CameraTriangleIntersections() {
-		camera = new Camera(new Point(0, 0.5, 0), new Vector(1, 0, 0), new Vector(0, 1, 0)).setVPDistance(1)
-				.setVPSize(3, 3);
+		camera = new Camera(new Point(0, 0.5, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)).setVPDistance(1).setVPSize(3, 3);
 
 		// TC01: Simple test(1)
-		assertEquals(1, intersections(new Triangle(new Point(0, 2, 0), new Point(1, 2, 0), new Point(-1, 2, 0))), //
+		assertEquals(1, intersections(new Triangle(new Point(0, 2.5, 1), new Point(1, 2.5, -0.5), new Point(-1, 2.5, -0.5))), //
 				"Simple test(1) failed");
 
 		// TC02: Simple test(2)
-		assertEquals(2, intersections(new Triangle(new Point(0, 2.5, 5), new Point(1, 2.5, 0), new Point(-1, 2.5, 0))), //
+		assertEquals(2, intersections(new Triangle(new Point(0, 2.5, 5), new Point(1, 2.5,-0.5), new Point(-1, 2.5, -0.5))), //
 				"Simple test(2) failed");
 	}
 }
