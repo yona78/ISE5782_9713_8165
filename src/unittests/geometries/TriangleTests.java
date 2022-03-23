@@ -37,6 +37,7 @@ class TriangleTests {
 	public void testFindIntsersections() {
 		Triangle tr = new Triangle(new Point(0, 0, 0), new Point(1, 0, 0), new Point(0, 1, 0));
 		Vector v = new Vector(0, 0, 1);
+		
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: There is a simple single test here
