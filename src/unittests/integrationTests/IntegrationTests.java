@@ -46,9 +46,9 @@ class IntegrationTests {
 	 */
 	@Test
 	void CameraSphereIntersections() {
-		camera = new Camera(new Point(0, 0, 0), new Vector(1, 0, 0), new Vector(0, 0, 1)).setVPDistance(1).setVPSize(3,
+		camera = new Camera(new Point(0, 0, 0), new Vector(0, 0, -1), new Vector(0, 1, 0)).setVPDistance(1).setVPSize(3,
 				3);
-		Point center = new Point(0, 3, 0);
+		Point center = new Point(0, 0, -3);
 
 		// TC01: Simple test(2)
 		assertEquals(2, intersections(new Sphere(center, 1)), "Simple test(2) failed");
