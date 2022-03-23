@@ -79,7 +79,8 @@ class IntegrationTests {
 	 */
 	@Test
 	void CameraPlaneIntersections() {
-		camera = new Camera(new Point(0, -0.5, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)).setVPDistance(1).setVPSize(3, 3);
+		camera = new Camera(new Point(0, -0.5, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)).setVPDistance(1)
+				.setVPSize(3, 3);
 		Point center = new Point(0, 5, 0);
 
 		// TC01: Simple test(9)
@@ -96,18 +97,22 @@ class IntegrationTests {
 
 	/**
 	 * Test method for {@link elements.Camera#constructRay(int, int, int, int)}.
-	 * Test method for {@link geometries.Triangle#findIntersections(primitives.Ray)}.
+	 * Test method for
+	 * {@link geometries.Triangle#findIntersections(primitives.Ray)}.
 	 */
 	@Test
 	void CameraTriangleIntersections() {
-		camera = new Camera(new Point(0, 0.5, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)).setVPDistance(1).setVPSize(3, 3);
+		camera = new Camera(new Point(0, 0.5, 0), new Vector(0, 1, 0), new Vector(0, 0, 1)).setVPDistance(1)
+				.setVPSize(3, 3);
 
 		// TC01: Simple test(1)
-		assertEquals(1, intersections(new Triangle(new Point(0, 2.5, 1), new Point(1, 2.5, -0.5), new Point(-1, 2.5, -0.5))), //
+		assertEquals(1,
+				intersections(new Triangle(new Point(0, 2.5, 1), new Point(1, 2.5, -0.5), new Point(-1, 2.5, -0.5))), //
 				"Simple test(1) failed");
 
 		// TC02: Simple test(2)
-		assertEquals(2, intersections(new Triangle(new Point(0, 2.5, 5), new Point(1, 2.5,-0.5), new Point(-1, 2.5, -0.5))), //
+		assertEquals(2,
+				intersections(new Triangle(new Point(0, 2.5, 5), new Point(1, 2.5, -0.5), new Point(-1, 2.5, -0.5))), //
 				"Simple test(2) failed");
 	}
 }
