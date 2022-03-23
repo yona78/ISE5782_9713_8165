@@ -37,7 +37,7 @@ class TriangleTests {
 	public void testFindIntsersections() {
 		Triangle tr = new Triangle(new Point(0, 0, 0), new Point(1, 0, 0), new Point(0, 1, 0));
 		Vector v = new Vector(0, 0, 1);
-		
+
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: There is a simple single test here
@@ -53,6 +53,7 @@ class TriangleTests {
 				"Test when the point is out of triangle (against vertex) failed");
 
 		// =============== Boundary Values Tests ==================
+		
 		// TC11: Test when the point is in the edge of the triangle
 		assertNull(tr.findIntersections(new Ray(new Point(0, 0.5, 1), v)), //
 				"Test when the point is in the edge of the triangle failed");
