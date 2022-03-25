@@ -2,6 +2,8 @@ package primitives;
 
 import static primitives.Util.*;
 
+import java.util.List;
+
 /**
  * This class will represented Ray object in the project by Point and direction
  * Vector
@@ -66,5 +68,28 @@ public class Ray {
 	 */
 	public Point getPoint(double t) {
 		return isZero(t) ? p0 : p0.add(dir.scale(t));
+	}
+	
+	/**
+	 * The function return the closest point to the p0 point of the ray from a lidt of points.
+	 *
+	 * @param lst - list of points to check which one is the closest
+	 * @return the closest point in the list
+	 */
+	public Point findClosestPoint(List<Point> lst) {
+		if(lst == null|| lst.size() == 0) {
+		    return null;
+		}
+		Point closest = lst.get(0);
+		double minDistance = p0.distance(closest);
+		double helpDistance;
+		for (Point point: lst) {
+			helpDistance = p0.distance(point);
+			if (helpDistance < minDistance) {
+				closest = point;
+				minDistance = helpDistance;
+			}
+		}
+		return closest;
 	}
 }
