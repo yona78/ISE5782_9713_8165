@@ -73,8 +73,8 @@ class TubeTests {
 
 		// TC12: Test when the ray crosses it throw the center
 		intsersections.add(new Point(1, 0, 3));
-		assertEquals(tube.findIntersections(new Ray(new Point(-2, 0, 0), new Vector(1, 0, 1))),
-				intsersections, "Test when the ray crosses it throw the center failed");
+		assertEquals(tube.findIntersections(new Ray(new Point(-2, 0, 0), new Vector(1, 0, 1))), intsersections,
+				"Test when the ray crosses it throw the center failed");
 		intsersections.remove(1);
 
 		// TC13: Test when the vertical ray crosses it XXX
@@ -170,5 +170,31 @@ class TubeTests {
 		assertEquals(tube.findIntersections(new Ray(new Point(0, 0, 0), new Vector(-1, 0, 1))), intsersections,
 				"Test when the inner-ray begin in the center failed");
 
+		// When the ray begins on the side
+
+		// TC40: Test when the vertical side-ray crosses the center
+		assertEquals(tube.findIntersections(new Ray(new Point(1, 0, 1), new Vector(-1, 0, 0))), intsersections,
+				"Test when the vertical side-ray crosses the center failed");
+
+		// TC41: Test when the vertical side-ray don't crosses the center XXX
+		// assertEquals(tube.findIntersections(new Ray(new Point(-0.5, 0, 1), new
+		// Vector(-1, 0, 0))), intsersections,
+		// "Test when the vertical side-ray don't crosses the center failed");
+
+		// TC42: Test when the side-ray crosses the center
+		assertEquals(tube.findIntersections(new Ray(new Point(1, 0, -1), new Vector(-1, 0, 1))), intsersections,
+				"Test when the side-ray crosses the center failed");
+
+		// TC43: Test when the side-ray don't crosses the center  XXX
+		//assertEquals(tube.findIntersections(new Ray(new Point(-0.5, 0, 0), new Vector(-1, 0, 2))), intsersections,
+		//		"Test when the side-ray don't crosses the center failed");
+
+		// TC44: Test when the vertical side-ray is going out
+		assertNull(tube.findIntersections(new Ray(new Point(-1, 0, 1), new Vector(-1, 0, 0))),
+				"Test when the vertical side-ray is going out failed");
+
+		// TC45: Test when the side-ray is going out
+		assertEquals(tube.findIntersections(new Ray(new Point(-1, 0, 1), new Vector(-1, 0, 1))), intsersections,
+				"Test when the vertical side-ray is going out failed");
 	}
 }
