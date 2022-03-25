@@ -66,14 +66,15 @@ class TubeTests {
 		// =============== Boundary Values Tests ==================
 
 		// TC11: Test when the vertical ray crosses it throw the center
-		assertEquals(tube.findIntersections(new Ray(new Point(-2, 0, 1), new Vector(1, 0, 0))),
-				intsersections.add(new Point(1, 0, 1)),
+		intsersections.add(new Point(1, 0, 1));
+		assertEquals(tube.findIntersections(new Ray(new Point(-2, 0, 1), new Vector(1, 0, 0))), intsersections,
 				"Test when the vertical ray crosses it throw the center failed");
 		intsersections.remove(1);
 
 		// TC12: Test when the ray crosses it throw the center
+		intsersections.add(new Point(1, 0, 3));
 		assertEquals(tube.findIntersections(new Ray(new Point(-2, 0, 0), new Vector(1, 0, 1))),
-				intsersections.add(new Point(1, 0, 3)), "Test when the ray crosses it throw the center failed");
+				intsersections, "Test when the ray crosses it throw the center failed");
 		intsersections.remove(1);
 
 		// TC13: Test when the vertical ray crosses it XXX
