@@ -16,6 +16,8 @@ public class Camera {
 	private double width;
 	private double height;
 	private double distance;
+	private ImageWriter imageWriter;
+	private RayTracerBase rayTracerBase;
 
 	/**
 	 * The function return the point of the camera
@@ -123,6 +125,28 @@ public class Camera {
 	}
 
 	/**
+	 * The function use to set the imageWriter and returns the new camera
+	 *
+	 * @param imageWriter - The imageWriter to set in
+	 * @return the camera
+	 */
+	public Camera setImageWriter(ImageWriter imageWriter) {
+		this.imageWriter = imageWriter;
+		return this;
+	}
+
+	/**
+	 * The function use to set the rayTracerBase and returns the new camera
+	 *
+	 * @param rayTracerBase - The rayTracerBase to set in
+	 * @return the camera
+	 */
+	public Camera setRayTracerBase(RayTracerBase rayTracerBase) {
+		this.rayTracerBase = rayTracerBase;
+		return this;
+	}
+
+	/**
 	 * Creates a ray that goes through a given pixel
 	 * 
 	 * @param nX number of pixels on X axis in the view plane
@@ -149,4 +173,37 @@ public class Camera {
 
 	}
 
+	/**
+	 * 
+	 */
+	public void renderImage() {
+		if (imageWriter == null || rayTracerBase == null)
+			throw new MissingResourcesException();
+		throw new UnsupportedOperationException();
+		int nX = imageWriter.getNx();
+		int nY = imageWriter.getNy();
+		for(int i = 0; i < nX; ++i) {
+			for(int j = 0; j< nY; ++j) {
+				imageWriter.writePixel(i, j, rayTracerBase.traceRay(constructRay(nX, nY, i, j)));
+			}
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void printGrid(int interval, Color color) {
+		if (imageWriter == null)
+			throw new MissingResourcesException();
+		
+	}
+	
+	/**
+	 * 
+	 */
+	public void writeToImage() {
+		if (imageWriter == null)
+			throw new MissingResourcesException();
+		renderImage();
+	}
 }
