@@ -51,15 +51,14 @@ public class Triangle extends Polygon {
 		if (prevN == 0)
 			return true;
 		
-		v1 = vertices.get(2).subtract(p0);
+		Vector v4 = vertices.get(2).subtract(p0);
 
-		double curN = v3.dotProduct((v2.crossProduct(v1)).normalize());
+		double curN = v3.dotProduct((v2.crossProduct(v4)).normalize());
 		if (curN * prevN <= 0)
 			return true;
 
-		v2 = vertices.get(0).subtract(p0);
 
-		curN = v3.dotProduct((v1.crossProduct(v2)).normalize());
+		curN = v3.dotProduct((v4.crossProduct(v1)).normalize());
 		if (curN * prevN <= 0)
 			return true;
 		
