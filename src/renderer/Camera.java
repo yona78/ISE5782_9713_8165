@@ -174,48 +174,59 @@ public class Camera {
 
 	}
 
-	 /**
-     * Renders the image pixel by pixel into the imageWriter
-     */
+	/**
+	 * Renders the image pixel by pixel into the imageWriter
+	 */
 	public void renderImage() {
 		if (cameraImageWriter == null)
-            throw new MissingResourceException("Missing image writer object!", "ImageWriter", "");
-        if (cameraRayTracerBase == null)
-            throw new MissingResourceException("Missing tracer object!", "RayTracerBase", "");
+			throw new MissingResourceException("Missing image writer object!", "ImageWriter", "");
+		if (cameraRayTracerBase == null)
+			throw new MissingResourceException("Missing tracer object!", "RayTracerBase", "");
 		int nX = cameraImageWriter.getNx();
 		int nY = cameraImageWriter.getNy();
-		for(int i = 0; i < nX; ++i) {
-			for(int j = 0; j< nY; ++j) {
-				cameraImageWriter.writePixel(i, j, cameraRayTracerBase.traceRay(constructRay(nX, nY, i, j)));
+		for (int i = 0; i < nX; ++i) {
+			for (int j = 0; j < nY; ++j) {
+				cameraImageWriter.writePixel(i, j, castRay(nX, nY, i, j));
 			}
 		}
 	}
 
-	 /**
-     * Create a grid in the image
-     *
-     * @param interval - How many pixels do you want to have in a square
-     * @param color    - What color the grid should be
-     */
+	/**
+	 * @param nX
+	 * @param nY
+	 * @param i
+	 * @param j
+	 * @return
+	 */
+	private Color castRay(int nX, int nY, int i, int j) {
+		return cameraRayTracerBase.traceRay(constructRay(nX, nY, i, j));
+	}
+
+	/**
+	 * Create a grid in the image
+	 *
+	 * @param interval - How many pixels do you want to have in a square
+	 * @param color    - What color the grid should be
+	 */
 	public void printGrid(int interval, Color color) {
 		if (cameraImageWriter == null)
 			throw new MissingResourceException("Missing image writer object!", "ImageWriter", "");
 		for (int i = 0; i < cameraImageWriter.getNx(); i++) {
-            for (int j = 0; j < cameraImageWriter.getNy(); j++) {
-                if (i % interval == 0 || j % interval == 0)
-                    cameraImageWriter.writePixel(i, j, color);
-            }
-        }
-		
+			for (int j = 0; j < cameraImageWriter.getNy(); j++) {
+				if (i % interval == 0 || j % interval == 0)
+					cameraImageWriter.writePixel(i, j, color);
+			}
+		}
+
 	}
-	
+
 	/**
-     * Change the actual image file according to the imageWriter object
-     */
+	 * Change the actual image file according to the imageWriter object
+	 */
 	public void writeToImage() {
 		if (cameraImageWriter == null)
-            throw new MissingResourceException("Missing image writer object!", "ImageWriter", "");
+			throw new MissingResourceException("Missing image writer object!", "ImageWriter", "");
 
-        cameraImageWriter.writeToImage();
+		cameraImageWriter.writeToImage();
 	}
 }

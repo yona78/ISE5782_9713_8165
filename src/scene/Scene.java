@@ -1,8 +1,8 @@
 package scene;
 
 import primitives.Color;
-import elements.AmbientLight;
 import geometries.Geometries;
+import lighting.AmbientLight;
 
 /**
  * This class represents scene in the project and will be a plain data structure(PDS).
@@ -15,7 +15,6 @@ public class Scene {
 	public Color background = Color.BLACK;
 	public AmbientLight ambientLight = new AmbientLight();
 	public Geometries geometries = new Geometries();
-	
 	
 	/**
 	 * Constructor to initialize Scene based on name and defualt values
@@ -58,8 +57,5 @@ public class Scene {
 		this.geometries = setGeometries;
 		return this;
 	}
-	
-	
-	
 
 }

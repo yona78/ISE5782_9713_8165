@@ -21,14 +21,14 @@ class IntegrationTests {
 
 	static Vector vTo = new Vector(0, 0, -1);
 	static Vector vUp = new Vector(0, 1, 0);
-	static Camera camera;
+	Camera camera;
 
 	/**
 	 * Help function, set camera
 	 * 
 	 * @param p is the camera location
 	 */
-	static void setCamera(Point p) {
+	void setCamera(Point p) {
 		camera = new Camera(p, vTo, vUp).setVPDistance(1).setVPSize(3, 3);
 	}
 
@@ -38,7 +38,7 @@ class IntegrationTests {
 	 * @param g the geometry
 	 * @return the amount of intersection 2points
 	 */
-	static int intersections(Intersectable g) {
+	int intersections(Intersectable g) {
 		List<Point> l1;
 		int size = 0;
 		for (int i = 0; i < 3; ++i) {
@@ -53,14 +53,16 @@ class IntegrationTests {
 	}
 
 	/**
-	 * Test method for {@link elements.Camera#constructRay(int, int, int, int)}.
-	 * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
+	 * Integration test for the following methods:<br>
+	 * <ul>
+	 * <li>{@link elements.Camera#constructRay(int, int, int, int)}</li>
+	 * <li>{@link geometries.Sphere#findIntersections(primitives.Ray)}</li>
+	 * </ul>
 	 */
 	@Test
 	void CameraSphereIntersections() {
 		camera = new Camera(new Point(0, 0, 0), new Vector(0, 0, -1), new Vector(0, 1, 0)).setVPDistance(1).setVPSize(3,
 				3);
-		Point center = new Point(0, 0, -3);
 		// TC01: Simple test(2)
 		setCamera(new Point(0, 0, 0));
 		assertEquals(2, intersections(new Sphere(new Point(0, 0, -3), 1)), "Simple test(2) failed");
