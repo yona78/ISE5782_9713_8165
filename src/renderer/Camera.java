@@ -1,6 +1,7 @@
 package renderer;
 
 import primitives.*;
+import java.util.MissingResourceException;
 
 /**
  * This class represents a camera in the project.
@@ -16,8 +17,8 @@ public class Camera {
 	private double width;
 	private double height;
 	private double distance;
-	private ImageWriter imageWriter;
-	private RayTracerBase rayTracerBase;
+	private ImageWriter cameraImageWriter;
+	private RayTracerBase cameraRayTracerBase;
 
 	/**
 	 * The function return the point of the camera
@@ -131,7 +132,7 @@ public class Camera {
 	 * @return the camera
 	 */
 	public Camera setImageWriter(ImageWriter imageWriter) {
-		this.imageWriter = imageWriter;
+		this.cameraImageWriter = imageWriter;
 		return this;
 	}
 
@@ -142,7 +143,7 @@ public class Camera {
 	 * @return the camera
 	 */
 	public Camera setRayTracerBase(RayTracerBase rayTracerBase) {
-		this.rayTracerBase = rayTracerBase;
+		this.cameraRayTracerBase = rayTracerBase;
 		return this;
 	}
 
@@ -173,37 +174,48 @@ public class Camera {
 
 	}
 
-	/**
-	 * 
-	 */
+	 /**
+     * Renders the image pixel by pixel into the imageWriter
+     */
 	public void renderImage() {
-		if (imageWriter == null || rayTracerBase == null)
-			throw new MissingResourcesException();
-		throw new UnsupportedOperationException();
-		int nX = imageWriter.getNx();
-		int nY = imageWriter.getNy();
+		if (cameraImageWriter == null)
+            throw new MissingResourceException("Missing image writer object!", "ImageWriter", "");
+        if (cameraRayTracerBase == null)
+            throw new MissingResourceException("Missing tracer object!", "RayTracerBase", "");
+		int nX = cameraImageWriter.getNx();
+		int nY = cameraImageWriter.getNy();
 		for(int i = 0; i < nX; ++i) {
 			for(int j = 0; j< nY; ++j) {
-				imageWriter.writePixel(i, j, rayTracerBase.traceRay(constructRay(nX, nY, i, j)));
+				cameraImageWriter.writePixel(i, j, cameraRayTracerBase.traceRay(constructRay(nX, nY, i, j)));
 			}
 		}
 	}
 
-	/**
-	 * 
-	 */
+	 /**
+     * Create a grid in the image
+     *
+     * @param interval - How many pixels do you want to have in a square
+     * @param color    - What color the grid should be
+     */
 	public void printGrid(int interval, Color color) {
-		if (imageWriter == null)
-			throw new MissingResourcesException();
+		if (cameraImageWriter == null)
+			throw new MissingResourceException("Missing image writer object!", "ImageWriter", "");
+		for (int i = 0; i < cameraImageWriter.getNx(); i++) {
+            for (int j = 0; j < cameraImageWriter.getNy(); j++) {
+                if (i % interval == 0 || j % interval == 0)
+                    cameraImageWriter.writePixel(i, j, color);
+            }
+        }
 		
 	}
 	
 	/**
-	 * 
-	 */
+     * Change the actual image file according to the imageWriter object
+     */
 	public void writeToImage() {
-		if (imageWriter == null)
-			throw new MissingResourcesException();
-		renderImage();
+		if (cameraImageWriter == null)
+            throw new MissingResourceException("Missing image writer object!", "ImageWriter", "");
+
+        cameraImageWriter.writeToImage();
 	}
 }
