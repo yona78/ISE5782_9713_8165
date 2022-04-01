@@ -3,7 +3,7 @@ package lighting;
 import primitives.*;
 
 /**
- * This class represents AmbientLight for objects in our project.
+ * This class extends Light and represents AmbientLight for objects in our project.
  * 
  * @author Hillel Kroitoro, Yona Orunov
  */
