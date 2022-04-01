@@ -15,7 +15,7 @@ import static primitives.Util.*;
  * 
  */
 
-public class Sphere implements Geometry {
+public class Sphere extends Geometry {
 	final private Point center;
 	final private double radius;
 	final private double radius2; // square radius
@@ -55,13 +55,14 @@ public class Sphere implements Geometry {
 		return point.subtract(center).normalize();
 	}
 
+
 	@Override
-	public List<Point> findIntersections(Ray ray) {
+	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
 		Vector u;
 		try {
 			u = center.subtract(ray.getP0());
 		} catch (IllegalArgumentException ignore) {
-			return List.of(ray.getPoint(radius));
+			return List.of(new GeoPoint(this,ray.getPoint(radius)));
 		}
 
 		double tm = u.dotProduct(ray.getDir());
@@ -77,7 +78,7 @@ public class Sphere implements Geometry {
 			return null;
 
 		double t1 = tm - th;
-		return alignZero(t1) <= 0 ? List.of(ray.getPoint(t2)) //
-				: List.of(ray.getPoint(t1), ray.getPoint(t2));
+		return alignZero(t1) <= 0 ? List.of(new GeoPoint(this,ray.getPoint(t2))) //
+				: List.of(new GeoPoint(this,ray.getPoint(t1)), new GeoPoint(this,ray.getPoint(t2)));
 	}
 }

@@ -14,6 +14,13 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>basicRenderTestTwoColors.xml</name>
+			<type>1</type>
+			<location>C:/Users/yonao/Downloads/basicRenderTestTwoColors.xml</location>
+		</link>
+	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1646576352235</id>

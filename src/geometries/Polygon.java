@@ -11,7 +11,7 @@ import static primitives.Util.*;
  * 
  * @author Dan
  */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
 	/**
 	 * List of polygon's vertices
 	 */
@@ -90,11 +90,6 @@ public class Polygon implements Geometry {
 		return plane.getNormal();
 	}
 
-	@Override
-	public List<Point> findIntersections(Ray ray) {
-		List<Point> lst = plane.findIntersections(ray);
-		return lst == null || pointOutOfPolygon(ray) ? null : lst;
-	}
 
 	/**
 	 * Help function to check if the ray is not on the polygon
@@ -121,5 +116,11 @@ public class Polygon implements Geometry {
 		}
 
 		return false;
+	}
+
+	@Override
+	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+		List<GeoPoint> lst = plane.findGeoIntersections(ray);
+		return lst == null || pointOutOfPolygon(ray) ? null : List.of(new GeoPoint(this,lst.get(0).point));
 	}
 }

@@ -11,7 +11,7 @@ import java.util.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable{
 
 	private List<Intersectable> geometries = new LinkedList<>();
 
@@ -41,10 +41,10 @@ public class Geometries implements Intersectable {
 	}
 
 	@Override
-	public List<Point> findIntersections(Ray ray) {
-		List<Point> lst1 = null;
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+		List<GeoPoint> lst1 = null;
 		for (Intersectable geometry : geometries) {
-			List<Point> tmp = geometry.findIntersections(ray);
+			List<GeoPoint> tmp = geometry.findGeoIntersections(ray);
 			if (tmp != null) {
 				if (lst1 == null)
 					lst1 = new LinkedList<>();
@@ -53,5 +53,6 @@ public class Geometries implements Intersectable {
 		}
 		return lst1;
 	}
+
 
 }

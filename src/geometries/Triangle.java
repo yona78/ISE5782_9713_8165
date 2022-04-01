@@ -5,6 +5,7 @@ package geometries;
 
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Util;
@@ -28,9 +29,9 @@ public class Triangle extends Polygon {
 	}
 
 	@Override
-	public List<Point> findIntersections(Ray ray) {
-		List<Point> points = super.plane.findIntersections(ray);
-		return points == null || pointOutOfTriangle(ray) ? null : points;
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+		List<GeoPoint> points = super.plane.findGeoIntersections(ray);
+		return points == null || pointOutOfTriangle(ray) ? null : List.of(new GeoPoint(this,points.get(0).point));
 	}
 
 	/**
