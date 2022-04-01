@@ -192,11 +192,13 @@ public class Camera {
 	}
 
 	/**
-	 * @param nX
-	 * @param nY
-	 * @param i
-	 * @param j
-	 * @return
+	 * The function creates ray from the camera to a pixel and finds the ray's color
+	 * 
+	 * @param nX number of pixels on X axis in the view plane
+	 * @param nY number of pixels on Y axis in the view plane
+	 * @param j  Y coordinate of the pixel
+	 * @param i  X coordinate of the pixel
+	 * @return The color of the ray from the camera to the pixel
 	 */
 	private Color castRay(int nX, int nY, int i, int j) {
 		return cameraRayTracerBase.traceRay(constructRay(nX, nY, i, j));
@@ -211,8 +213,10 @@ public class Camera {
 	public void printGrid(int interval, Color color) {
 		if (cameraImageWriter == null)
 			throw new MissingResourceException("Missing image writer object!", "ImageWriter", "");
-		for (int i = 0; i < cameraImageWriter.getNx(); i++) {
-			for (int j = 0; j < cameraImageWriter.getNy(); j++) {
+		int nX = cameraImageWriter.getNx();
+		int nY = cameraImageWriter.getNy();
+		for (int i = 0; i < nX; i++) {
+			for (int j = 0; j < nY; j++) {
 				if (i % interval == 0 || j % interval == 0)
 					cameraImageWriter.writePixel(i, j, color);
 			}

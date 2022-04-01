@@ -12,7 +12,7 @@ public class AmbientLight {
 	private Color intensity;
 	
 	/**
-	 * Defult constructor to initializeAmbientLight object with basic color
+	 * Default constructor to initializeAmbientLight object with basic color
 	 */
 	public AmbientLight() {
 		intensity = Color.BLACK;
@@ -21,11 +21,11 @@ public class AmbientLight {
 	/**
 	 * Constructor to initialize AmbientLight based on color and absorption for the color
 	 * 
-	 * @param Ia - The basic color to the ambient light 
-	 * @param Ka - The absorption for the Ia color
+	 * @param iA - The basic color to the ambient light 
+	 * @param kA - The absorption for the iA color
 	 */
-	public AmbientLight(Color Ia, Double3 Ka) {
-		intensity = Ia.scale(Ka);
+	public AmbientLight(Color iA, Double3 kA) {
+		intensity = iA.scale(kA);
 	}
 	
 	/**

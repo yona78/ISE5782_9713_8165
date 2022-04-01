@@ -33,12 +33,12 @@ class IntegrationTests {
 	}
 
 	/**
-	 * Help function, finds the intersection points
+	 * Help function, finds the amount of intersection points
 	 * 
 	 * @param g the geometry
-	 * @return the amount of intersection 2points
+	 * @return the amount of intersection points
 	 */
-	int intersections(Intersectable g) {
+	int countIntersections(Intersectable g) {
 		List<Point> l1;
 		int size = 0;
 		for (int i = 0; i < 3; ++i) {
@@ -65,22 +65,22 @@ class IntegrationTests {
 				3);
 		// TC01: Simple test(2)
 		setCamera(new Point(0, 0, 0));
-		assertEquals(2, intersections(new Sphere(new Point(0, 0, -3), 1)), "Simple test(2) failed");
+		assertEquals(2, countIntersections(new Sphere(new Point(0, 0, -3), 1)), "Simple test(2) failed");
 
 		// TC02: Test when their are intersection points in front of the plane(18)
 		setCamera(new Point(0, 0, 0.5));
-		assertEquals(18, intersections(new Sphere(new Point(0, 0, -2.5), 2.5)), //
+		assertEquals(18, countIntersections(new Sphere(new Point(0, 0, -2.5), 2.5)), //
 				"Test when their are intersection points in front of the plane(18) failed");
 
 		// TC03: Test when their are intersection points in front of the plane(10)
-		assertEquals(10, intersections(new Sphere(new Point(0, 0, -2), 2)), //
+		assertEquals(10, countIntersections(new Sphere(new Point(0, 0, -2), 2)), //
 				"Test when their are intersection points in front of the plane(10) failed");
 
 		// TC04: Test when the camera is in the body(9)
-		assertEquals(9, intersections(new Sphere(new Point(0, 0, -1), 4)), "Test when the camera is in the body(9) failed");
+		assertEquals(9, countIntersections(new Sphere(new Point(0, 0, -1), 4)), "Test when the camera is in the body(9) failed");
 
 		// TC06: Test when the the body is behind the camera(0)
-		assertEquals(0, intersections(new Sphere(new Point(0, 0, 1), 0.5)), //
+		assertEquals(0, countIntersections(new Sphere(new Point(0, 0, 1), 0.5)), //
 				"Test when the the body is behind the camera(0) failed");
 	}
 
@@ -94,14 +94,14 @@ class IntegrationTests {
 		Point p0 = new Point(0, 0, -5);
 
 		// TC01: Simple test(9)
-		assertEquals(9, intersections(new Plane(p0, new Vector(1, 0, 2))), "Simple test(9) failed");
+		assertEquals(9, countIntersections(new Plane(p0, new Vector(1, 0, 2))), "Simple test(9) failed");
 
 		// TC02: Test when the plane is parallel to the view plane(9)
-		assertEquals(9, intersections(new Plane(p0, new Vector(0, 0, -1))), //
+		assertEquals(9, countIntersections(new Plane(p0, new Vector(0, 0, -1))), //
 				"Test when the plane is parallel to the view plane(9) failed");
 
 		// TC03: Test when there are 6 intersection points(6)
-		assertEquals(6, intersections(new Plane(p0, new Vector(1, 0, -1))), //
+		assertEquals(6, countIntersections(new Plane(p0, new Vector(1, 0, -1))), //
 				"Tilted plane, 6 intersection points test not working");
 	}
 
@@ -116,12 +116,12 @@ class IntegrationTests {
 
 		// TC01: One intersection point test
 		assertEquals(1,
-				intersections(new Triangle(new Point(0, 1, -2), new Point(-1, -1, -2), new Point(1, -1, -2))), //
+				countIntersections(new Triangle(new Point(0, 1, -2), new Point(-1, -1, -2), new Point(1, -1, -2))), //
 				"One intersection point test failed");
 
 		// TC02: Simple test(2)
 		assertEquals(2,
-				intersections(new Triangle(new Point(0, 20, -2), new Point(1, -1, -2), new Point(-1, -1, -2))), //
+				countIntersections(new Triangle(new Point(0, 20, -2), new Point(1, -1, -2), new Point(-1, -1, -2))), //
 				"Simple test(2) failed");
 	}
 }
