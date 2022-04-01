@@ -8,7 +8,7 @@ import primitives.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 abstract class Light {
-	private Color intensity;
+	final private Color intensity;
 	
 	/**
 	 * Constructor to initialize Light based on color
