@@ -1,8 +1,12 @@
 package scene;
 
 import primitives.Color;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import geometries.Geometries;
-import lighting.AmbientLight;
+import lighting.*;
 
 /**
  * This class represents scene in the project and will be a plain data structure(PDS).
@@ -15,6 +19,7 @@ public class Scene {
 	public Color background = Color.BLACK;
 	public AmbientLight ambientLight = new AmbientLight();
 	public Geometries geometries = new Geometries();
+	List<LightSource> lights= new LinkedList<>();
 	
 	/**
 	 * Constructor to initialize Scene based on name and defualt values
@@ -56,6 +61,26 @@ public class Scene {
 	public Scene setGeometries(Geometries setGeometries) {
 		this.geometries = setGeometries;
 		return this;
+	}
+	
+	/**
+	 * The function use for set to scene their ambientLight and return the new scene.
+	 *
+	 * @param setLights - The lights to set for the lights of the scene.
+	 * @return the scene.
+	 */
+	public Scene setLights(List<LightSource> setLights) {
+		this.lights = setLights;
+		return this;
+	}
+	
+	/**
+	 * Getter for lights felid in scene.
+	 *
+	 * @return lights of scene
+	 */
+	List<LightSource> getLights() {
+		return lights;
 	}
 
 }
