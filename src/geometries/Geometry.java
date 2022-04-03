@@ -15,6 +15,7 @@ import renderer.ImageWriter;
 
 public abstract  class Geometry extends Intersectable {
 	protected Color emission = Color.BLACK;
+	protected Material material;
 	/**
 	 * This method calculates the normal vector to the given point on the geometry
 	 * 
