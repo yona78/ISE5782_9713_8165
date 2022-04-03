@@ -40,7 +40,7 @@ public class Material {
 	 * @param nShininess is the new nShininess
 	 * @return the updated material
 	 */
-	public Material setNShininess(int nShininess) {
+	public Material setShininess(int nShininess) {
 		this.nShininess = nShininess;
 		return this;
 	}
