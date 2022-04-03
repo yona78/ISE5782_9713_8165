@@ -7,8 +7,8 @@ package primitives;
  */
 
 public class Material {
-	public double kD;
-	public double kS;
+	public Double3 kD;
+	public Double3 kS;
 	public int nShininess;
 
 	// -----------------------setters-----------------------
@@ -18,7 +18,7 @@ public class Material {
 	 * @param kD is the new kD
 	 * @return the updated material
 	 */
-	public Material setKd(double kD) {
+	public Material setKd(Double3 kD) {
 		this.kD = kD;
 		return this;
 	}
@@ -29,7 +29,7 @@ public class Material {
 	 * @param kS is the new kS
 	 * @return the updated material
 	 */
-	public Material setKs(double kS) {
+	public Material setKs(Double3 kS) {
 		this.kS = kS;
 		return this;
 	}
