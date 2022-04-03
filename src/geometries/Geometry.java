@@ -15,7 +15,7 @@ import renderer.ImageWriter;
 
 public abstract  class Geometry extends Intersectable {
 	protected Color emission = Color.BLACK;
-	protected Material material;
+	private Material material;
 	/**
 	 * This method calculates the normal vector to the given point on the geometry
 	 * 
@@ -27,20 +27,40 @@ public abstract  class Geometry extends Intersectable {
 	/**
 	 * Getter of the emission of the geometry.
 	 * 
-	 * @return emission.
+	 * @return the emission.
 	 */
 	public Color getEmission() {
 		return emission;
 	}
 	
 	/**
-	 * The function use to set the emmission and returns the new geometry
+	 * Getter of the material of the geometry.
+	 * 
+	 * @return the material.
+	 */
+	public Material getMaterial() {
+		return material;
+	}
+	
+	/**
+	 * The function use to set the emission and returns the new geometry
 	 *
 	 * @param setEmission - The color to set in
 	 * @return the geometry
 	 */
 	public Geometry setEmission(Color setEmission) {
 		this.emission = setEmission;
+		return this;
+	}
+	
+	/**
+	 * The function use to set the material and returns the new geometry
+	 *
+	 * @param setMaterial - The material to set in
+	 * @return the geometry
+	 */
+	public Geometry setMaterial(Material setMaterial) {
+		this.material = setMaterial;
 		return this;
 	}
 }
