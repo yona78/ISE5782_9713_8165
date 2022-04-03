@@ -29,7 +29,7 @@ public class Material {
 	 * @param kS is the new kS
 	 * @return the updated material
 	 */
-	Material setKs(double kS) {
+	public Material setKs(double kS) {
 		this.kS = kS;
 		return this;
 	}
