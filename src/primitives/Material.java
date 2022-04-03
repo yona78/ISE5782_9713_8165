@@ -18,7 +18,7 @@ public class Material {
 	 * @param kD is the new kD
 	 * @return the updated material
 	 */
-	Material setKd(double kD) {
+	public Material setKd(double kD) {
 		this.kD = kD;
 		return this;
 	}
