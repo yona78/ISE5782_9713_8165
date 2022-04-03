@@ -19,7 +19,7 @@ public class Scene {
 	public Color background = Color.BLACK;
 	public AmbientLight ambientLight = new AmbientLight();
 	public Geometries geometries = new Geometries();
-	private List<LightSource> lights = new LinkedList<>();
+	public List<LightSource> lights = new LinkedList<>();
 	
 	/**
 	 * Constructor to initialize Scene based on name and default values
