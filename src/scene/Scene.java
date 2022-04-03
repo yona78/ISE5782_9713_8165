@@ -19,10 +19,10 @@ public class Scene {
 	public Color background = Color.BLACK;
 	public AmbientLight ambientLight = new AmbientLight();
 	public Geometries geometries = new Geometries();
-	List<LightSource> lights= new LinkedList<>();
+	private List<LightSource> lights = new LinkedList<>();
 	
 	/**
-	 * Constructor to initialize Scene based on name and defualt values
+	 * Constructor to initialize Scene based on name and default values
 	 * 
 	 * @param name1 - The name of the scene
 	 */
@@ -61,26 +61,6 @@ public class Scene {
 	public Scene setGeometries(Geometries setGeometries) {
 		this.geometries = setGeometries;
 		return this;
-	}
-	
-	/**
-	 * The function use for set to scene their ambientLight and return the new scene.
-	 *
-	 * @param setLights - The lights to set for the lights of the scene.
-	 * @return the scene.
-	 */
-	public Scene setLights(List<LightSource> setLights) {
-		this.lights = setLights;
-		return this;
-	}
-	
-	/**
-	 * Getter for lights felid in scene.
-	 *
-	 * @return lights of scene
-	 */
-	List<LightSource> getLights() {
-		return lights;
 	}
 
 }
