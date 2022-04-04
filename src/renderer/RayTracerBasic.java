@@ -45,6 +45,13 @@ public class RayTracerBasic extends RayTracerBase{
 				.add(localEffect(gP, ray));
 	}
 
+	/**
+	 * Help function to calculate the local effect
+	 * 
+	 * @param gP is the GeoPoint
+	 * @param ray is the ray from the camera to the point
+	 * @return the diffuse + the specular effects
+	 */
 	private Color localEffect(GeoPoint gP, Ray ray) {
 		Color cr = Color.BLACK;
 		Double3 tmp;
