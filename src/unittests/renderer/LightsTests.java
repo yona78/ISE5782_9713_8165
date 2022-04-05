@@ -132,4 +132,35 @@ public class LightsTests {
 				.writeToImage(); //
 	}
 
+	/**
+	 * Produce a picture of a sphere lighted by a point light and spot light
+	 */
+	@Test
+	public void spherePointSpot() {
+		scene1.geometries.add(sphere);
+		scene1.lights.add(new PointLight(spCL, spPL).setKl(0.001).setKq(0.0002));
+		scene1.lights.add(new SpotLight(spCL, spPL, new Vector(1, 1, -0.5)).setKl(0.001).setKq(0.0001));
+
+		ImageWriter imageWriter = new ImageWriter("lightSpherePointSpot", 500, 500);
+		camera1.setImageWriter(imageWriter) //
+				.setRayTracerBase(new RayTracerBasic(scene1)) //
+				.renderImage() //
+				.writeToImage(); //
+	}
+
+	/**
+	 * Produce a picture of a sphere lighted by a point light and spot light
+	 */
+	@Test
+	public void trianglesPointSpot() {
+		scene2.geometries.add(triangle1, triangle2);
+		scene2.lights.add(new PointLight(trCL, trPL).setKl(0.001).setKq(0.0002));
+		scene2.lights.add(new SpotLight(trCL, trPL, trDL).setKl(0.001).setKq(0.0001));
+
+		ImageWriter imageWriter = new ImageWriter("lightSpherePointSpot", 500, 500);
+		camera1.setImageWriter(imageWriter) //
+				.setRayTracerBase(new RayTracerBasic(scene1)) //
+				.renderImage() //
+				.writeToImage(); //
+	}
 }
