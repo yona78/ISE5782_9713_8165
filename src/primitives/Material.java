@@ -7,11 +7,10 @@ package primitives;
  */
 
 public class Material {
-	public double kD;
-	public double kS;
-	public int nShininess;
+	public double kD = 0;
+	public double kS = 0;
+	public int nShininess = 0 ;
 
-	// -----------------------setters-----------------------
 	/**
 	 * Setter of the kD field of the material
 	 * 
