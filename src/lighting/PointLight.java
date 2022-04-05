@@ -10,7 +10,7 @@ import scene.Scene;
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class PointLight extends Light implements LightSource {
-	private final Point position;
+	private  Point position;
 	private double kC = 1;
 	private double kL = 0;
 	private double kQ = 0;

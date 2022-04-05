@@ -7,28 +7,28 @@ package primitives;
  */
 
 public class Material {
-	public double kD = 0;
-	public double kS = 0;
+	public Double3 kD = new Double3(0);
+	public Double3 kS = new Double3(0);
 	public int nShininess = 0 ;
 
 	/**
-	 * Setter of the kD field of the material
+	 * Setter with Double3 object of the kD field of the material
 	 * 
 	 * @param kD is the new kD
 	 * @return the updated material
 	 */
-	public Material setKd(double kD) {
+	public Material setKd(Double3 kD) {
 		this.kD = kD;
 		return this;
 	}
 
 	/**
-	 * Setter of the kS field of the material
+	 * Setter with Double3 object of the kS field of the material
 	 * 
 	 * @param kS is the new kS
 	 * @return the updated material
 	 */
-	public Material setKs(double kS) {
+	public Material setKs(Double3 kS) {
 		this.kS = kS;
 		return this;
 	}
@@ -43,4 +43,27 @@ public class Material {
 		this.nShininess = nShininess;
 		return this;
 	}
+	
+	/**
+	 * Setter with double of the kD field of the material
+	 * 
+	 * @param kD is the new kD
+	 * @return the updated material
+	 */
+	public Material setKd(double kD) {
+		this.kD = new Double3(kD);
+		return this;
+	}
+
+	/**
+	 * Setter with double of the kS field of the material
+	 * 
+	 * @param kS is the new kS
+	 * @return the updated material
+	 */
+	public Material setKs(double kS) {
+		this.kS = new Double3(kS);
+		return this;
+	}
+
 }

@@ -8,7 +8,7 @@ import primitives.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class SpotLight extends PointLight{
-	private final Vector direction;
+	private  Vector direction;
 	
 	/**
 	 * Constructor to initialize SpotLight based on color , point  and vector. 
@@ -19,7 +19,7 @@ public class SpotLight extends PointLight{
 	 */
 	public SpotLight(Color intensity, Point p0, Vector dir) {
 		super(intensity, p0);
-		direction = dir;
+		direction = dir.normalize();
 	}
 	
 	@Override

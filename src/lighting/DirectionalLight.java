@@ -10,7 +10,7 @@ import primitives.Vector;
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class DirectionalLight extends Light implements LightSource {
-	private final Vector direction;
+	private Vector direction;
 	
 	/**
 	 * Constructor to initialize DirectionalLight based on color and vector of direction

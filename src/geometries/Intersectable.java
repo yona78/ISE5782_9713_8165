@@ -31,8 +31,8 @@ public abstract class Intersectable {
 	 * @author Hillel Kroitoro, Yona Orunov
 	 */
 	public static class GeoPoint {
-	    public final Geometry geometry;
-	    public final Point point;
+	    public Geometry geometry;
+	    public Point point;
 	    
 	    /**
          * A constructor for the GeoPoint class

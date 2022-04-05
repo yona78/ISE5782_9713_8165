@@ -136,10 +136,11 @@ public class RenderTests {
 		return new Color(Integer.parseInt(intNumbers[0]), Integer.parseInt(intNumbers[1]), Integer.parseInt(intNumbers[2]));
 	}
 	
+
 	// For stage 6 - please disregard in stage 5
 	/**
-	 * Produce a scene with basic 3D model - including individual lights of the bodies 
-	 * and render it into a png image with a grid
+	 * Produce a scene with basic 3D model - including individual lights of the
+	 * bodies and render it into a png image with a grid
 	 */
 	@Test
 	public void basicRenderMultiColorTest() {
@@ -168,5 +169,6 @@ public class RenderTests {
 		camera.printGrid(100, new Color(java.awt.Color.WHITE));
 		camera.writeToImage();
 	}
+
 
 }

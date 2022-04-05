@@ -62,5 +62,16 @@ public class Scene {
 		this.geometries = setGeometries;
 		return this;
 	}
+	
+	/**
+	 * The function use for set to lights user's lights and return the new scene.
+	 *
+	 * @param setLights - The lights to set for the lights of the scene
+	 * @return the scene
+	 */
+	public Scene setLights(List<LightSource> setLights) {
+		this.lights = setLights;
+		return this;
+	}
 
 }
