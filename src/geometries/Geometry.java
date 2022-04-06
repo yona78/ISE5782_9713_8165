@@ -4,8 +4,6 @@
 package geometries;
 
 import primitives.*;
-import renderer.Camera;
-import renderer.ImageWriter;
 
 /**
  * This interface will be the base of all geometries classes.
@@ -13,7 +11,7 @@ import renderer.ImageWriter;
  * @author Hillel Kroitoro, Yona Orunov
  */
 
-public abstract  class Geometry extends Intersectable {
+public abstract class Geometry extends Intersectable {
 	protected Color emission = Color.BLACK;
 	private Material material = new Material();
 	/**
