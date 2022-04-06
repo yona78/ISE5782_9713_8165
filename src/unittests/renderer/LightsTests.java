@@ -118,7 +118,7 @@ public class LightsTests {
 	}
 
 	/**
-	 * Produce a picture of a two triangles lighted by a spot light
+	 * Produce a picture of two triangles lighted by a spot light
 	 */
 	@Test
 	public void trianglesSpot() {
@@ -132,6 +132,9 @@ public class LightsTests {
 				.writeToImage(); //
 	}
 	
+	/**
+	 * Produce a picture of a sphere lighted by multiple light sources
+	 */
 	@Test
 	void SphereMultiple() {
 		scene1.geometries.add(sphere);
@@ -150,6 +153,9 @@ public class LightsTests {
 		.writeToImage(); //
 	}
 
+	/**
+	 * Produce a picture of a triangle lighted by multiple light sources
+	 */
 	@Test
 	void trianglesMultiple() {
 		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)),
