@@ -88,6 +88,21 @@ public class LightsTests {
 	}
 
 	/**
+	 * Produce a picture of a sphere lighted by a limited spot light
+	 */
+	@Test
+	public void sphereLimitedSpot() {
+		scene1.geometries.add(sphere);
+		scene1.lights.add(new SpotLight(spCL, spPL, new Vector(1, 1, -0.5), 90).setKl(0.001).setKq(0.0001));
+
+		ImageWriter imageWriter = new ImageWriter("sphereLimitedSpot", 500, 500);
+		camera1.setImageWriter(imageWriter) //
+				.setRayTracerBase(new RayTracerBasic(scene1)) //
+				.renderImage() //
+				.writeToImage(); //
+	}
+	
+	/**
 	 * Produce a picture of a two triangles lighted by a directional light
 	 */
 	@Test
@@ -126,6 +141,21 @@ public class LightsTests {
 		scene2.lights.add(new SpotLight(trCL, trPL, trDL).setKl(0.001).setKq(0.0001));
 
 		ImageWriter imageWriter = new ImageWriter("lightTrianglesSpot", 500, 500);
+		camera2.setImageWriter(imageWriter) //
+				.setRayTracerBase(new RayTracerBasic(scene2)) //
+				.renderImage() //
+				.writeToImage(); //
+	}
+	
+	/**
+	 * Produce a picture of two triangles lighted by a limited spot light
+	 */
+	@Test
+	public void trianglesLimitedSpot() {
+		scene2.geometries.add(triangle1, triangle2);
+		scene2.lights.add(new SpotLight(trCL, trPL, trDL).setKl(0.001).setKq(0.0001));
+
+		ImageWriter imageWriter = new ImageWriter("lightTrianglesLimitedSpot", 500, 500);
 		camera2.setImageWriter(imageWriter) //
 				.setRayTracerBase(new RayTracerBasic(scene2)) //
 				.renderImage() //
