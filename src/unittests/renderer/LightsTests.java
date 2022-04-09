@@ -173,10 +173,11 @@ public class LightsTests {
 				.setKl(0.0000001).setKq(0.0000001));
 		scene1.lights.add(new SpotLight(new Color(0, 900, 0), new Point(-80, -30, 50), new Vector(1, -2, -3))
 				.setKl(0.0000000001).setKq(0.000000001));
+		scene1.lights.add(new SpotLight(new Color(500, 200, 0), new Point(0, -30, 150), new Vector(1, -2, -3))
+				.setKl(0.0000000001).setKq(0.000000001));
 
 
-
-		ImageWriter imageWriter = new ImageWriter("lightSphereMultiple", 500, 500);
+		ImageWriter imageWriter = new ImageWriter("lightSphereMultiple", 10000, 10000);
 		camera1.setImageWriter(imageWriter) //
 		.setRayTracerBase(new RayTracerBasic(scene1)) //
 		.renderImage() //
