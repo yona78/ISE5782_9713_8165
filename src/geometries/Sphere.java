@@ -72,7 +72,7 @@ public class Sphere extends Geometry {
 			return null;
 
 		double th = Math.sqrt(th2);
-
+		
 		double t2 = tm + th;
 		if (alignZero(t2) <= 0 ||alignZero(t2 - maxDistance) > 0)
 			return null;
