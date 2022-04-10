@@ -119,8 +119,8 @@ public class Polygon extends Geometry {
 	}
 
 	@Override
-	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-		List<GeoPoint> lst = plane.findGeoIntersections(ray);
+	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+		List<GeoPoint> lst = plane.findGeoIntersections(ray, maxDistance);
 		return lst == null || pointOutOfPolygon(ray) ? null : List.of(new GeoPoint(this,lst.get(0).point));
 	}
 }

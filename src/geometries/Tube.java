@@ -53,14 +53,9 @@ public class Tube extends Geometry {
 		return point.subtract(o).normalize();
 	}
 
-	@Override
-	public List<GeoPoint> findGeoIntersections(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		// TODO Auto-generated method stub
 		return null;
 	}

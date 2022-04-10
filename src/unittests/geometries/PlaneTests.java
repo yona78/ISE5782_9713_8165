@@ -50,7 +50,7 @@ class PlaneTests {
 	}
 
 	/**
-	 * Test method for {@link geometries.Plane#findIntersections(primitives.Ray)}.
+	 * Test method for {@link geometries.Plane#findIntersections(primitives.Ray, double maxDistance)}.
 	 */
 	@Test
 	public void testFindIntersections() {

@@ -57,7 +57,7 @@ public class Sphere extends Geometry {
 
 
 	@Override
-	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		Vector u;
 		try {
 			u = center.subtract(ray.getP0());
@@ -74,11 +74,11 @@ public class Sphere extends Geometry {
 		double th = Math.sqrt(th2);
 
 		double t2 = tm + th;
-		if (alignZero(t2) <= 0)
+		if (alignZero(t2) <= 0 ||alignZero(t2 - maxDistance) > 0)
 			return null;
 
 		double t1 = tm - th;
-		return alignZero(t1) <= 0 ? List.of(new GeoPoint(this,ray.getPoint(t2))) //
+		return alignZero(t1) <= 0 || alignZero(t1 - maxDistance) > 0? List.of(new GeoPoint(this,ray.getPoint(t2))) //
 				: List.of(new GeoPoint(this,ray.getPoint(t1)), new GeoPoint(this,ray.getPoint(t2)));
 	}
 }

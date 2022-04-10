@@ -1,6 +1,6 @@
 package geometries;
 
-import primitives.Point;
+
 import primitives.Ray;
 
 import java.util.*;
@@ -41,10 +41,10 @@ public class Geometries extends Intersectable{
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		List<GeoPoint> lst1 = null;
 		for (Intersectable geometry : geometries) {
-			List<GeoPoint> tmp = geometry.findGeoIntersections(ray);
+			List<GeoPoint> tmp = geometry.findGeoIntersections(ray, maxDistance);
 			if (tmp != null) {
 				if (lst1 == null)
 					lst1 = new LinkedList<>();
