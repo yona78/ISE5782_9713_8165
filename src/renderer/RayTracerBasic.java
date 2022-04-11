@@ -29,6 +29,15 @@ public class RayTracerBasic extends RayTracerBase {
 		super(scene);
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param gp
+	 * @param v
+	 * @param level
+	 * @param k
+	 * @return
+	 */
 	private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, Double3 k) {
 		Color color = Color.BLACK;
 		Vector n = gp.geometry.getNormal(gp.point);
