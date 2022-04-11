@@ -79,7 +79,7 @@ public class RayTracerBasic extends RayTracerBase{
             Vector l = lightSource.getL(gP.point);
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) == sing(nv)
-                if(unshaded(lightSource,n,l,gP)) {
+                if(unshaded(lightSource,l,n,gP)) {
                 	Color iL = lightSource.getIntensity(gP.point);
                     color = color.add(calcDiffusive(material.kD, l, n, iL),
                             calcSpecular(material.kS, l, n, v, material.nShininess, iL));

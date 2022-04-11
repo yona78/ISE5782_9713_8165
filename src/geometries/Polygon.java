@@ -1,7 +1,9 @@
 package geometries;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 import static primitives.Util.*;
 
@@ -121,6 +123,13 @@ public class Polygon extends Geometry {
 	@Override
 	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		List<GeoPoint> lst = plane.findGeoIntersections(ray, maxDistance);
-		return lst == null || pointOutOfPolygon(ray) ? null : List.of(new GeoPoint(this,lst.get(0).point));
+		if (lst == null || pointOutOfPolygon(ray)) {
+			return  null;
+		}
+		List<GeoPoint> newGeoPoints = new LinkedList<>();
+		for (GeoPoint geo : lst) {
+			newGeoPoints.add(new GeoPoint(this, geo.point));
+		}
+		return newGeoPoints;
 	}
 }

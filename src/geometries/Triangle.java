@@ -3,6 +3,7 @@
  */
 package geometries;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -31,7 +32,14 @@ public class Triangle extends Polygon {
 	@Override
 	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		List<GeoPoint> points = super.plane.findGeoIntersections(ray, maxDistance);
-		return points == null || pointOutOfTriangle(ray) ? null : List.of(new GeoPoint(this,points.get(0).point));
+		if (points == null || pointOutOfTriangle(ray)) {
+			return  null;
+		}
+		List<GeoPoint> newGeoPoints = new LinkedList<>();
+		for (GeoPoint geo :points) {
+			newGeoPoints.add(new GeoPoint(this, geo.point));
+		}
+		return newGeoPoints;
 	}
 
 	/**
