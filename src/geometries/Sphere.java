@@ -65,7 +65,7 @@ public class Sphere extends Geometry {
 			return List.of(new GeoPoint(this,ray.getPoint(radius)));
 		}
 
-		double tm = u.dotProduct(ray.getDir());
+		double tm = ray.getDir().dotProduct(u);
 		double d2 = u.lengthSquared() - tm * tm;
 		double th2 = radius2 - d2;
 		if (alignZero(th2) <= 0)
