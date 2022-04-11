@@ -21,6 +21,11 @@
 			<location>C:/Users/yonao/Downloads/basicRenderTestTwoColors.xml</location>
 		</link>
 		<link>
+			<name>src/unittests/renderer/ReflectionRefractionTests.java</name>
+			<type>1</type>
+			<location>C:/Users/yonao/Downloads/ReflectionRefractionTests.java</location>
+		</link>
+		<link>
 			<name>src/unittests/renderer/ShadowTests.java</name>
 			<type>1</type>
 			<location>C:/Users/yonao/eclipse-workspace/ISE5782_9713_8165/src/unittests/renderer/ShadowTests.java</location>

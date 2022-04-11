@@ -14,6 +14,7 @@ import geometries.Intersectable.GeoPoint;
  * @author Hillel Kroitoro
  */
 public class Ray {
+	public static final double DELTA = 0.1;
 	final private Point p0;
 	final private Vector dir;
 
@@ -27,6 +28,20 @@ public class Ray {
 		p0 = p;
 		dir = vec.normalize();
 	}
+	
+	/**
+     * Ray constructor to create a vector with a delta difference,
+     * to ensure they don’t intersect the point’s geometry itself
+     * again and again.
+     * @param head The head of the ray (before adding delta).
+     * @param direction The direction of the ray.
+     * @param normal The normal vector to the geometry.
+     */
+    public Ray(Point head, Vector direction, Vector normal) {
+        Vector delta = normal.scale(normal.dotProduct(direction) > 0 ? DELTA : - DELTA);
+        this.p0 = head.add(delta);
+        this.dir = direction;
+    }
 
 	@Override
 	public String toString() {
