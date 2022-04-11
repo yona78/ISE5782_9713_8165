@@ -20,7 +20,7 @@ public class SpotLight extends PointLight{
 	public SpotLight(Color intensity, Point p0, Vector dir) {
 		super(intensity, p0);
 		direction = dir.normalize();
-		range = 180;
+		range = Math.PI;
 	}
 	
 	/**
