@@ -153,7 +153,7 @@ public class LightsTests {
 	@Test
 	public void trianglesLimitedSpot() {
 		scene2.geometries.add(triangle1, triangle2);
-		scene2.lights.add(new SpotLight(trCL, trPL, trDL, Math.PI / 4).setKl(0.001).setKq(0.0001));
+		scene2.lights.add(new SpotLight(trCL, trPL, trDL, Math.PI / 2).setKl(0.001).setKq(0.0001));
 
 		ImageWriter imageWriter = new ImageWriter("lightTrianglesLimitedSpot", 500, 500);
 		camera2.setImageWriter(imageWriter) //
