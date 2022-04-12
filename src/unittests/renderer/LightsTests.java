@@ -93,7 +93,7 @@ public class LightsTests {
 	@Test
 	public void sphereLimitedSpot() {
 		scene1.geometries.add(sphere);
-		scene1.lights.add(new SpotLight(spCL, spPL, new Vector(0, 1, -0.5), Math.PI / 2).setKl(0.001).setKq(0.0001));
+		scene1.lights.add(new SpotLight(spCL, spPL, new Vector(1, 1, -0.5), Math.PI / 2).setKl(0.001).setKq(0.0001));
 
 		ImageWriter imageWriter = new ImageWriter("sphereLimitedSpot", 500, 500);
 		camera1.setImageWriter(imageWriter) //
