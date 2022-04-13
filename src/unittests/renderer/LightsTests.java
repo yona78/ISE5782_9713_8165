@@ -212,11 +212,10 @@ public class LightsTests {
 				.setMaterial(new Material().setKd(1).setKs(0.5).setShininess(600)));
 
 		scene2.lights.add(new SpotLight(trCL, trPL, trDL, Math.PI / 2).setKl(0.001).setKq(0.0001));
-		scene2.lights.add(new DirectionalLight(new Color(255, 128, 0), new Vector(-1, 0, -2)));
 		scene2.lights
 				.add(new PointLight(new Color(204, 0, 0), new Point(20, 30, 10)).setKl(0.0000001).setKq(0.0000001));
 
-		ImageWriter imageWriter = new ImageWriter("lightTrianglesDirectional", 500, 500);
+		ImageWriter imageWriter = new ImageWriter("multyObjTransRef", 500, 500);
 		camera2.setImageWriter(imageWriter) //
 				.setRayTracerBase(new RayTracerBasic(scene2)) //
 				.renderImage() //
