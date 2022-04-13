@@ -41,7 +41,7 @@ public class SpotLight extends PointLight{
     public Color getIntensity(Point p) {
 		double tmp = direction.dotProduct(getL(p));
 		if(tmp <= 0)
-			return 0;
+			return Color.BLACK;
 		tmp = Math.cos(Math.acos(tmp) * Math.PI/range);
         return super.getIntensity(p).scale(tmp);
     }
