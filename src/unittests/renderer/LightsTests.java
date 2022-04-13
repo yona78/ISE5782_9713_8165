@@ -238,7 +238,7 @@ public class LightsTests {
 			p= new Point(i%3 == 0? 500: -500, i < 2? 500: -500, 0);
 			m = new Material().setKd(1d/i).setKR(1d - 1d/i).setKs((double)i/4).setKT(0.5).setShininess(1000);
 			scene2.geometries.add(new Plane(p, p.subtract(Point.ZERO)).setMaterial(m).setEmission(colors.get(i)));
-			scene2.geometries.add(new Sphere(p, 15*i).setMaterial(m).setEmission(colors.get(4 - i)));
+			scene2.geometries.add(new Sphere(p, 150*(i+1)).setMaterial(m).setEmission(colors.get(3 - i)));
 		}
 
 		scene2.lights.add(new SpotLight(trCL, trPL, trDL, Math.PI / 2).setKl(0.001).setKq(0.0001));
