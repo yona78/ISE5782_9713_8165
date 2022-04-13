@@ -20,10 +20,11 @@ public class LightsTests {
 	private Scene scene1 = new Scene("Test scene");
 	private Scene scene2 = new Scene("Test scene") //
 			.setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
-	private Camera camera1 = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+	private Vector vTo = new Vector(0, 0, -1);
+	private Camera camera1 = new Camera(new Point(0, 0, 1000), vTo, new Vector(0, 1, 0)) //
 			.setVPSize(150, 150) //
 			.setVPDistance(1000);
-	private Camera camera2 = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+	private Camera camera2 = new Camera(new Point(0, 0, 1000), vTo, new Vector(0, 1, 0)) //
 			.setVPSize(200, 200) //
 			.setVPDistance(1000);
 
@@ -241,11 +242,14 @@ public class LightsTests {
 			scene2.geometries.add(new Sphere(p, 150*(i+1)).setMaterial(m).setEmission(colors.get(3 - i)));
 		}
 
-		scene2.lights.add(new SpotLight(trCL, trPL, trDL, Math.PI / 2).setKl(0.001).setKq(0.0001));
+		scene2.lights.add(new SpotLight(trCL, Point.ZERO, vTo, Math.PI / 3).setKl(0.001).setKq(0.0001));
+		scene2.lights.add(new SpotLight(trCL, Point.ZERO, vTo, Math.PI / 3).setKl(0.001).setKq(0.0001));
 		scene2.lights.add(new DirectionalLight(new Color(255, 128, 0), new Vector(-1, 0, -2)));
 		scene2.lights
-				.add(new PointLight(new Color(204, 0, 0), new Point(40, 30, 10)).setKl(0.0000001).setKq(0.0000001));
-
+				.add(new PointLight(new Color(200, 0, 0), new Point(40, 30, 10)).setKl(0.0000001).setKq(0.0000001));
+		
+		camera2.setVPDistance(900);
+		
 		ImageWriter imageWriter = new ImageWriter("multyObjTransRef10", 500, 500);
 		camera2.setImageWriter(imageWriter) //
 				.setRayTracerBase(new RayTracerBasic(scene2)) //
