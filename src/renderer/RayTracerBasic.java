@@ -21,7 +21,7 @@ public class RayTracerBasic extends RayTracerBase {
 	private static final double INITIAL_K = 1.0;
 
 	/**
-	 * Construct RayTracerBasic base with scene and uses RayTracerBase constractor
+	 * Construct RayTracerBasic base with scene and uses RayTracerBase constructor
 	 * 
 	 * @param scene is the scene we want to trace
 	 */
@@ -30,13 +30,13 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
+	 * The function calculates the global effects on the point.
 	 * 
-	 * 
-	 * @param gp
-	 * @param v
-	 * @param level
-	 * @param k
-	 * @return
+	 * @param gp    - is the point.
+	 * @param v     - is the direction of the reflected ray.
+	 * @param level - is the level of the recreation.
+	 * @param k     - is the effect of the cross.
+	 * @return the color of the point.
 	 */
 	private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, Double3 k) {
 		Color color = Color.BLACK;
@@ -51,16 +51,41 @@ public class RayTracerBasic extends RayTracerBase {
 		return color;
 	}
 
+	/**
+	 * The function calculates a global effect on the point.
+	 * 
+	 * @param ray   - is the light ray
+	 * @param level - is the level of the recreation 
+	 * @param kT    - is the transparency %.
+	 * @param kkt   - is the transparency % * the K effect.
+	 * @return the color of the point.
+	 */
 	private Color calcGlobalEffect(Ray ray, int level, Double3 kT, Double3 kkt) {
 		GeoPoint gp = findClosestIntersection(ray);
 		return (gp == null ? scene.background : calcColor(gp, ray, level - 1, kkt)).scale(kT);
 	}
 
+	/**
+	 * The function calculates the new reflected ray
+	 * 
+	 * @param p - is the point.
+	 * @param v - is the ray's direction.
+	 * @param n - is the normal vector.
+	 * @return the reflected ray.
+	 */
 	private Ray constructReflectedRay(Point p, Vector v, Vector n) {
 		Vector r = v.subtract(n.scale(2 * v.dotProduct(n)));
 		return new Ray(p, r, n);
 	}
 
+	/**
+	 * The function creates a new ray
+	 * 
+	 * @param p The source of the ray
+	 * @param v The direction of the ray
+	 * @param n The normal vector to the geo
+	 * @return the new ray
+	 */
 	private Ray constructRefractedRay(Point p, Vector v, Vector n) {
 		return new Ray(p, v, n);
 	}
@@ -82,9 +107,18 @@ public class RayTracerBasic extends RayTracerBase {
 		return intersections == null || intersections.isEmpty() || geoPoint.geometry.getMaterial().kT != Double3.ZERO;
 	}
 
-	private Double3 transparency(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
+	/**
+	 * The function calculates the transpareced light to the point
+	 * 
+	 * @param geoPoint is the point
+	 * @param lS is the light source
+	 * @param l is the vector from the light source to the point
+	 * @param n is the normal vector the the point
+	 * @return the transpareced light.
+	 */
+	private Double3 transparency(GeoPoint geoPoint, LightSource lS, Vector l, Vector n) {
 		Ray lightRay = new Ray(geoPoint.point, l.scale(-1), n);
-		double lightDistance = ls.getDistance(geoPoint.point);
+		double lightDistance = lS.getDistance(geoPoint.point);
 		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, lightDistance);
 		if (intersections == null)
 			return new Double3(1.0);
@@ -147,7 +181,7 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * Help function to calculate the diffusive effect using Phong modol.
+	 * Help function to calculate the diffusive effect using Phong model.
 	 * 
 	 * @param kD is diffusive factor.
 	 * @param l  is the the vector from the light to the object.
@@ -159,12 +193,12 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * Help function to calculate the specular effect using Phong modol.
+	 * Help function to calculate the specular effect using Phong model.
 	 * 
 	 * @param kD         is specular factor.
 	 * @param l          is the the vector from the light to the object.
 	 * @param n          - the normal of the object.
-	 * @param v          - the vector from the camrea to the object.
+	 * @param v          - the vector from the camera to the object.
 	 * @param nShininess - the shininess of the object.
 	 * @return the specular factor.
 	 */
@@ -173,11 +207,26 @@ public class RayTracerBasic extends RayTracerBase {
 		return lightIntensity.scale(kS.scale(Math.pow(Math.max(v.scale(-1).dotProduct(r), 0), nShininess)));
 	}
 
+	/**
+	 * The function calculates the color of the point
+	 * 
+	 * @param gp    - is the point
+	 * @param ray   - is the light ray
+	 * @param level - is the level of the recreation
+	 * @param kkt   - is the transparency % * the K effect
+	 * @return the color of the point
+	 */
 	private Color calcColor(GeoPoint gp, Ray ray, int level, Double3 kkt) {
 		Color color = calcLocalEffect(gp, ray, kkt).add(gp.geometry.getEmission());
 		return 1 == level ? color : color.add(calcGlobalEffects(gp, ray.getDir(), level, kkt));
 	}
 
+	/**
+	 * The function finds the closes point among the intersection points to the ray's source
+	 * 
+	 * @param ray is the ray
+	 * @return the closes point to the ray's source
+	 */
 	private GeoPoint findClosestIntersection(Ray ray) {
 		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(ray);
 		if (intersections == null)

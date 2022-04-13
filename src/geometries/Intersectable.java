@@ -81,9 +81,9 @@ public abstract class Intersectable {
 	/**
 	 * The function helps findGeoIntersections to find the geo intersections
 	 * 
-	 * @param ray
-	 * @param maxDistance
-	 * @return
+	 * @param ray - Is the ray to check intersection GeoPoint with the object.
+	 * @param maxDistance - Is the maximum distance to look for intersections.
+	 * @return list of intersection GeoPoints.
 	 */
 	protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
