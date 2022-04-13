@@ -243,7 +243,7 @@ public class LightsTests {
 		}
 
 		scene2.lights.add(new SpotLight(trCL, Point.ZERO, vTo, Math.PI / 3).setKl(0.001).setKq(0.0001));
-		scene2.lights.add(new SpotLight(trCL, Point.ZERO, vTo, Math.PI / 3).setKl(0.001).setKq(0.0001));
+		scene2.lights.add(new SpotLight(trCL, Point.ZERO, vTo.scale(-1), Math.PI / 5).setKl(0.001).setKq(0.0001));
 		scene2.lights.add(new DirectionalLight(new Color(255, 128, 0), new Vector(-1, 0, -2)));
 		scene2.lights
 				.add(new PointLight(new Color(200, 0, 0), new Point(40, 30, 10)).setKl(0.0000001).setKq(0.0000001));
