@@ -206,10 +206,10 @@ public class LightsTests {
 	 */
 	@Test
 	public void MultyObjTransRef() {
-		scene2.geometries.add(triangle1, triangle2);
+		scene2.geometries.add(triangle1.setMaterial(material.setKR(1)), triangle2.setMaterial(material.setKR(1)));
 		scene2.geometries.add(sphere);
 		scene2.geometries.add(new Sphere(new Point(0, 0, -50), 40).setEmission(new Color(red).reduce(2))
-				.setMaterial(new Material().setKd(1).setKs(0.5).setShininess(600)));
+				.setMaterial(material.setKR(0.75).setKT(0.5)));
 
 		scene2.lights.add(new SpotLight(trCL, trPL, trDL, Math.PI / 2).setKl(0.001).setKq(0.0001));
 		scene2.lights
