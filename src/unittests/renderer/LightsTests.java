@@ -9,6 +9,8 @@ import renderer.*;
 import scene.Scene;
 import static java.awt.Color.*;
 
+import java.util.List;
+
 /**
  * Test rendering a basic image
  * 
@@ -202,10 +204,11 @@ public class LightsTests {
 	}
 
 	/**
-	 * Produce a picture of a two triangles lighted by a directional light
+	 * Produce a picture of a two triangles and two spheres lighted by several
+	 * lights
 	 */
 	@Test
-	public void MultyObjTransRef() {
+	public void MultyObjTransRef4() {
 		scene2.geometries.add(triangle1.setMaterial(material.setKR(1)), triangle2.setMaterial(material.setKR(1)));
 		scene2.geometries.add(sphere);
 		scene2.geometries.add(new Sphere(new Point(0, 0, -50), 40).setEmission(new Color(red).reduce(2))
@@ -216,7 +219,34 @@ public class LightsTests {
 		scene2.lights
 				.add(new PointLight(new Color(204, 0, 0), new Point(40, 30, 10)).setKl(0.0000001).setKq(0.0000001));
 
-		ImageWriter imageWriter = new ImageWriter("multyObjTransRef", 500, 500);
+		ImageWriter imageWriter = new ImageWriter("multyObjTransRef4", 500, 500);
+		camera2.setImageWriter(imageWriter) //
+				.setRayTracerBase(new RayTracerBasic(scene2)) //
+				.renderImage() //
+				.writeToImage(); //
+	}
+
+	/**
+	 * Produce a picture of a two triangles and two spheres lighted by several lights
+	 */
+	@Test
+	public void MultyObjTransRef10() {
+		Point p;
+		Material m;
+		List<Color> colors = List.of(new Color(red), new Color(blue), new Color(yellow), new Color(green));
+		for(int i = 0; i < 4; ++i) {
+			p= new Point(i%3 == 0? 500: -500, i < 2? 500: -500, 0);
+			m = new Material().setKd(1d/i).setKR(1d - 1d/i).setKs((double)i/4).setKT(0.5).setShininess(1000);
+			scene2.geometries.add(new Plane(p, p.subtract(Point.ZERO)).setMaterial(m).setEmission(colors.get(i)));
+			scene2.geometries.add(new Sphere(p, 15*i).setMaterial(m).setEmission(colors.get(4 - i)));
+		}
+
+		scene2.lights.add(new SpotLight(trCL, trPL, trDL, Math.PI / 2).setKl(0.001).setKq(0.0001));
+		scene2.lights.add(new DirectionalLight(new Color(255, 128, 0), new Vector(-1, 0, -2)));
+		scene2.lights
+				.add(new PointLight(new Color(204, 0, 0), new Point(40, 30, 10)).setKl(0.0000001).setKq(0.0000001));
+
+		ImageWriter imageWriter = new ImageWriter("multyObjTransRef10", 500, 500);
 		camera2.setImageWriter(imageWriter) //
 				.setRayTracerBase(new RayTracerBasic(scene2)) //
 				.renderImage() //
