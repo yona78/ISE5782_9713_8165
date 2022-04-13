@@ -236,7 +236,7 @@ public class LightsTests {
 		Material m;
 		List<Color> colors = List.of(new Color(red), new Color(blue), new Color(yellow), new Color(green));
 		for(int i = 0; i < 4; ++i) {
-			p= new Point(i%3 == 0? 500: -500, i < 2? 500: -500, 0);
+			p= new Point(i%3 == 0? 50: -50, i < 2? 50: -50, 5);
 			m = new Material().setKd(1d/i).setKR(1d - 1d/i).setKs((double)i/4).setKT(0.5).setShininess(1000);
 			scene2.geometries.add(new Plane(p, p.subtract(Point.ZERO)).setMaterial(m).setEmission(colors.get(i)));
 			scene2.geometries.add(new Sphere(p, 150*(i+1)).setMaterial(m).setEmission(colors.get(3 - i)));
