@@ -53,6 +53,4 @@ public class Geometries extends Intersectable{
 		}
 		return lst1;
 	}
-
-
 }
