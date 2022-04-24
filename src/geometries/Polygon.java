@@ -92,7 +92,6 @@ public class Polygon extends Geometry {
 		return plane.getNormal();
 	}
 
-
 	/**
 	 * Help function to check if the ray is not on the polygon
 	 * 
@@ -124,7 +123,7 @@ public class Polygon extends Geometry {
 	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		List<GeoPoint> lst = plane.findGeoIntersections(ray, maxDistance);
 		if (lst == null || pointOutOfPolygon(ray)) {
-			return  null;
+			return null;
 		}
 		List<GeoPoint> newGeoPoints = new LinkedList<>();
 		for (GeoPoint geo : lst) {

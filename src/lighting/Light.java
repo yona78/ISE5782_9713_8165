@@ -9,7 +9,7 @@ import primitives.*;
  */
 abstract class Light {
 	final private Color intensity;
-	
+
 	/**
 	 * Constructor to initialize Light based on color
 	 * 
@@ -18,7 +18,7 @@ abstract class Light {
 	protected Light(Color intensity) {
 		this.intensity = intensity;
 	}
-	
+
 	/**
 	 * Getter of the intensity of the light
 	 *

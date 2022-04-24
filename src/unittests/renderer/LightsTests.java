@@ -20,10 +20,11 @@ public class LightsTests {
 	private Scene scene1 = new Scene("Test scene");
 	private Scene scene2 = new Scene("Test scene") //
 			.setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
-	private Camera camera1 = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+	private Vector vTo = new Vector(0, 0, -1);
+	private Camera camera1 = new Camera(new Point(0, 0, 1000), vTo, new Vector(0, 1, 0)) //
 			.setVPSize(150, 150) //
 			.setVPDistance(1000);
-	private Camera camera2 = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+	private Camera camera2 = new Camera(new Point(0, 0, 1000), vTo, new Vector(0, 1, 0)) //
 			.setVPSize(200, 200) //
 			.setVPDistance(1000);
 
@@ -227,24 +228,27 @@ public class LightsTests {
 	}
 
 	/**
-	 * Produce a picture of a two triangles and two spheres lighted by several lights
+	 * Produce a picture of a two triangles and two spheres lighted by several
+	 * lights
 	 */
 	@Test
 	public void MultyObjTransRef10() {
 		Point p;
 		Material m;
 		List<Color> colors = List.of(new Color(red), new Color(blue), new Color(yellow), new Color(green));
-		for(int i = 0; i < 4; ++i) {
-			p= new Point(i%3 == 0? 500: -500, i < 2? 500: -500, 0);
-			m = new Material().setKd(1d/i).setKR(1d - 1d/i).setKs((double)i/4).setKT(0.5).setShininess(1000);
+		for (int i = 0; i < 4; ++i) {
+			p = new Point(i % 3 == 0 ? 50 : -50, i < 2 ? 50 : -50, -5);
+			m = new Material().setKd(1d / i).setKR(1d - 1d / i).setKs(i / 4d).setKT(0.5).setShininess(1000);
 			scene2.geometries.add(new Plane(p, p.subtract(Point.ZERO)).setMaterial(m).setEmission(colors.get(i)));
-			scene2.geometries.add(new Sphere(p, 15*i).setMaterial(m).setEmission(colors.get(4 - i)));
+			scene2.geometries.add(new Sphere(p, 15 * (i + 1)).setMaterial(m).setEmission(colors.get(3 - i)));
 		}
 
-		scene2.lights.add(new SpotLight(trCL, trPL, trDL, Math.PI / 2).setKl(0.001).setKq(0.0001));
+		scene2.lights.add(new SpotLight(trCL, Point.ZERO, vTo, Math.PI / 3).setKl(0.001).setKq(0.0001));
+		scene2.lights.add(new SpotLight(spCL, Point.ZERO, vTo.scale(-1), Math.PI / 5).setKl(0.001).setKq(0.0001));
 		scene2.lights.add(new DirectionalLight(new Color(255, 128, 0), new Vector(-1, 0, -2)));
-		scene2.lights
-				.add(new PointLight(new Color(204, 0, 0), new Point(40, 30, 10)).setKl(0.0000001).setKq(0.0000001));
+		scene2.lights.add(new PointLight(new Color(200, 0, 0), new Point(0, 0, -50)).setKl(0.0000001).setKq(0.0000001));
+
+		camera2.setVPDistance(800);
 
 		ImageWriter imageWriter = new ImageWriter("multyObjTransRef10", 500, 500);
 		camera2.setImageWriter(imageWriter) //

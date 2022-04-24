@@ -77,7 +77,8 @@ class IntegrationTests {
 				"Test when their are intersection points in front of the plane(10) failed");
 
 		// TC04: Test when the camera is in the body(9)
-		assertEquals(9, countIntersections(new Sphere(new Point(0, 0, -1), 4)), "Test when the camera is in the body(9) failed");
+		assertEquals(9, countIntersections(new Sphere(new Point(0, 0, -1), 4)),
+				"Test when the camera is in the body(9) failed");
 
 		// TC06: Test when the the body is behind the camera(0)
 		assertEquals(0, countIntersections(new Sphere(new Point(0, 0, 1), 0.5)), //

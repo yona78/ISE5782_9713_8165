@@ -48,12 +48,12 @@ public abstract class Intersectable {
 			if (o == null || getClass() != o.getClass())
 				return false;
 			GeoPoint geoPoint = (GeoPoint) o;
-			return geometry.getClass() == geoPoint.geometry.getClass() && point.equals(geoPoint.point);
+			return geometry == geoPoint.geometry && point.equals(geoPoint.point);
 		}
 
 		@Override
 		public String toString() {
-			return "(" + point.toString() + "," + geometry.toString() + ")";
+			return "(" + point + "," + geometry + ")";
 		}
 	}
 
@@ -81,7 +81,8 @@ public abstract class Intersectable {
 	/**
 	 * The function helps findGeoIntersections to find the geo intersections
 	 * 
-	 * @param ray - Is the ray to check intersection GeoPoint with the object.
+	 * @param ray         - Is the ray to check intersection GeoPoint with the
+	 *                    object.
 	 * @param maxDistance - Is the maximum distance to look for intersections.
 	 * @return list of intersection GeoPoints.
 	 */

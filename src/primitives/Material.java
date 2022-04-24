@@ -11,7 +11,7 @@ public class Material {
 	public Double3 kS = new Double3(0);
 	public Double3 kT = new Double3(0.0);
 	public Double3 kR = new Double3(0.0);
-	public int nShininess = 0 ;
+	public int nShininess = 0;
 
 	/**
 	 * Setter with Double3 object of the kD field of the material
@@ -45,7 +45,7 @@ public class Material {
 		this.nShininess = nShininess;
 		return this;
 	}
-	
+
 	/**
 	 * Setter with double of the kD field of the material
 	 * 
@@ -67,7 +67,7 @@ public class Material {
 		this.kS = new Double3(kS);
 		return this;
 	}
-	
+
 	/**
 	 * Setter with double of the kS field of the material
 	 * 
@@ -78,7 +78,7 @@ public class Material {
 		this.kT = new Double3(kT);
 		return this;
 	}
-	
+
 	/**
 	 * Setter with double of the kS field of the material
 	 * 
@@ -89,7 +89,7 @@ public class Material {
 		this.kR = new Double3(kR);
 		return this;
 	}
-	
+
 	/**
 	 * Setter with Double3 object of the kS field of the material
 	 * 
@@ -100,7 +100,7 @@ public class Material {
 		this.kR = kR;
 		return this;
 	}
-	
+
 	/**
 	 * Setter with Double3 object of the kS field of the material
 	 * 

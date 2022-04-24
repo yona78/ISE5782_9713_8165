@@ -9,18 +9,19 @@ import geometries.Geometries;
 import lighting.*;
 
 /**
- * This class represents scene in the project and will be a plain data structure(PDS).
+ * This class represents scene in the project and will be a plain data
+ * structure(PDS).
  * 
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class Scene {
-	
+
 	public String name;
 	public Color background = Color.BLACK;
 	public AmbientLight ambientLight = new AmbientLight();
 	public Geometries geometries = new Geometries();
 	public List<LightSource> lights = new LinkedList<>();
-	
+
 	/**
 	 * Constructor to initialize Scene based on name and default values
 	 * 
@@ -29,9 +30,10 @@ public class Scene {
 	public Scene(String name1) {
 		name = name1;
 	}
-	
+
 	/**
-	 * The function use for set to scene their color of background and return the new scene.
+	 * The function use for set to scene their color of background and return the
+	 * new scene.
 	 *
 	 * @param setBackground - The color to set for the background of the scene
 	 * @return the scene
@@ -40,20 +42,23 @@ public class Scene {
 		this.background = setBackground;
 		return this;
 	}
-	
+
 	/**
-	 * The function use for set to scene their ambientLight and return the new scene.
+	 * The function use for set to scene their ambientLight and return the new
+	 * scene.
 	 *
-	 * @param setAmbientLight - The ambientLight to set for the ambientLight of the scene
+	 * @param setAmbientLight - The ambientLight to set for the ambientLight of the
+	 *                        scene
 	 * @return the scene
 	 */
 	public Scene setAmbientLight(AmbientLight setAmbientLight) {
 		this.ambientLight = setAmbientLight;
 		return this;
 	}
-	
+
 	/**
-	 * The function use for set to geometries user's geometries and return the new scene.
+	 * The function use for set to geometries user's geometries and return the new
+	 * scene.
 	 *
 	 * @param setGeometries - The geometries to set for the geometries of the scene
 	 * @return the scene
@@ -62,7 +67,7 @@ public class Scene {
 		this.geometries = setGeometries;
 		return this;
 	}
-	
+
 	/**
 	 * The function use for set to lights user's lights and return the new scene.
 	 *

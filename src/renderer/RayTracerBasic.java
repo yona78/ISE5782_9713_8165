@@ -55,7 +55,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * The function calculates a global effect on the point.
 	 * 
 	 * @param ray   - is the light ray
-	 * @param level - is the level of the recreation 
+	 * @param level - is the level of the recreation
 	 * @param kT    - is the transparency %.
 	 * @param kkt   - is the transparency % * the K effect.
 	 * @return the color of the point.
@@ -93,41 +93,47 @@ public class RayTracerBasic extends RayTracerBase {
 	/**
 	 * The function check if the light source is shaded.
 	 * 
+	 * @deprecated use transparency function instead of it
+	 * 
 	 * @param light    - The light source that we want to check if
 	 * @param l        - The l vector.
 	 * @param n        - The n vector.
 	 * @param geoPoint - The geometric intersection point with the geometry.
 	 * @return true if the light source is shaded or false if not.
 	 */
+	@SuppressWarnings("unused")
+	@Deprecated
 	private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geoPoint) {
 		Ray lightRay = new Ray(geoPoint.point, l.scale(-1), n);
 
 		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay,
 				light.getDistance(geoPoint.point));
-		return intersections == null || intersections.isEmpty() || geoPoint.geometry.getMaterial().kT != Double3.ZERO;
+		return intersections == null || geoPoint.geometry.getMaterial().kT != Double3.ZERO;
 	}
 
 	/**
 	 * The function calculates the transpareced light to the point
 	 * 
 	 * @param geoPoint is the point
-	 * @param lS is the light source
-	 * @param l is the vector from the light source to the point
-	 * @param n is the normal vector the the point
+	 * @param lS       is the light source
+	 * @param l        is the vector from the light source to the point
+	 * @param n        is the normal vector the the point
 	 * @return the transpareced light.
 	 */
 	private Double3 transparency(GeoPoint geoPoint, LightSource lS, Vector l, Vector n) {
 		Ray lightRay = new Ray(geoPoint.point, l.scale(-1), n);
 		double lightDistance = lS.getDistance(geoPoint.point);
+		Double3 ktr = new Double3(1.0);
+
 		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, lightDistance);
 		if (intersections == null)
-			return new Double3(1.0);
-		Double3 ktr = new Double3(1.0);
+			return ktr;
+
 		for (GeoPoint gp : intersections) {
 			if (alignZero(gp.point.distance(geoPoint.point) - lightDistance) <= 0) {
 				ktr = ktr.product(gp.geometry.getMaterial().kT);
 				if (ktr.lowerThan(MIN_CALC_COLOR_K))
-					return new Double3(0.0);
+					return Double3.ZERO;
 			}
 		}
 		return ktr;
@@ -204,7 +210,9 @@ public class RayTracerBasic extends RayTracerBase {
 	 */
 	private Color calcSpecular(Double3 kS, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
 		Vector r = l.subtract(n.scale(2 * (l.dotProduct(n))));
-		return lightIntensity.scale(kS.scale(Math.pow(Math.max(v.scale(-1).dotProduct(r), 0), nShininess)));
+		double minusVR = -v.dotProduct(r);
+		return alignZero(minusVR) <= 0 ? Color.BLACK //
+				: lightIntensity.scale(kS.scale(Math.pow(minusVR, nShininess)));
 	}
 
 	/**
@@ -222,15 +230,14 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * The function finds the closes point among the intersection points to the ray's source
+	 * The function finds the closes point among the intersection points to the
+	 * ray's source
 	 * 
 	 * @param ray is the ray
 	 * @return the closes point to the ray's source
 	 */
 	private GeoPoint findClosestIntersection(Ray ray) {
 		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(ray);
-		if (intersections == null)
-			return null;
-		return ray.findClosestGeoPoint(intersections);
+		return intersections == null ? null : ray.findClosestGeoPoint(intersections);
 	}
 }

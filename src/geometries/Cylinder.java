@@ -39,14 +39,14 @@ public class Cylinder extends Tube {
 	public Vector getNormal(Point point) {
 		Point p1 = axis.getP0();
 		Vector v = axis.getDir();
-		if(Util.isZero(p1.distanceSquared(point))) {
+		if (Util.isZero(p1.distanceSquared(point))) {
 			return v.scale(-1);
 		}
 		double t = v.dotProduct(point.subtract(p1));
-		if(Util.isZero(t)) {
+		if (Util.isZero(t)) {
 			return v.scale(-1);
 		}
-		if(Util.isZero(t - this.height)) {
+		if (Util.isZero(t - this.height)) {
 			return v;
 		}
 		return point.subtract(p1.add(v.scale(t))).normalize();

@@ -1,6 +1,5 @@
 package geometries;
 
-
 import primitives.Ray;
 
 import java.util.*;
@@ -11,7 +10,7 @@ import java.util.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 
-public class Geometries extends Intersectable{
+public class Geometries extends Intersectable {
 
 	private List<Intersectable> geometries = new LinkedList<>();
 
@@ -53,6 +52,5 @@ public class Geometries extends Intersectable{
 		}
 		return lst1;
 	}
-
 
 }

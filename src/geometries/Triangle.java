@@ -70,7 +70,7 @@ public class Triangle extends Polygon {
 		curN = v3.dotProduct((v4.crossProduct(v1)).normalize());
 		if (curN * prevN <= 0)
 			return true;
-		
+
 		return false;
 	}
 }

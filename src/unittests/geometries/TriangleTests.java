@@ -53,7 +53,7 @@ class TriangleTests {
 				"Test when the point is out of triangle (against vertex) failed");
 
 		// =============== Boundary Values Tests ==================
-		
+
 		// TC11: Test when the point is in the edge of the triangle
 		assertNull(tr.findIntersections(new Ray(new Point(0, 0.5, 1), v)), //
 				"Test when the point is in the edge of the triangle failed");
