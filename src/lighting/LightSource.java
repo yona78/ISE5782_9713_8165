@@ -9,7 +9,7 @@ import primitives.*;
  */
 public interface LightSource {
 	/**
-	 * The function return the intensity of the light sourse in the point
+	 * The function return the intensity of the light sours in the point
 	 * 
 	 * @param p is the point
 	 * @return the intensity

@@ -10,7 +10,7 @@ import primitives.Vector;
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class DirectionalLight extends Light implements LightSource {
-	private Vector direction;
+	final private Vector direction;
 
 	/**
 	 * Constructor to initialize DirectionalLight based on color and vector of
@@ -21,22 +21,21 @@ public class DirectionalLight extends Light implements LightSource {
 	 */
 	public DirectionalLight(Color intensity, Vector dir) {
 		super(intensity);
-		direction = dir;
+		direction = dir.normalize();
 	}
 
 	@Override
 	public Color getIntensity(Point p) {
-		return getIntensity();
+		return intensity;
 	}
 
 	@Override
 	public Vector getL(Point p) {
-		return direction.normalize();
+		return direction;
 	}
 
 	@Override
 	public double getDistance(Point point) {
 		return Double.POSITIVE_INFINITY;
 	}
-
 }

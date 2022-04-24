@@ -8,8 +8,8 @@ import primitives.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class SpotLight extends PointLight {
-	private Vector direction;
-	private double range;
+	final private Vector direction;
+	private double range = Math.PI;
 
 	/**
 	 * Constructor to initialize SpotLight based on color , point and vector.
@@ -21,7 +21,6 @@ public class SpotLight extends PointLight {
 	public SpotLight(Color intensity, Point p0, Vector dir) {
 		super(intensity, p0);
 		direction = dir.normalize();
-		range = Math.PI;
 	}
 
 	/**
@@ -39,19 +38,11 @@ public class SpotLight extends PointLight {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public Color getIntensity(Point p) {
-		double tmp = Math.cos(Math.acos(direction.dotProduct(getL(p))) * Math.PI / range);
-		return super.getIntensity(p).scale(tmp > 0 ? tmp : 0);
-	}
-=======
-    public Color getIntensity(Point p) {
 		double tmp = direction.dotProduct(getL(p));
-		if(tmp <= 0)
+		if (Util.alignZero(tmp) <= 0)
 			return Color.BLACK;
-		tmp = Math.cos(Math.acos(tmp) * Math.PI/range);
-        return super.getIntensity(p).scale(tmp);
-    }
->>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
-
+		tmp = Math.cos(Math.acos(tmp) * Math.PI / range);
+		return super.getIntensity(p).scale(tmp);
+	}
 }

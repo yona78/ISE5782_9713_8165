@@ -8,7 +8,7 @@ import primitives.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class PointLight extends Light implements LightSource {
-	private Point position;
+	final private Point position;
 	private double kC = 1;
 	private double kL = 0;
 	private double kQ = 0;
@@ -60,7 +60,7 @@ public class PointLight extends Light implements LightSource {
 	@Override
 	public Color getIntensity(Point p) {
 		double d = p.distance(position);
-		return getIntensity().reduce(kC + kL * d + d * d * kQ);
+		return intensity.reduce(kC + kL * d + kQ * d * d);
 	}
 
 	@Override
