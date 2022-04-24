@@ -39,9 +39,19 @@ public class SpotLight extends PointLight {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public Color getIntensity(Point p) {
 		double tmp = Math.cos(Math.acos(direction.dotProduct(getL(p))) * Math.PI / range);
 		return super.getIntensity(p).scale(tmp > 0 ? tmp : 0);
 	}
+=======
+    public Color getIntensity(Point p) {
+		double tmp = direction.dotProduct(getL(p));
+		if(tmp <= 0)
+			return Color.BLACK;
+		tmp = Math.cos(Math.acos(tmp) * Math.PI/range);
+        return super.getIntensity(p).scale(tmp);
+    }
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 
 }

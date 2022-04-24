@@ -49,6 +49,21 @@ public class LightsTests {
 	 * Produce a picture of a sphere lighted by a directional light
 	 */
 	@Test
+	public void sphereDisPoint() {
+		scene1.geometries.add(sphere);
+		scene1.lights.add(new PointLight(spCL, new Point(0, 0, 10)));
+
+		ImageWriter imageWriter = new ImageWriter("lightsphereDisPoint", 500, 500);
+		camera1.setImageWriter(imageWriter) //
+				.setRayTracerBase(new RayTracerBasic(scene1)) //
+				.renderImage() //
+				.writeToImage(); //
+	}
+
+	/**
+	 * Produce a picture of a sphere lighted by a directional light
+	 */
+	@Test
 	public void sphereDirectional() {
 		scene1.geometries.add(sphere);
 		scene1.lights.add(new DirectionalLight(spCL, new Vector(1, 1, -0.5)));
@@ -238,7 +253,11 @@ public class LightsTests {
 		List<Color> colors = List.of(new Color(red), new Color(blue), new Color(yellow), new Color(green));
 		for (int i = 0; i < 4; ++i) {
 			p = new Point(i % 3 == 0 ? 50 : -50, i < 2 ? 50 : -50, -5);
+<<<<<<< HEAD
 			m = new Material().setKd(1d / i).setKR(1d - 1d / i).setKs(i / 4d).setKT(0.5).setShininess(1000);
+=======
+			m = new Material().setKd(1d / i).setKR(1d - 1d / i).setKs((double) i / 4).setKT(0.5).setShininess(1000);
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 			scene2.geometries.add(new Plane(p, p.subtract(Point.ZERO)).setMaterial(m).setEmission(colors.get(i)));
 			scene2.geometries.add(new Sphere(p, 15 * (i + 1)).setMaterial(m).setEmission(colors.get(3 - i)));
 		}

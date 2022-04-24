@@ -101,15 +101,24 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @param geoPoint - The geometric intersection point with the geometry.
 	 * @return true if the light source is shaded or false if not.
 	 */
+<<<<<<< HEAD
 	@SuppressWarnings("unused")
 	@Deprecated
 	private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geoPoint) {
+=======
+	/*private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geoPoint) {
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 		Ray lightRay = new Ray(geoPoint.point, l.scale(-1), n);
 
 		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay,
 				light.getDistance(geoPoint.point));
+<<<<<<< HEAD
 		return intersections == null || geoPoint.geometry.getMaterial().kT != Double3.ZERO;
 	}
+=======
+		return intersections == null || intersections.isEmpty() || geoPoint.geometry.getMaterial().kT != Double3.ZERO;
+	}*/
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 
 	/**
 	 * The function calculates the transpareced light to the point
