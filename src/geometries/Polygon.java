@@ -3,7 +3,6 @@ package geometries;
 import java.util.LinkedList;
 import java.util.List;
 
-import geometries.Intersectable.GeoPoint;
 import primitives.*;
 import static primitives.Util.*;
 

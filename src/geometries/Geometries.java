@@ -52,9 +52,6 @@ public class Geometries extends Intersectable {
 		}
 		return lst1;
 	}
-<<<<<<< HEAD
 
 }
-=======
-}
->>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
+
