@@ -234,4 +234,12 @@ public class Camera {
 
 		cameraImageWriter.writeToImage();
 	}
+	
+	/**
+	 * Change the possession of the camera
+	 */
+	public Camera MoveTo(Point p) {
+		p0 = p != null? p: p0;
+		return this;
+	}
 }
