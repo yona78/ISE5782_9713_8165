@@ -237,6 +237,9 @@ public class Camera {
 
 	/**
 	 * Change the possession of the camera
+	 * 
+	 * @param p is the new point of the camera
+	 * @return the updated camera
 	 */
 	public Camera MoveTo(Point p) {
 		p0 = p != null ? p : p0;
@@ -245,6 +248,10 @@ public class Camera {
 
 	/**
 	 * Change the possession of the camera
+	 * 
+	 * @param vT - is the new Vto of the camera
+	 * @param vU - is the new Vup of the camera
+	 * @return the updated camera
 	 */
 	public Camera Redirect(Vector vT, Vector vU) {
 		if (vT != null && vU != null) {

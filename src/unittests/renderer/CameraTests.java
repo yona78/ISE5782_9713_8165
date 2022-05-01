@@ -10,7 +10,7 @@ import primitives.*;
 import renderer.Camera;
 
 /**
- * @author yonao
+ * @author Hillel Kroitoro, Yona Orunov
  *
  */
 class CameraTests {
@@ -76,19 +76,19 @@ class CameraTests {
 		Vector vTo = new Vector(0, 0, -1);
 		Camera camera = new Camera(ZERO_POINT, vTo, new Vector(0, -1, 0)).setVPDistance(10);
 		Vector vR = camera.getRight();
-		
+
 		// ============ Equivalence Partitions Tests ==============
 		// EP01: Change vTo to (1, 0, -1)
 		Vector v = new Vector(1, 0, -1);
 		assertEquals(v, camera.Redirect(v, camera.getVup()).getVto(), "The new Vto isn't (1, 0, -1)");
-		//assertEquals(vR, camera.getRight(), "The new Vright isn't (1, 0, -1)");
-		
+
 		// EP02: Change vUp to (1, -1, 0)
 		v = new Vector(1, -1, 0);
 		assertEquals(v, camera.Redirect(vTo, v), "The new Vup isn't (1, -1, 0)");
 
-		// EP03: Change vUp to (1, -1, 0) and vUp to (1, -1, 0)
-		v = new Vector(1, -1, 0);
-		assertEquals(v, camera.Redirect(vTo, v), "The new Vup isn't (1, -1, 0)");
+		// =============== Boundary Values Tests ==================
+		// BV01: vTo and vUp have the same direction
+		v = new Vector(2, 5 , -1);
+		assertThrows(IllegalArgumentException.class, () -> camera.Redirect(v, v), "The new Vup isn't (1, -1, 0)");
 	}
 }
