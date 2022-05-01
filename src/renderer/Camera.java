@@ -234,12 +234,26 @@ public class Camera {
 
 		cameraImageWriter.writeToImage();
 	}
-	
+
 	/**
 	 * Change the possession of the camera
 	 */
 	public Camera MoveTo(Point p) {
-		p0 = p != null? p: p0;
+		p0 = p != null ? p : p0;
+		return this;
+	}
+
+	/**
+	 * Change the possession of the camera
+	 */
+	public Camera Redirect(Vector vT, Vector vU) {
+		if (vT != null && vU != null) {
+			if (!Util.isZero(vU.dotProduct(vT)))
+				throw new IllegalArgumentException("vUp and vTo must be vertical");
+			vUp = vU.normalize();
+			vTo = vT.normalize();
+			vR = vT.crossProduct(vU).normalize();
+		}
 		return this;
 	}
 }
