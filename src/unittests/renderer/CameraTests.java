@@ -56,4 +56,39 @@ class CameraTests {
 
 	}
 
+	/**
+	 * Test method for {@link renderer.Camera#MoveTo(Point)}.
+	 */
+	@Test
+	void testMoveTo() {
+		Camera camera = new Camera(ZERO_POINT, new Vector(0, 0, -1), new Vector(0, -1, 0)).setVPDistance(10);
+		// ============ Equivalence Partitions Tests ==============
+		// EP01: Move the camera to (1, 2, 3)
+		Point p = new Point(1, 2, 3);
+		assertEquals(p, camera.MoveTo(p).getP0(), "The new point isn't (1, 2, 3)");
+	}
+
+	/**
+	 * Test method for {@link renderer.Camera#Redirect(Vector, Vector)}.
+	 */
+	@Test
+	void testRedirect() {
+		Vector vTo = new Vector(0, 0, -1);
+		Camera camera = new Camera(ZERO_POINT, vTo, new Vector(0, -1, 0)).setVPDistance(10);
+		Vector vR = camera.getRight();
+		
+		// ============ Equivalence Partitions Tests ==============
+		// EP01: Change vTo to (1, 0, -1)
+		Vector v = new Vector(1, 0, -1);
+		assertEquals(v, camera.Redirect(v, camera.getVup()).getVto(), "The new Vto isn't (1, 0, -1)");
+		//assertEquals(vR, camera.getRight(), "The new Vright isn't (1, 0, -1)");
+		
+		// EP02: Change vUp to (1, -1, 0)
+		v = new Vector(1, -1, 0);
+		assertEquals(v, camera.Redirect(vTo, v), "The new Vup isn't (1, -1, 0)");
+
+		// EP03: Change vUp to (1, -1, 0) and vUp to (1, -1, 0)
+		v = new Vector(1, -1, 0);
+		assertEquals(v, camera.Redirect(vTo, v), "The new Vup isn't (1, -1, 0)");
+	}
 }
