@@ -9,7 +9,7 @@ import primitives.*;
  */
 public class SpotLight extends PointLight {
 	final private Vector direction;
-	private double angle;
+	private double angle = Math.PI;
 
 	/**
 	 * Constructor to initialize SpotLight based on color , point and vector.
@@ -21,9 +21,8 @@ public class SpotLight extends PointLight {
 	public SpotLight(Color intensity, Point p0, Vector dir) {
 		super(intensity, p0);
 		direction = dir.normalize();
-		angle = 0.5;
 	}
-	
+
 	/**
 	 * Setter for the angle of the light.
 	 * 
@@ -31,14 +30,14 @@ public class SpotLight extends PointLight {
 	 * @return the spot with new angle.
 	 */
 	public SpotLight setAngle(double angle) {
-	     this.angle = angle;
-	     return this;
+		this.angle = angle;
+		return this;
 	}
 
 	@Override
 	public Color getIntensity(Point p) {
 		double tmp = direction.dotProduct(getL(p));
 		tmp = Math.cos(Math.acos(tmp) * (0.5 / angle));
-		return super.getIntensity(p).scale(Math.max(0,tmp));
+		return super.getIntensity(p).scale(Math.max(0, tmp));
 	}
 }
