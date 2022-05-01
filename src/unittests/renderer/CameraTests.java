@@ -75,7 +75,7 @@ class CameraTests {
 	void testRedirect() {
 		Vector vTo = new Vector(0, 0, -1);
 		Camera camera = new Camera(ZERO_POINT, vTo, new Vector(0, -1, 0)).setVPDistance(10);
-		Vector vR = camera.getRight();
+		// Vector vR = camera.getRight();
 
 		// ============ Equivalence Partitions Tests ==============
 		// EP01: Change vTo to (1, 0, -1)
@@ -88,7 +88,8 @@ class CameraTests {
 
 		// =============== Boundary Values Tests ==================
 		// BV01: vTo and vUp have the same direction
-		v = new Vector(2, 5 , -1);
-		assertThrows(IllegalArgumentException.class, () -> camera.Redirect(v, v), "vTo and vUp have the same direction");
+		v = new Vector(2, 5, -1);
+		assertThrows(IllegalArgumentException.class, () -> camera.Redirect(v, v),
+				"vTo and vUp have the same direction");
 	}
 }
