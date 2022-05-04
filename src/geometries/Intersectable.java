@@ -45,9 +45,8 @@ public abstract class Intersectable {
 		public boolean equals(Object o) {
 			if (this == o)
 				return true;
-			if (o == null || getClass() != o.getClass())
+			if (o == null || !(o instanceof GeoPoint geoPoint))
 				return false;
-			GeoPoint geoPoint = (GeoPoint) o;
 			return geometry == geoPoint.geometry && point.equals(geoPoint.point);
 		}
 

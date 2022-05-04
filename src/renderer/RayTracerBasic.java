@@ -101,6 +101,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @param geoPoint - The geometric intersection point with the geometry.
 	 * @return true if the light source is shaded or false if not.
 	 */
+	@SuppressWarnings("unused")
 	@Deprecated
 	private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geoPoint) {
 		Ray lightRay = new Ray(geoPoint.point, l.scale(-1), n);

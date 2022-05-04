@@ -1,6 +1,7 @@
 package lighting;
 
 import primitives.*;
+import static primitives.Util.*;
 
 /**
  * This class represents a spot light
@@ -9,7 +10,7 @@ import primitives.*;
  */
 public class SpotLight extends PointLight {
 	final private Vector direction;
-	private double angle = Math.PI;
+	private int angle = 1;
 
 	/**
 	 * Constructor to initialize SpotLight based on color , point and vector.
@@ -29,15 +30,16 @@ public class SpotLight extends PointLight {
 	 * @param angle is the angle of the light.
 	 * @return the spot with new angle.
 	 */
-	public SpotLight setAngle(double angle) {
+	public SpotLight setAngle(int angle) {
 		this.angle = angle;
 		return this;
 	}
 
 	@Override
 	public Color getIntensity(Point p) {
-		double tmp = direction.dotProduct(getL(p));
-		tmp = Math.cos(Math.acos(tmp) * (0.5 / angle));
-		return super.getIntensity(p).scale(Math.max(0, tmp));
+		double tmp = alignZero(direction.dotProduct(getL(p)));
+		if (tmp <= 0) return Color.BLACK;
+		if (angle != 1) tmp = Math.pow(tmp, angle) ;
+		return super.getIntensity(p).scale(tmp);
 	}
 }
