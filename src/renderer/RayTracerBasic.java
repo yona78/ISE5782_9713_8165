@@ -79,7 +79,7 @@ public class RayTracerBasic extends RayTracerBase {
 	}
 
 	/**
-	 * The function creates a new ray
+	 * The function calculates the new refracted ray
 	 * 
 	 * @param p The source of the ray
 	 * @param v The direction of the ray
