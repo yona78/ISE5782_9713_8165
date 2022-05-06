@@ -1,7 +1,6 @@
 package renderer;
 
 import java.util.List;
-
 import primitives.*;
 
 /**
