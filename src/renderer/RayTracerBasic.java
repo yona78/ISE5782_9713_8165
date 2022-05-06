@@ -4,7 +4,7 @@ import primitives.*;
 
 import scene.Scene;
 import java.util.List;
-
+import renderer.CastMultipleRays;
 import geometries.Intersectable.GeoPoint;
 import lighting.LightSource;
 import static primitives.Util.*;
@@ -44,13 +44,43 @@ public class RayTracerBasic extends RayTracerBase {
 		Material material = gp.geometry.getMaterial();
 		Double3 kkr = material.kR.product(k);
 		if (!kkr.lowerThan(MIN_CALC_COLOR_K))
-			color = calcGlobalEffect(constructReflectedRay(gp.point, v, n), level, material.kR, kkr);
+			color = reflectedEffect(gp.point, v, n, level, material.kR, kkr, material.kG);
 		Double3 kkt = material.kT.product(k);
 		if (!kkt.lowerThan(MIN_CALC_COLOR_K))
-			color = color.add(calcGlobalEffect(constructRefractedRay(gp.point, v, n), level, material.kT, kkt));
+			color = color.add(refractedEffect(gp.point, v, n, level, material.kT, kkt, material.kB));
 		return color;
 	}
 
+	
+	private Color reflectedEffect(Point p, Vector v, Vector n, int level, Double3 kR, Double3 kkr , Double3 kG) {
+		Color color = Color.BLACK;
+		Ray reflectedRay = constructReflectedRay(p, v, n);
+		if(this.useGS) {
+			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n, level);
+			double help = n.dotProduct(reflectedRay.getDir());
+			for (Ray ray: lst) {
+				if (n.dotProduct(ray.getDir())* help >0) {
+					color = color.add(calcGlobalEffect(ray, level,kR, kkr));
+				}
+			}
+		}
+		return color.add(calcGlobalEffect(reflectedRay, level,kR, kkr));
+	}
+	
+	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt , Double3 kB) {
+		Color color = Color.BLACK;
+		Ray refractedRay = constructRefractedRay(p, v, n);
+		if(this.useBS) {
+			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n, level);
+			double help = n.dotProduct(v);
+			for (Ray ray: lst) {
+				if (n.dotProduct(ray.getDir())* help >0) {
+					color =  color.add(calcGlobalEffect(ray, level,kT, kkt));
+				}
+			}
+		}
+		return color.add(calcGlobalEffect(refractedRay, level,kT, kkt));
+	}
 	/**
 	 * The function calculates a global effect on the point.
 	 * 

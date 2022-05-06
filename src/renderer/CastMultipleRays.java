@@ -49,7 +49,7 @@ public class CastMultipleRays {
 			Vector vn = v.crossProduct(n).normalize();
 			Vector minusVn = vn.scale(-1);
 			for (int i = 1; i < c; ++i) {
-				r = v;//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+				r = v;//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 				r.add(((i %4 == 1?vn:minusVn)));
 				l.add(new Ray(p, r, n));
 			}
