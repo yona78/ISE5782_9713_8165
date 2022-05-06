@@ -97,7 +97,7 @@ public class LightsTests {
 	@Test
 	public void sphereLimitedSpot() {
 		scene1.geometries.add(sphere);
-		scene1.lights.add(new SpotLight(spCL, spPL, new Vector(1, 1, -0.5)).setAngle(0.25).setKl(0.001).setKq(0.0001));
+		scene1.lights.add(new SpotLight(spCL, spPL, new Vector(1, 1, -0.5)).setAngle(4).setKl(0.001).setKq(0.0001));
 
 		ImageWriter imageWriter = new ImageWriter("sphereLimitedSpot", 500, 500);
 		camera1.setImageWriter(imageWriter) //
@@ -157,7 +157,7 @@ public class LightsTests {
 	@Test
 	public void trianglesLimitedSpot() {
 		scene2.geometries.add(triangle1, triangle2);
-		scene2.lights.add(new SpotLight(trCL, trPL, trDL).setAngle(0.25).setKl(0.001).setKq(0.0001));
+		scene2.lights.add(new SpotLight(trCL, trPL, trDL).setAngle(4).setKl(0.001).setKq(0.0001));
 
 		ImageWriter imageWriter = new ImageWriter("lightTrianglesLimitedSpot", 500, 500);
 		camera2.setImageWriter(imageWriter) //
