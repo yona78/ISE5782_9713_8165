@@ -11,6 +11,8 @@ public class Material {
 	public Double3 kS = new Double3(0);
 	public Double3 kT = new Double3(0.0);
 	public Double3 kR = new Double3(0.0);
+	public Double3 kG = new Double3(0.0);
+	public Double3 kB = new Double3(0.0);
 	public int nShininess = 0;
 
 	/**
@@ -112,4 +114,25 @@ public class Material {
 		return this;
 	}
 
+	/**
+	 * Setter with Double3 object of the kG field of the material
+	 * 
+	 * @param kG is the new kG
+	 * @return the updated material
+	 */
+	public Material setKG(Double3 kG) {
+		this.kG = kG;
+		return this;
+	}
+
+	/**
+	 * Setter with Double3 object of the kb field of the material
+	 * 
+	 * @param kb is the new kb
+	 * @return the updated material
+	 */
+	public Material setKB(Double3 kB) {
+		this.kB = kB;
+		return this;
+	}
 }

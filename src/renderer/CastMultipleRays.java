@@ -18,7 +18,7 @@ public class CastMultipleRays {
 	 * @param c - is the amount of reflected rays.
 	 * @return list of the reflected rays.
 	 */
-	public static List<Ray> constructMultipleReflectedRays(Point p, Vector v, Vector n, Ray mainRay, int c) {
+	public static List<Ray> constructMultipleRays(Point p, Vector v, Vector n, Ray mainRay, int c) {
 		List<Ray> l = List.of(mainRay);
 		Vector r;
 		Vector vn = v.crossProduct(n).normalize();
@@ -47,8 +47,13 @@ public class CastMultipleRays {
 			Vector vn = v.crossProduct(n).normalize();
 			Vector minusVn = vn.scale(-1);
 			for (int i = 1; i < c; ++i) {
+<<<<<<< HEAD
 				r = v;// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 				r.add(((i % 4 == 1 ? vn : minusVn)));
+=======
+				r = v;//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+				r.add(((i %4 == 1?vn:minusVn)));
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 				l.add(new Ray(p, r, n));
 			}
 		}

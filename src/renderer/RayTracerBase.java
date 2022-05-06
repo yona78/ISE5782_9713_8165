@@ -16,6 +16,8 @@ import scene.Scene;
 
 public abstract class RayTracerBase {
 	protected Scene scene;
+	protected boolean useGS = false;
+	protected boolean useBS = false;
 
 	/**
 	 * Construct ray tracer base with scene
@@ -33,5 +35,28 @@ public abstract class RayTracerBase {
 	 * @return The color of the intersection point.
 	 */
 	public abstract Color traceRay(Ray ray);
+	
+	/**
+	 * Setter if use glossy surfaces in ray trace
+	 * 
+	 * @param gS is the the value if want the update
+	 * @return the updated ray trace
+	 */
+	public RayTracerBase setUseGS(boolean gS) {
+		this.useGS = gS;
+		return this;
+	}
+	
+	/**
+	 * Setter if use blurry glass in ray trace
+	 * 
+	 * @param bS is the the value if want the update
+	 * @return the updated ray trace
+	 */
+	public RayTracerBase setUseBS(boolean bS) {
+		this.useBS = bS;
+		return this;
+	}
+	
 
 }
