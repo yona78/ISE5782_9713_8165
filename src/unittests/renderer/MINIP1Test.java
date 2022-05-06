@@ -21,7 +21,7 @@ import primitives.*;
 /**
  * Test rendering glaze glass
  * 
- * @author yona
+ * @author yona Orn
  * @author Hillel
  */
 class ImageWriterTests {
