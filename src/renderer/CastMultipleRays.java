@@ -47,13 +47,10 @@ public class CastMultipleRays {
 			Vector vn = v.crossProduct(n).normalize();
 			Vector minusVn = vn.scale(-1);
 			for (int i = 1; i < c; ++i) {
-<<<<<<< HEAD
 				r = v;// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 				r.add(((i % 4 == 1 ? vn : minusVn)));
-=======
 				r = v;//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 				r.add(((i %4 == 1?vn:minusVn)));
->>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 				l.add(new Ray(p, r, n));
 			}
 		}

@@ -4,7 +4,6 @@ import primitives.*;
 
 import scene.Scene;
 import java.util.List;
-import renderer.CastMultipleRays;
 import geometries.Intersectable.GeoPoint;
 import lighting.LightSource;
 import static primitives.Util.*;
@@ -56,13 +55,14 @@ public class RayTracerBasic extends RayTracerBase {
 		Color color = Color.BLACK;
 		Ray reflectedRay = constructReflectedRay(p, v, n);
 		if(this.useGS) {
-			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n, level, reflectedRay, 100);
+			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n,  reflectedRay, 9);
 			double help = n.dotProduct(reflectedRay.getDir());
 			for (Ray ray: lst) {
 				if (n.dotProduct(ray.getDir())* help >0) {
 					color = color.add(calcGlobalEffect(ray, level,kR, kkr));
 				}
 			}
+			return color;
 		}
 		return color.add(calcGlobalEffect(reflectedRay, level,kR, kkr));
 	}
@@ -71,13 +71,14 @@ public class RayTracerBasic extends RayTracerBase {
 		Color color = Color.BLACK;
 		Ray refractedRay = constructRefractedRay(p, v, n);
 		if(this.useBS) {
-			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n, level);
+			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n,refractedRay, 9);
 			double help = n.dotProduct(v);
 			for (Ray ray: lst) {
 				if (n.dotProduct(ray.getDir())* help >0) {
 					color =  color.add(calcGlobalEffect(ray, level,kT, kkt));
 				}
 			}
+			return color;
 		}
 		return color.add(calcGlobalEffect(refractedRay, level,kT, kkt));
 	}
