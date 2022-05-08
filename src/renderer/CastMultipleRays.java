@@ -13,8 +13,6 @@ interface Func {
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class CastMultipleRays {
-	private static final int AmountOfRays = 30;
-	private static final double digree = 2 * Math.PI / AmountOfRays;
 
 	/**
 	 * The function calculates the rays.
@@ -24,14 +22,15 @@ public class CastMultipleRays {
 	 * @param radius  - is the radius of the cone that begins in p and its height is 1.
 	 * @return list of the rays.
 	 */
-	public static List<Ray> SuperSempler(Point p, Vector v, Vector n, Ray mainRay, double radius) {
+	public static List<Ray> SuperSempler(Point p, Vector v, Vector n, Ray mainRay, double radius, int amountOfRays) {
 		List<Ray> l = List.of(mainRay);
+		double digree = 2 * Math.PI / amountOfRays;
 		try {
 			Vector right = v.crossProduct(n).normalize().scale(radius);
 			Vector up = v.crossProduct(right).normalize().scale(radius);
 			Vector newVec;
 
-			for (int i = 0; i < AmountOfRays; ++i) {
+			for (int i = 0; i < amountOfRays; ++i) {
 				newVec = v.add(right.scale(Math.cos(i * digree))).add(up.scale(Math.sin(i * digree)));
 				l.add(new Ray(p, newVec));
 			}
