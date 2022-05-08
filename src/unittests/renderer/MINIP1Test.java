@@ -21,8 +21,7 @@ import primitives.*;
 /**
  * Test rendering glaze glass
  * 
- * @author yona Orn
- * @author Hillel
+ * @author Hillel Kroitoro, Yona Orunov
  */
 class MINIP1Tests {
 	private Scene scene = new Scene("Test scene")//
