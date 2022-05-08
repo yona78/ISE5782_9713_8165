@@ -21,8 +21,7 @@ public class CastMultipleRays {
 	 * 
 	 * @param mainRay - is the ray we split.
 	 * @param n       - is the normal vector to the point.
-	 * @param radius  - is the radius of the cone that begins in p and its height is
-	 *                1.
+	 * @param radius  - is the radius of the cone that begins in p and its height is 1.
 	 * @return list of the rays.
 	 */
 	public static List<Ray> SuperSempler(Ray mainRay, Vector n, int radius) {
