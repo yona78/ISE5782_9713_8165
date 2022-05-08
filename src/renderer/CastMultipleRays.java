@@ -20,11 +20,12 @@ public class CastMultipleRays {
 	 * The function calculates the rays.
 	 * 
 	 * @param mainRay - is the ray we split.
-	 * @param n - is the normal vector to the point.
-	 * @param radius - is the radius of the cone that begins in p and its height is 1.
+	 * @param n       - is the normal vector to the point.
+	 * @param radius  - is the radius of the cone that begins in p and its height is
+	 *                1.
 	 * @return list of the rays.
 	 */
-	public static List<Ray> xxxx(Ray mainRay, Vector n, int radius) {
+	public static List<Ray> SuperSempler(Ray mainRay, Vector n, int radius) {
 		List<Ray> l = List.of(mainRay);
 		Point p = mainRay.getP0();
 		Vector v = mainRay.getDir();
@@ -32,15 +33,13 @@ public class CastMultipleRays {
 			Vector right = v.crossProduct(n).normalize().scale(radius);
 			Vector up = v.crossProduct(right).normalize().scale(radius);
 			Vector newVec;
-			
+
 			for (int i = 0; i < AmountOfRays; ++i) {
 				newVec = v.add(right.scale(Math.cos(i * digree))).add(up.scale(Math.sin(i * digree)));
 				l.add(new Ray(p, newVec));
 			}
+		} finally {
+			return l;
 		}
-		catch{
-			//xxxxxxxxx
-		}
-		return l;
 	}
 }
