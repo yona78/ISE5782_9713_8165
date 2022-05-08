@@ -50,38 +50,38 @@ public class RayTracerBasic extends RayTracerBase {
 		return color;
 	}
 
-	
-	private Color reflectedEffect(Point p, Vector v, Vector n, int level, Double3 kR, Double3 kkr , Double3 kG) {
+	private Color reflectedEffect(Point p, Vector v, Vector n, int level, Double3 kR, Double3 kkr, Double3 kG) {
 		Color color = Color.BLACK;
 		Ray reflectedRay = constructReflectedRay(p, v, n);
-		if(this.useGS) {
-			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n,  reflectedRay, 30);
+		if (this.useGS) {
+			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n, reflectedRay, 30);
 			double help = n.dotProduct(reflectedRay.getDir());
-			for (Ray ray: lst) {
-				if (n.dotProduct(ray.getDir())* help >0) {
-					color = color.add(calcGlobalEffect(ray, level,kR, kkr));
+			for (Ray ray : lst) {
+				if (n.dotProduct(ray.getDir()) * help > 0) {
+					color = color.add(calcGlobalEffect(ray, level, kR, kkr));
 				}
 			}
 			return color;
 		}
-		return color.add(calcGlobalEffect(reflectedRay, level,kR, kkr));
+		return color.add(calcGlobalEffect(reflectedRay, level, kR, kkr));
 	}
-	
-	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt , Double3 kB) {
+
+	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt, Double3 kB) {
 		Color color = Color.BLACK;
 		Ray refractedRay = constructRefractedRay(p, v, n);
-		if(this.useBS) {
-			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n,refractedRay, 30);
+		if (this.useBS) {
+			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n, refractedRay, 30);
 			double help = n.dotProduct(v);
-			for (Ray ray: lst) {
-				if (n.dotProduct(ray.getDir())* help >0) {
-					color =  color.add(calcGlobalEffect(ray, level,kT, kkt));
+			for (Ray ray : lst) {
+				if (n.dotProduct(ray.getDir()) * help > 0) {
+					color = color.add(calcGlobalEffect(ray, level, kT, kkt));
 				}
 			}
 			return color;
 		}
-		return color.add(calcGlobalEffect(refractedRay, level,kT, kkt));
+		return color.add(calcGlobalEffect(refractedRay, level, kT, kkt));
 	}
+
 	/**
 	 * The function calculates a global effect on the point.
 	 * 
