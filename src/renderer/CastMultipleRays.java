@@ -76,9 +76,7 @@ public class CastMultipleRays {
 			Vector minusVn = vn.scale(-1);
 			for (int i = 1; i < AmountOfRays; ++i) {
 				r = v;// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-				r.add(((i % 4 == 1 ? vn : minusVn)));
-				r = v;// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-				r.add(((i % 4 == 1 ? vn : minusVn)));
+				r.add(((i / 2 % 2 == 1 ? vn : minusVn)));
 				l.add(new Ray(p, r, n));
 			}
 		}
