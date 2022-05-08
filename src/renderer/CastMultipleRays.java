@@ -14,71 +14,32 @@ interface Func {
  */
 public class CastMultipleRays {
 	private static final int AmountOfRays = 30;
+	private static final double digree = 2 * Math.PI / AmountOfRays;
 
 	/**
-	 * The function calculates the new reflected rays.
+	 * The function calculates the rays.
 	 * 
-	 * @param p - is the intersection point between the ray and the geometry.
-	 * @param v - is the direction vector of the ray.
-	 * @param n - is the normal vector to the geometry.
-	 * @param c - is the amount of reflected rays.
-	 * @return list of the reflected rays.
+	 * @param mainRay - is the ray we split.
+	 * @param n - is the normal vector to the point.
+	 * @param radius - is the radius of the cone that begins in p and its height is 1.
+	 * @return list of the rays.
 	 */
-	public static List<Ray> constructMultipleRays(Point p, Vector v, Vector n, Ray mainRay, int c, Func f) {
+	public static List<Ray> xxxx(Ray mainRay, Vector n, int radius) {
 		List<Ray> l = List.of(mainRay);
-		Vector r;
-		Vector vn = v.crossProduct(n).normalize();
-		Vector minusVn = vn.scale(-1);
-		for (int i = 1; i < AmountOfRays; ++i) {
-			r = f.func(vn, minusVn, i, c);
-			r.add(((i / 2 % 2 == 1 ? vn : minusVn)));
-			l.add(new Ray(p, r, n));
-		}
-		return l;
-	}
-
-	/**
-	 * The function calculates the new reflected rays.
-	 * 
-	 * @param p - is the intersection point between the ray and the geometry.
-	 * @param v - is the direction vector of the ray.
-	 * @param n - is the normal vector to the geometry.
-	 * @param c - is the amount of reflected rays.
-	 * @return list of the reflected rays.
-	 */
-	public static List<Ray> constructMultipleRays(Point p, Vector v, Vector n, Ray mainRay, int c) {
-		List<Ray> l = List.of(mainRay);
-		Vector r;
-		Vector vn = v.crossProduct(n).normalize();
-		Vector minusVn = vn.scale(-1);
-		for (int i = 1; i < AmountOfRays; ++i) {
-			r = v.subtract(n.scale((4 + (double) i / c) * v.dotProduct(n) * (i % 2 - 0.5)));
-			r.add(((i / 2 % 2 == 1 ? vn : minusVn)));
-			l.add(new Ray(p, r, n));
-		}
-		return l;
-	}
-
-	/**
-	 * The function calculates the new refracted ray.
-	 * 
-	 * @param p - is the intersection point between the ray and the geometry.
-	 * @param v - is the direction vector of the ray.
-	 * @param n - is the normal vector to the geometry.
-	 * @param c - is the amount of reflected rays.
-	 * @return list of the refracted rays.
-	 */
-	public static List<Ray> constructMultipleRefractedRays(Point p, Vector v, Vector n, int c) {
-		Vector r = v;
-		List<Ray> l = List.of(new Ray(p, r, n));
-		if (c != 1) {
-			Vector vn = v.crossProduct(n).normalize();
-			Vector minusVn = vn.scale(-1);
-			for (int i = 1; i < AmountOfRays; ++i) {
-				r = v;// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-				r.add(((i / 2 % 2 == 1 ? vn : minusVn)));
-				l.add(new Ray(p, r, n));
+		Point p = mainRay.getP0();
+		Vector v = mainRay.getDir();
+		try {
+			Vector right = v.crossProduct(n).normalize().scale(radius);
+			Vector up = v.crossProduct(right).normalize().scale(radius);
+			Vector newVec;
+			
+			for (int i = 0; i < AmountOfRays; ++i) {
+				newVec = v.add(right.scale(Math.cos(i * digree))).add(up.scale(Math.sin(i * digree)));
+				l.add(new Ray(p, newVec));
 			}
+		}
+		catch{
+			//xxxxxxxxx
 		}
 		return l;
 	}
