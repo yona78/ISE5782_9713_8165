@@ -10,11 +10,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import geometries.*;
-import lighting.AmbientLight;
-import lighting.DirectionalLight;
-import renderer.Camera;
-import renderer.ImageWriter;
-import renderer.RayTracerBasic;
+import lighting.*;
+import renderer.*;
 import scene.Scene;
 import primitives.*;
 
@@ -24,21 +21,52 @@ import primitives.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 class MINIP1Tests {
-	private Scene scene = new Scene("Test scene")//
-			.setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
-	Vector vTo = new Vector(0, 0, -1);
-	private Camera camera = new Camera(new Point(0, 0, 1000), vTo, new Vector(0, 1, 0)) //
-			.setVPSize(150, 150) //
-			.setVPDistance(1000);
-	private Material material = new Material().setKd(0.5).setKR(10).setKs(0.5).setShininess(300);
-
+	/**
+	 * A test for the focus with supersSampling
+	 */
 	@Test
-	void writeToImage() {
-		scene.geometries.add(new Plane(new Point(0, 0, -20), vTo).setEmission(new Color(RED).reduce(2)) //
-				.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)).setMaterial(material));
-		scene.geometries.add(new Sphere(new Point(1, 2, -5), 2.5).setEmission(new Color(BLUE).reduce(2)) //
-				.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)));
-		scene.lights.add(new DirectionalLight(new Color(800, 500, 0), new Vector(1, 1, -0.5)));
+	public void DepthOfFieldTest() {
+		Camera camera = new Camera(new Point(0, 0, 100), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+				.setVPSize(200, 200).setVPDistance(100); //
+		Scene scene = new Scene("Test scene");
+		scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), new Double3(0.1)));
+
+		scene.geometries.add( //
+				new Sphere(new Point(-60, -70, -40), 40).setEmission(new Color(200, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+				new Sphere(new Point(-30, -55, -80), 40).setEmission(new Color(200, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+				new Sphere(new Point(0, -40, -120), 40).setEmission(new Color(200, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+				new Sphere(new Point(30, -25, -160), 40).setEmission(new Color(200, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+				new Sphere(new Point(60, -10, -200), 40).setEmission(new Color(200, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+
+				new Sphere(new Point(-60, -10, -40), 20).setEmission(new Color(0, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+				new Sphere(new Point(-30, 15, -80), 20).setEmission(new Color(0, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+				new Sphere(new Point(0, 40, -120), 20).setEmission(new Color(0, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+				new Sphere(new Point(30, 65, -160), 20).setEmission(new Color(0, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+				new Sphere(new Point(60, 90, -200), 20).setEmission(new Color(0, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.1)),
+
+				new Triangle(new Point(0, -10, -500), new Point(500, -10, -500), new Point(200, -110, -50))
+						.setEmission(new Color(10, 10, 80)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKr(0.7)));
+
+		scene.lights.add(new SpotLight(new Color(400, 0, 0), new Point(80, 0, 0), new Vector(0, 0, -1)) //
+				.setKl(4E-5).setKq(2E-7));
+		scene.lights.add(new SpotLight(new Color(0, 400, 0), new Point(-80, 50, 0), new Vector(0, 0, -1)) //
+				.setKl(4E-5).setKq(2E-7));
+		scene.lights.add(new SpotLight(new Color(400, 400, 0), new Point(60, 80, 0), new Vector(0, 0, -1)) //
+				.setKl(4E-5).setKq(2E-7));
+		scene.lights.add(new SpotLight(new Color(400, 200, 200), new Point(30, -120, 0), new Vector(0, 1, -1)) //
+				.setKl(4E-5).setKq(2E-7));
+		scene.lights.add(new DirectionalLight(new Color(0, 40, 400), new Vector(0, 0, 1)));
 
 		ImageWriter imageWriter = new ImageWriter("mirror", 500, 500);
 		camera.setImageWriter(imageWriter) //

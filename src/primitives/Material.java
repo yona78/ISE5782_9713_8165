@@ -76,7 +76,7 @@ public class Material {
 	 * @param kS is the new kS
 	 * @return the updated material
 	 */
-	public Material setKT(double kT) {
+	public Material setKt(double kT) {
 		this.kT = new Double3(kT);
 		return this;
 	}
@@ -87,7 +87,7 @@ public class Material {
 	 * @param kS is the new kS
 	 * @return the updated material
 	 */
-	public Material setKR(double kR) {
+	public Material setKr(double kR) {
 		this.kR = new Double3(kR);
 		return this;
 	}

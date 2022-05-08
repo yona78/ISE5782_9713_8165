@@ -199,7 +199,7 @@ public class LightsTests {
 		scene_3.geometries.add( //
 				new Sphere( new Point(0, 0, -100),40) //
 						.setEmission(new Color(0, 0, 100)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKT(0.7)),
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.7)),
 				new Sphere( new Point(0, 0, -100),20) //
 						.setEmission(new Color(100, 20, 20)) //
 						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
