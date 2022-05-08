@@ -24,7 +24,7 @@ import primitives.*;
  * @author yona Orn
  * @author Hillel
  */
-class ImageWriterTests {
+class MINIP1Tests {
 	private Scene scene = new Scene("Test scene")//
 			.setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
 	Vector vTo = new Vector(0, 0, -1);
