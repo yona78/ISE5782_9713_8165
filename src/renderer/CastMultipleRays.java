@@ -4,7 +4,7 @@ import java.util.List;
 import primitives.*;
 
 interface Func {
-    Vector func(Vector v, Vector n, int i, int c);
+	Vector func(Vector v, Vector n, int i, int c);
 }
 
 /**
@@ -13,6 +13,8 @@ interface Func {
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class CastMultipleRays {
+	private static final int AmountOfRays = 30;
+
 	/**
 	 * The function calculates the new reflected rays.
 	 * 
@@ -27,14 +29,14 @@ public class CastMultipleRays {
 		Vector r;
 		Vector vn = v.crossProduct(n).normalize();
 		Vector minusVn = vn.scale(-1);
-		for (int i = 1; i < c; ++i) {
+		for (int i = 1; i < AmountOfRays; ++i) {
 			r = f.func(vn, minusVn, i, c);
-			r.add(((i % 4 == 1 ? vn : minusVn)));
+			r.add(((i / 2 % 2 == 1 ? vn : minusVn)));
 			l.add(new Ray(p, r, n));
 		}
 		return l;
 	}
-	
+
 	/**
 	 * The function calculates the new reflected rays.
 	 * 
@@ -49,9 +51,9 @@ public class CastMultipleRays {
 		Vector r;
 		Vector vn = v.crossProduct(n).normalize();
 		Vector minusVn = vn.scale(-1);
-		for (int i = 1; i < c; ++i) {
+		for (int i = 1; i < AmountOfRays; ++i) {
 			r = v.subtract(n.scale((4 + (double) i / c) * v.dotProduct(n) * (i % 2 - 0.5)));
-			r.add(((i % 4 == 1 ? vn : minusVn)));
+			r.add(((i / 2 % 2 == 1 ? vn : minusVn)));
 			l.add(new Ray(p, r, n));
 		}
 		return l;
@@ -72,11 +74,9 @@ public class CastMultipleRays {
 		if (c != 1) {
 			Vector vn = v.crossProduct(n).normalize();
 			Vector minusVn = vn.scale(-1);
-			for (int i = 1; i < c; ++i) {
+			for (int i = 1; i < AmountOfRays; ++i) {
 				r = v;// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-				r.add(((i % 4 == 1 ? vn : minusVn)));
-				r = v;//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-				r.add(((i %4 == 1?vn:minusVn)));
+				r.add(((i / 2 % 2 == 1 ? vn : minusVn)));
 				l.add(new Ray(p, r, n));
 			}
 		}
