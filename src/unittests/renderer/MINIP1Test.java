@@ -31,8 +31,6 @@ class MINIP1Tests {
 			.setVPSize(150, 150) //
 			.setVPDistance(1000);
 	private Material material = new Material().setKd(0.5).setKR(10).setKs(0.5).setShininess(300);
-	// private List<Color> colors = List.of(new Color(red), new Color(blue), new
-	// Color(yellow), new Color(green));
 
 	@Test
 	void writeToImage() {

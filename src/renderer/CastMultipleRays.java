@@ -24,10 +24,8 @@ public class CastMultipleRays {
 	 * @param radius  - is the radius of the cone that begins in p and its height is 1.
 	 * @return list of the rays.
 	 */
-	public static List<Ray> SuperSempler(Ray mainRay, Vector n, int radius) {
+	public static List<Ray> SuperSempler(Point p, Vector v, Vector n, Ray mainRay, double radius) {
 		List<Ray> l = List.of(mainRay);
-		Point p = mainRay.getP0();
-		Vector v = mainRay.getDir();
 		try {
 			Vector right = v.crossProduct(n).normalize().scale(radius);
 			Vector up = v.crossProduct(right).normalize().scale(radius);

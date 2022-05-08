@@ -54,7 +54,7 @@ public class RayTracerBasic extends RayTracerBase {
 		Color color = Color.BLACK;
 		Ray reflectedRay = constructReflectedRay(p, v, n);
 		if (this.useGS) {
-			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n, reflectedRay, 30);
+			List<Ray> lst = CastMultipleRays.SuperSempler(p, v, n, reflectedRay, kG);
 			double help = n.dotProduct(reflectedRay.getDir());
 			int i =0;
 			for (Ray ray : lst) {
@@ -72,7 +72,7 @@ public class RayTracerBasic extends RayTracerBase {
 		Color color = Color.BLACK;
 		Ray refractedRay = constructRefractedRay(p, v, n);
 		if (this.useBS) {
-			List<Ray> lst = CastMultipleRays.constructMultipleRays(p, v, n, refractedRay, 30);
+			List<Ray> lst = CastMultipleRays.SuperSempler(p, v, n, refractedRay, kB);
 			double help = n.dotProduct(v);
 			int i  = 0;
 			for (Ray ray : lst) {
