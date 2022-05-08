@@ -18,6 +18,7 @@ public abstract class RayTracerBase {
 	protected Scene scene;
 	protected boolean useGS = false;
 	protected boolean useBS = false;
+	protected int sizeSuperSamling =0;
 
 	/**
 	 * Construct ray tracer base with scene
@@ -55,6 +56,17 @@ public abstract class RayTracerBase {
 	 */
 	public RayTracerBase setUseBS(boolean bS) {
 		this.useBS = bS;
+		return this;
+	}
+	
+	/**
+	 * Setter for the amount of ray that the object creates.
+	 * 
+	 * @param size - the size to set in ray trace.
+	 * @return the updated ray trace
+	 */
+	public RayTracerBase setSizeSuperSamling(int size) {
+		this.sizeSuperSamling = size ;
 		return this;
 	}
 	
