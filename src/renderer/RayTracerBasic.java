@@ -54,36 +54,37 @@ public class RayTracerBasic extends RayTracerBase {
 		Color color = Color.BLACK;
 		Ray reflectedRay = constructReflectedRay(p, v, n);
 		if (this.useGS) {
-			List<Ray> lst = CastMultipleRays.SuperSempler(p, v, n, reflectedRay, kG, sizeSuperSamling);
-			double help = n.dotProduct(reflectedRay.getDir());
+			List<Ray> lst = CastMultipleRays.superSampling(reflectedRay.getPoint(10),p, reflectedRay.getDir(),sizeSuperSamling,  kG);
+			double help = alignZero(n.dotProduct(reflectedRay.getDir()));
 			int i =0;
 			for (Ray ray : lst) {
-				if (n.dotProduct(ray.getDir()) * help > 0) {
+				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
 					color = color.add(calcGlobalEffect(ray, level, kR, kkr));
 					i++;
 				}
 			}
-			return color.reduce(i);
+			color =  color.reduce(i);
 		}
-		return calcGlobalEffect(reflectedRay, level, kR, kkr);
+		return color.add(calcGlobalEffect(reflectedRay, level, kR, kkr));
 	}
 
 	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt, double kB) {
 		Color color = Color.BLACK;
 		Ray refractedRay = constructRefractedRay(p, v, n);
 		if (this.useBS) {
-			List<Ray> lst = CastMultipleRays.SuperSempler(p, v, n, refractedRay, kB, sizeSuperSamling);
-			double help = n.dotProduct(v);
+			Point test = p;
+			List<Ray> lst = CastMultipleRays.superSampling(p.add(v.scale(10)),test, v,  sizeSuperSamling, kB);
+			double help = alignZero(n.dotProduct(v));
 			int i  = 0;
 			for (Ray ray : lst) {
-				if (n.dotProduct(ray.getDir()) * help > 0) {
+				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
 					color = color.add(calcGlobalEffect(ray, level, kT, kkt));
 					i++;
 				}
 			}
-			return color.reduce(i);
+			color =  color.reduce(i);
 		}
-		return calcGlobalEffect(refractedRay, level, kT, kkt);
+		return color.add(calcGlobalEffect(refractedRay, level, kT, kkt));
 	}
 
 	/**
@@ -109,8 +110,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the reflected ray.
 	 */
 	private Ray constructReflectedRay(Point p, Vector v, Vector n) {
-		Vector r = v.subtract(n.scale(2 * v.dotProduct(n)));
-		return new Ray(p, r, n);
+		return new Ray(p, v.add(n.scale(-2 * v.dotProduct(n))).normalize(), n.scale(-1));
 	}
 
 	/**

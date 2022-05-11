@@ -1,5 +1,6 @@
 package renderer;
 
+import java.util.ArrayList;
 import java.util.List;
 import primitives.*;
 
@@ -23,31 +24,24 @@ public class CastMultipleRays {
 	 *                1.
 	 * @return list of the rays.
 	 */
-	public static List<Ray> SuperSempler(Point p, Vector v, Vector n, Ray mainRay, double radius, int amountOfRays) {
-		List<Ray> l = List.of(mainRay);
-		double size = amountOfRays/ 3d;
-		double outAmountOfRays = 2 * size;
-		double inAmountOfRays = size;
-		double outDigree = 2 * Math.PI / size;
-		double inDigree = Math.PI / size;
-		try {
-			Vector right = v.crossProduct(n).normalize().scale(radius);
-			Vector up = v.crossProduct(right).normalize().scale(radius);
-			Vector newVec;
-
-			for (int i = 0; i < outAmountOfRays; ++i) {
-				newVec = v.add(right.scale(Math.cos(i * outDigree))).add(up.scale(Math.sin(i * outDigree)));
-				l.add(new Ray(p, newVec));
-			}
-
-			right = v.crossProduct(n).normalize().scale(radius / 2);
-			up = v.crossProduct(right).normalize().scale(radius / 2);
-			for (int i = 0; i < inAmountOfRays; ++i) {
-				newVec = v.add(right.scale(Math.cos(i * inDigree))).add(up.scale(Math.sin(i * inDigree)));
-				l.add(new Ray(p, newVec));
-			}
-		} finally {
-			return l;
-		}
+	 public static List<Ray> superSampling(Point point,Point last, Vector l, int SIZE, double radius) {
+		 Vector l1=l.crossProduct(l.add(new Vector(5,4,3)));
+	     Vector l2=l.crossProduct(l1);
+	     List<Ray> points = new ArrayList<Ray>();
+	     Point help = point;
+	     double newSize = Math.sqrt(SIZE - 1);
+	     for (int k = 1; k < newSize + 1; k++) {
+	         for (int t = 1; t < newSize + 1; t++) {
+	             //might be change because now it is a rectangular but not a circle
+	             Point newPoint=point.add(l1.scale(radius*(1-((k*2)/newSize))));
+	             newPoint=newPoint.add(l2.scale(radius*(1-((t*2)/newSize))));
+	             points.add(new Ray(last,newPoint.subtract(last)));
+	         }
+	    }
+	    Ray  help1 = new Ray(last,help.subtract(last));
+	    if(!points.contains(help1)){
+	         points.add(help1);
+	      }
+	    return points;
 	}
 }
