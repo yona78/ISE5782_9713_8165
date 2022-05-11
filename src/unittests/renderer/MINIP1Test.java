@@ -82,7 +82,7 @@ class MINIP1Tests {
         scene.lights.add(new DirectionalLight(new Color(0, 40, 400), new Vector(0, 0, 1)));
 
 		ImageWriter imageWriter = new ImageWriter("mirror", 500, 500);
-		RayTracerBasic help = (RayTracerBasic) new RayTracerBasic(scene).setUseBS(true).setUseGS(true).setSizeSuperSamling(81);
+		RayTracerBasic help = (RayTracerBasic) new RayTracerBasic(scene).setSizeSuperSamling(81).setUseBS(true).setUseGS(false);
 		camera.setImageWriter(imageWriter) //
 				.setRayTracerBase(help) //
 				.renderImage() //
