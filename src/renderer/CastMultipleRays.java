@@ -24,24 +24,27 @@ public class CastMultipleRays {
 	 *                1.
 	 * @return list of the rays.
 	 */
-	 public static List<Ray> superSampling(Point point,Point last, Vector l, int SIZE, double radius) {
-		 Vector l1=l.crossProduct(l.add(new Vector(5,4,3)));
-	     Vector l2=l.crossProduct(l1);
-	     List<Ray> points = new ArrayList<Ray>();
-	     Point help = point;
-	     double newSize = Math.sqrt(SIZE - 1);
-	     for (int k = 1; k < newSize + 1; k++) {
-	         for (int t = 1; t < newSize + 1; t++) {
-	             //might be change because now it is a rectangular but not a circle
-	             Point newPoint=point.add(l1.scale(radius*(1-((k*2)/newSize))));
-	             newPoint=newPoint.add(l2.scale(radius*(1-((t*2)/newSize))));
-	             points.add(new Ray(last,newPoint.subtract(last)));
-	         }
-	    }
-	    Ray  help1 = new Ray(last,help.subtract(last));
-	    if(!points.contains(help1)){
-	         points.add(help1);
-	      }
-	    return points;
+	public static List<Ray> superSampling(Point point, Point last, Vector l, int SIZE, double radius) {
+		List<Ray> points = new ArrayList<Ray>();
+		try {
+			Vector l1 = l.crossProduct(l.add(new Vector(5, 4, 3)));
+			Vector l2 = l.crossProduct(l1);
+			Point help = point;
+			double newSize = Math.sqrt(SIZE - 1);
+			for (int k = 1; k < newSize + 1; k++) {
+				for (int t = 1; t < newSize + 1; t++) {
+					// might be change because now it is a rectangular but not a circle
+					Point newPoint = point.add(l1.scale(radius * (1 - ((k * 2) / newSize))));
+					newPoint = newPoint.add(l2.scale(radius * (1 - ((t * 2) / newSize))));
+					points.add(new Ray(last, newPoint.subtract(last)));
+				}
+			}
+			Ray help1 = new Ray(last, help.subtract(last));
+			if (!points.contains(help1)) {
+				points.add(help1);
+			}
+		} catch (Exception e) {
+		}
+		return points;
 	}
 }
