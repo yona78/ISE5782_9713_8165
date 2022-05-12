@@ -70,7 +70,7 @@ public class RayTracerBasic extends RayTracerBase {
 
 	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt, double kB) {
 		Color color = Color.BLACK;
-		Ray refractedRay = constructRefractedRay(p, v, n);
+		Ray refractedRay = new Ray(p, v, n);
 		if (this.useBS) {
 			Point test = p;
 			List<Ray> lst = CastMultipleRays.superSampling(p.add(v.scale(10)),test, v,  sizeSuperSamling, kB);

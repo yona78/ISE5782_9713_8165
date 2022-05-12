@@ -27,8 +27,13 @@ public class CastMultipleRays {
 	public static List<Ray> superSampling(Point point, Point last, Vector l, int SIZE, double radius) {
 		List<Ray> points = new ArrayList<Ray>();
 		try {
-			Vector l1 = l.crossProduct(l.add(new Vector(5, 4, 3)));
-			Vector l2 = l.crossProduct(l1);
+			Vector l1;
+	        try {
+	             l1 = l.crossProduct(l.add(new Vector(0, 0, 1)));
+	        }catch(Exception ex){ l1 = l.crossProduct(l.add(new Vector(0, 1, 0)));}
+	        Vector l2=l.crossProduct(l1);
+	        l1.normalize();
+	        l2.normalize();
 			Point help = point;
 			double newSize = Math.sqrt(SIZE - 1);
 			for (int k = 1; k < newSize + 1; k++) {
