@@ -21,6 +21,17 @@ import primitives.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 class MINIP1Tests {
+	private double Rund(double dig, int c) {
+		return c * Math.sin(c / dig);
+	}
+
+	private Geometry GenSphere(double dig) {
+		double rund = Rund(dig, 100);
+		return new Sphere(new Point(300 * Math.cos(dig), 300 * Math.sin(dig), rund), rund + 120)
+				.setEmission(new Color(Rund(dig, 25) * 5 + 125, Rund(dig, 50) * 2.5 + 125, rund * 1.25 + 125)) //
+				.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(100));
+	}
+
 	/**
 	 * A test for the focus with supersSampling
 	 */
@@ -36,52 +47,28 @@ class MINIP1Tests {
 				new Plane(new Point(0, -20, 0), vUp).setEmission(new Color(100, 100, 100)) //
 						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
 
-				new Polygon(new Point(10, -20, 20), new Point(5, -20, 21), new Point(10, 0, 20), new Point(5, 0, 21))
-						.setEmission(new Color(0, 0, 100)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-				new Polygon(new Point(5, -20, 22), new Point(0, -20, 23), new Point(5, 0, 22), new Point(0, 0, 23))
-						.setEmission(new Color(0, 100, 0)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-				new Polygon(new Point(0, -20, 24), new Point(-5, -20, 25), new Point(0, 0, 24), new Point(-5, 0, 25))
-						.setEmission(new Color(0, 0, 100)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-				new Polygon(new Point(-5, -20, 24), new Point(-10, -20, 23), new Point(10, 0, 24), new Point(5, 0, 23))
-						.setEmission(new Color(0, 0, 100)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-				new Sphere(new Point(160, 0, -100), 20).setEmission(new Color(200, 100, 50)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-				new Sphere(new Point(500, 160, -500), 40).setEmission(new Color(200, 100, 50)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
+				new Polygon(new Point(100, -20, 200), new Point(50, -20, 210), new Point(100, 100, 200),
+						new Point(50, 100, 210)).setEmission(new Color(0, 0, 100)) //
+								.setMaterial(new Material().setKt(0.9).setKB(0.2).setKr(0.8).setKd(0.25).setKs(0.25)
+										.setShininess(20)),
+				new Polygon(new Point(50, -20, 220), new Point(0, -20, 230), new Point(50, 100, 220),
+						new Point(0, 100, 230)).setEmission(new Color(0, 100, 0)) //
+								.setMaterial(new Material().setKt(0.1).setKB(0.4).setKr(0.6).setKd(0.25).setKs(0.25)
+										.setShininess(40)),
+				new Polygon(new Point(0, -20, 220), new Point(-50, -20, 230), new Point(0, 100, 220),
+						new Point(-50, 100, 230)).setEmission(new Color(100, 0, 0)) //
+								.setMaterial(new Material().setKt(0.6).setKB(0.6).setKr(0.4).setKd(0.25).setKs(0.25)
+										.setShininess(80)),
+				new Polygon(new Point(-50, -20, 200), new Point(-100, -20, 210), new Point(100, 100, 200),
+						new Point(50, 100, 210)).setEmission(new Color(0, 0, 100)) //
+								.setMaterial(new Material().setKt(0.3).setKB(0.8).setKr(0.2).setKd(0.25).setKs(0.25)
+										.setShininess(160)),
 
-				new Sphere(new Point(-70, 0, -100), 20).setEmission(new Color(200, 100, 50)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-				new Sphere(new Point(-250, 80, -500), 40).setEmission(new Color(200, 100, 50)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-
-				new Sphere(new Point(0, -20, 30), 5).setEmission(new Color(200, 100, 50)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-
-				new Sphere(new Point(20, 0, 30), 10).setEmission(new Color(200, 100, 50)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-
-				new Plane(new Point(0, -10, -500), new Point(-500, -10, -500), new Point(-200, -110, -50))
-						.setEmission(new Color(100, 100, 100)) //
-						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
-
-				new Polygon(new Point(-10, -50, -50), new Point(40, -50, -50), new Point(40, 25, 25),
-						new Point(-10, 25, 25)).setEmission(new Color(10, 10, 10)) //
-								.setMaterial(
-										new Material().setKd(0.25).setKs(0.25).setShininess(20).setKr(0.5).setKG(0.5)),
-
-				new Polygon(new Point(-85, -50, -50), new Point(-35, -50, -50), new Point(-35, 25, 25),
-						new Point(-85, 25, 25)).setEmission(new Color(10, 10, 10)) //
-								.setMaterial(
-										new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.3).setKB(0.5)),
-
-				new Polygon(new Point(65, -50, -50), new Point(115, -50, -50), new Point(115, 25, 25),
-						new Point(65, 25, 25)).setEmission(new Color(10, 10, 10)) //
-								.setMaterial(
-										new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.3).setKB(1)));
+				new Sphere(new Point(0, -5, 100), 50).setEmission(new Color(200, 100, 50)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(100)));
+		for (double i = -Math.PI; i < Math.PI; i += 0.1) {
+			scene.geometries.add(GenSphere(i));
+		}
 
 		scene.lights.add(new SpotLight(new Color(400, 0, 0), new Point(80, 0, 0), new Vector(0, 0, -1)) //
 				.setKl(4E-5).setKq(2E-7));
