@@ -60,15 +60,15 @@ class MINIP1Tests {
 
                 new Polygon(new Point(-10,-50,-50),new Point(40,-50,-50),new Point(40,25,25),new Point(-10,25,25))
                         .setEmission(new Color(10, 10, 10)) //
-                        .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKr(0.5).setKG(0.5)),
+                        .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKr(0.5).setKG(1)),
 
                 new Polygon(new Point(-85,-50,-50),new Point(-35,-50,-50),new Point(-35,25,25),new Point(-85,25,25))
                         .setEmission(new Color(10, 10, 10)) //
-                        .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.3).setKB(0.5)),
+                        .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.3).setKB(1)),
 
                 new Polygon(new Point(65,-50,-50),new Point(115,-50,-50),new Point(115,25,25),new Point(65,25,25))
                         .setEmission(new Color(10, 10, 10)) //
-                        .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.3).setKB(1))
+                        .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.3).setKB(0.5))
         );
 
 		scene.lights.add(new SpotLight(new Color(400, 0, 0), new Point(80, 0, 0), new Vector(0, 0, -1)) //
