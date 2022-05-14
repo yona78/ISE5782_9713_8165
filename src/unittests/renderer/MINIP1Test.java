@@ -22,13 +22,13 @@ import primitives.*;
  */
 class MINIP1Tests {
 	private double Rund(double dig, int c) {
-		return c * Math.sin(c / dig);
+		return c * Math.sin(c / dig) + c;
 	}
 
 	private Geometry GenSphere(double dig) {
-		double rund = Rund(dig, 100);
+		double rund = Rund(dig, 100) - 100;
 		return new Sphere(new Point(300 * Math.cos(dig), 300 * Math.sin(dig), rund), rund + 120)
-				.setEmission(new Color(Rund(dig, 25) * 5 + 125, Rund(dig, 50) * 2.5 + 125, rund * 1.25 + 125)) //
+				.setEmission(new Color(Rund(dig, 25) * 5, Rund(dig, 50) * 2.5, rund * 1.25)) //
 				.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(100));
 	}
 
