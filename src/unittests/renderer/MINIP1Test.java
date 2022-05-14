@@ -66,7 +66,7 @@ class MINIP1Tests {
 
 				new Sphere(new Point(0, -5, 100), 50).setEmission(new Color(200, 100, 50)) //
 						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(100)));
-		for (double i = -Math.PI; i < Math.PI; i += 0.1) {
+		for (double i = -Math.PI; i < Math.PI; i += 0.5) {
 			scene.geometries.add(GenSphere(i));
 		}
 
