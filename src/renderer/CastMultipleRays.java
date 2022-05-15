@@ -35,7 +35,7 @@ public class CastMultipleRays {
 	        l1.normalize();
 	        l2.normalize();
 			Point help = point;
-			double newSize = Math.sqrt(SIZE - 1);
+			double newSize = Math.sqrt(SIZE);
 			for (int k = 1; k < newSize + 1; k++) {
 				for (int t = 1; t < newSize + 1; t++) {
 					// might be change because now it is a rectangular but not a circle

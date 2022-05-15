@@ -63,6 +63,7 @@ public class RayTracerBasic extends RayTracerBase {
 					i++;
 				}
 			}
+			if ( i!=0)
 			color =  color.reduce(i);
 		}
 		return color.add(calcGlobalEffect(reflectedRay, level, kR, kkr));
@@ -82,7 +83,8 @@ public class RayTracerBasic extends RayTracerBase {
 					i++;
 				}
 			}
-			color =  color.reduce(i);
+			if ( i!=0)
+			  color =  color.reduce(i);
 		}
 		return color.add(calcGlobalEffect(refractedRay, level, kT, kkt));
 	}
