@@ -36,10 +36,18 @@ public class CastMultipleRays {
 		Vector v2 = v.crossProduct(v1).normalize().scale(radius);
 
 		Vector newDir;
-		int size1 = size / 3;
-		double outDigree = 2 * Math.PI / size1;
-		for (int i = 0; i < size1; ++i) {
-			newDir = v.add(v1.scale(Math.cos(i * outDigree))).add(v2.scale(Math.sin(i * outDigree)));
+		int newSize = size / 3;
+		double digree = 2 * Math.PI / newSize;
+		for (int i = 0; i < newSize; ++i) {
+			newDir = v.add(v1.scale(Math.cos(i * digree))).add(v2.scale(Math.sin(i * digree)));
+			rays.add(new Ray(point, newDir));
+		}
+		newSize *= 2;
+		digree *= 2;
+		v1.scale(0.5);
+		v2.scale(0.5);
+		for (int i = 0; i < newSize; ++i) {
+			newDir = v.add(v1.scale(Math.cos(i * digree))).add(v2.scale(Math.sin(i * digree)));
 			rays.add(new Ray(point, newDir));
 		}
 		return rays;
