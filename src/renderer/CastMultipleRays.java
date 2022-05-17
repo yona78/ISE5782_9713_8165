@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import primitives.*;
 
-interface Func {
-	Vector func(Vector v, Vector n, int i, int c);
-}
 
 /**
  * This class helps RayTracerBasic to create multiple rays
