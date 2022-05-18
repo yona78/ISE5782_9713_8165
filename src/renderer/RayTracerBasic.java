@@ -49,7 +49,18 @@ public class RayTracerBasic extends RayTracerBase {
 			color = color.add(refractedEffect(gp.point, v, n, level, material.kT, kkt, material.kB));
 		return color;
 	}
-
+	/**
+	 * The function calculates the reflected effect on the point.
+	 * 
+	 * @param gp    - is the point.
+	 * @param v     - is the direction of the reflected ray.
+	 * @param level - is the level of the recreation.
+	 * @param n - normal vector .
+	 * @param kR - Kr of the metrial of the object.
+	 * @param kG - KG of the metrial of the object.
+	 * @param kkr - totel Kr till now.
+	 * @return the color of the point.
+	 */
 	private Color reflectedEffect(Point p, Vector v, Vector n, int level, Double3 kR, Double3 kkr, double kG) {
 		Color color = Color.BLACK;
 		Ray reflectedRay = constructReflectedRay(p, v, n);
@@ -68,7 +79,18 @@ public class RayTracerBasic extends RayTracerBase {
 		}
 		return color.add(calcGlobalEffect(reflectedRay, level, kR, kkr));
 	}
-
+	/**
+	 * The function calculates the refracted effect on the point.
+	 * 
+	 * @param gp    - is the point.
+	 * @param v     - is the direction of the reflected ray.
+	 * @param level - is the level of the recreation.
+	 * @param n - normal vector .
+	 * @param kT - KT of the metrial of the object.
+	 * @param kB - KB of the metrial of the object.
+	 * @param kkt - totel Kt till now.
+	 * @return the color of the point.
+	 */
 	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt, double kB) {
 		Color color = Color.BLACK;
 		Ray refractedRay = new Ray(p, v, n);
