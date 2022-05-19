@@ -58,4 +58,10 @@ public class Tube extends Geometry {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void calculateBX() {
+		// TODO Auto-generated method stub
+		
+	}
 }
