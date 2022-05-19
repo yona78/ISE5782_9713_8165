@@ -14,56 +14,41 @@ public class CastMultipleRays {
 	/**
 	 * The function calculates the rays.
 	 * 
-	 * @param mainRay - is the ray we split.
-	 * @param n       - is the normal vector to the point.
-	 * @param radius  - is the radius of the cone that begins in p and its height is
-	 *                1.
-	 * @return list of the rays.
+	 * @param point  - point with distance from the original point.
+	 * @param last   - the original point.
+	 * @param l      - the diraction vector
+	 * @param size   - the size of the grid
+	 * @param radius - the radius between each point on the grid
+	 * 
+	 * @return the function return size number vector
 	 */
-	public static List<Ray> superSampling(Point point, Vector t, int size, double radius) {
-		Vector v = t.normalize();
-		Point p = point.add(v);
-		List<Ray> rays = List.of(new Ray(p, v));
-		Vector v1;
+	public static List<Ray> superSampling(Point point, Point last, Vector l, int size, double radius) {
+		List<Ray> points = new ArrayList<Ray>();
 		try {
-			v1 = v.crossProduct(v.add(new Vector(0, 0, 1)));
-		} catch (Exception ex) {
-			v1 = v.crossProduct(v.add(new Vector(0, 1, 0)));
+			Vector l1;
+			try {
+				l1 = l.crossProduct(l.add(new Vector(0, 0, 1)));
+			} catch (Exception ex) {
+				l1 = l.crossProduct(l.add(new Vector(0, 1, 0)));
+			}
+			Vector l2 = l.crossProduct(l1);
+			l1.normalize();
+			l2.normalize();
+			Point help = point;
+			double newSize = Math.sqrt(size);
+			for (int k = 1; k < newSize + 1; k++) {
+				for (int t = 1; t < newSize + 1; t++) {
+					Point newPoint = point.add(l1.scale(radius * (1 - ((k * 2) / newSize))));
+					newPoint = newPoint.add(l2.scale(radius * (1 - ((t * 2) / newSize))));
+					points.add(new Ray(last, newPoint.subtract(last)));
+				}
+			}
+			Ray help1 = new Ray(last, help.subtract(last));
+			if (!points.contains(help1)) {
+				points.add(help1);
+			}
+		} catch (Exception e) {
 		}
-		v1 = v1.normalize().scale(radius);
-		Vector v2 = v.crossProduct(v1).normalize().scale(radius);
-
-		Vector newDir;
-		int newSize = size / 3;
-		double digree = 2 * Math.PI / newSize;
-		for (int i = 0; i < newSize; ++i) {
-			newDir = v;
-			try {
-				newDir = newDir.add(v1.scale(Math.cos(i * digree)));
-			} catch (Exception ex) {
-			}
-			try {
-				newDir = newDir.add(v2.scale(Math.sin(i * digree)));
-			} catch (Exception ex) {
-			}
-			rays.add(new Ray(p, newDir));
-		}
-		newSize *= 2;
-		digree *= 2;
-		v1.scale(0.5);
-		v2.scale(0.5);
-		for (int i = 0; i < newSize; ++i) {
-			newDir = v;
-			try {
-				newDir = newDir.add(v1.scale(Math.cos(i * digree)));
-			} catch (Exception ex) {
-			}
-			try {
-				newDir = newDir.add(v2.scale(Math.sin(i * digree)));
-			} catch (Exception ex) {
-			}
-			rays.add(new Ray(p, newDir));
-		}
-		return rays;
+		return points;
 	}
 }

@@ -49,65 +49,66 @@ public class RayTracerBasic extends RayTracerBase {
 			color = color.add(refractedEffect(gp.point, v, n, level, material.kT, kkt, material.kB));
 		return color;
 	}
-
 	/**
-	 * The function calculates the reflection aspect.
+	 * The function calculates the reflected effect on the point.
 	 * 
-	 * @param p - is the intersection point.
-	 * @param v - is the direction of the original ray.
-	 * @param n - is the normal vector to the plane.
-	 * @param level - is the level of the recursion.
-	 * @param kT    - is the transparency %.
-	 * @param kkt   - is the transparency % * the K effect.
-	 * @param kG - is the aspect of the rays' directions.
-	 * @return the reflected color.
+	 * @param gp    - is the point.
+	 * @param v     - is the direction of the reflected ray.
+	 * @param level - is the level of the recreation.
+	 * @param n - normal vector .
+	 * @param kR - Kr of the metrial of the object.
+	 * @param kG - KG of the metrial of the object.
+	 * @param kkr - totel Kr till now.
+	 * @return the color of the point.
 	 */
 	private Color reflectedEffect(Point p, Vector v, Vector n, int level, Double3 kR, Double3 kkr, double kG) {
 		Color color = Color.BLACK;
+		Ray reflectedRay = constructReflectedRay(p, v, n);
 		if (this.useGS) {
-			List<Ray> lst = CastMultipleRays.superSampling(p.add(v.scale(-1)), v, sizeSuperSamling, kG);
-			double help = alignZero(n.dotProduct(v));
-			int i = 0;
+			List<Ray> lst = CastMultipleRays.superSampling(reflectedRay.getPoint(10),p, reflectedRay.getDir(),sizeSuperSamling,  kG);
+			double help = alignZero(n.dotProduct(reflectedRay.getDir()));
+			int i =0;
 			for (Ray ray : lst) {
 				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
 					color = color.add(calcGlobalEffect(ray, level, kR, kkr));
-					++i;
+					i++;
 				}
 			}
-			if (i != 0)
-				color = color.reduce(i);
+			if ( i!=0)
+			color =  color.reduce(i);
 		}
-		return color.add(calcGlobalEffect(constructReflectedRay(p, v, n), level, kR, kkr));
+		return color.add(calcGlobalEffect(reflectedRay, level, kR, kkr));
 	}
-
 	/**
-	 * The function calculates the refrection aspect.
+	 * The function calculates the refracted effect on the point.
 	 * 
-	 * @param p - is the intersection point.
-	 * @param v - is the direction of the original ray.
-	 * @param n - is the normal vector to the plane.
-	 * @param level - is the level of the recursion.
-	 * @param kT    - is the transparency %.
-	 * @param kkt   - is the transparency % * the K effect.
-	 * @param kB - is the aspect of the rays' directions.
-	 * @return the refrected color.
+	 * @param gp    - is the point.
+	 * @param v     - is the direction of the reflected ray.
+	 * @param level - is the level of the recreation.
+	 * @param n - normal vector .
+	 * @param kT - KT of the metrial of the object.
+	 * @param kB - KB of the metrial of the object.
+	 * @param kkt - totel Kt till now.
+	 * @return the color of the point.
 	 */
 	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt, double kB) {
 		Color color = Color.BLACK;
+		Ray refractedRay = new Ray(p, v, n);
 		if (this.useBS) {
-			List<Ray> lst = CastMultipleRays.superSampling(p.add(v), v, sizeSuperSamling, kB);
+			Point test = p;
+			List<Ray> lst = CastMultipleRays.superSampling(p.add(v.scale(10)),test, v,  sizeSuperSamling, kB);
 			double help = alignZero(n.dotProduct(v));
-			int i = 0;
+			int i  = 0;
 			for (Ray ray : lst) {
 				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
 					color = color.add(calcGlobalEffect(ray, level, kT, kkt));
-					++i;
+					i++;
 				}
 			}
-			if (i != 0)
-				color = color.reduce(i);
+			if ( i!=0)
+			  color =  color.reduce(i);
 		}
-		return color.add(calcGlobalEffect(new Ray(p, v, n), level, kT, kkt));
+		return color.add(calcGlobalEffect(refractedRay, level, kT, kkt));
 	}
 
 	/**
@@ -133,7 +134,8 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the reflected ray.
 	 */
 	private Ray constructReflectedRay(Point p, Vector v, Vector n) {
-		return new Ray(p, v.add(n.scale(-2 * v.dotProduct(n))).normalize(), n.scale(-1));
+		Vector r = v.subtract(n.scale(2 * v.dotProduct(n)));
+		return new Ray(p, r, n);
 	}
 
 	/**

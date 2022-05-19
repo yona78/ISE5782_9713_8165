@@ -130,4 +130,35 @@ public class Polygon extends Geometry {
 		}
 		return newGeoPoints;
 	}
+
+	@Override
+	public void calculateBX() {
+		// TODO Auto-generated method stub
+		double maxX = this.vertices.get(0).getX();
+		double maxY = this.vertices.get(0).getY();
+		double maxZ = this.vertices.get(0).getZ();
+		double minX = this.vertices.get(0).getX();
+		double minY = this.vertices.get(0).getY();
+		double minZ = this.vertices.get(0).getZ();
+		for( int i = 1; i< vertices.size();i++) {
+			Point help = vertices.get(i);
+			double x = help.getX();
+			double y = help.getY();
+			double z = help.getZ();
+			if (maxX < x) 
+				maxX = x;
+			if (maxY < y) 
+				maxY = y;
+			if (maxZ < z) 
+				maxZ = z;
+			if (minX < x) 
+				minX = x;
+			if (minY < y) 
+				minY = y;
+			if (minZ < z) 
+				minZ = z;
+		}
+		this.bx = new BoundingBox(minX,minY,minZ,maxX,maxY,maxZ);
+		
+	}
 }
