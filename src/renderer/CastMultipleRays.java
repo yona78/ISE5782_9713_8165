@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import primitives.*;
 
-interface Func {
-	Vector func(Vector v, Vector n, int i, int c);
-}
-
 /**
  * This class helps RayTracerBasic to create multiple rays
  * 
@@ -24,8 +20,10 @@ public class CastMultipleRays {
 	 *                1.
 	 * @return list of the rays.
 	 */
-	public static List<Ray> superSampling(Point point, Vector v, int size, double radius) {
-		List<Ray> rays = List.of(new Ray(point, v));
+	public static List<Ray> superSampling(Point point, Vector t, int size, double radius) {
+		Vector v = t.normalize();
+		Point p = point.add(v);
+		List<Ray> rays = List.of(new Ray(p, v));
 		Vector v1;
 		try {
 			v1 = v.crossProduct(v.add(new Vector(0, 0, 1)));
@@ -39,16 +37,32 @@ public class CastMultipleRays {
 		int newSize = size / 3;
 		double digree = 2 * Math.PI / newSize;
 		for (int i = 0; i < newSize; ++i) {
-			newDir = v.add(v1.scale(Math.cos(i * digree))).add(v2.scale(Math.sin(i * digree)));
-			rays.add(new Ray(point, newDir));
+			newDir = v;
+			try {
+				newDir = newDir.add(v1.scale(Math.cos(i * digree)));
+			} catch (Exception ex) {
+			}
+			try {
+				newDir = newDir.add(v2.scale(Math.sin(i * digree)));
+			} catch (Exception ex) {
+			}
+			rays.add(new Ray(p, newDir));
 		}
 		newSize *= 2;
 		digree *= 2;
 		v1.scale(0.5);
 		v2.scale(0.5);
 		for (int i = 0; i < newSize; ++i) {
-			newDir = v.add(v1.scale(Math.cos(i * digree))).add(v2.scale(Math.sin(i * digree)));
-			rays.add(new Ray(point, newDir));
+			newDir = v;
+			try {
+				newDir = newDir.add(v1.scale(Math.cos(i * digree)));
+			} catch (Exception ex) {
+			}
+			try {
+				newDir = newDir.add(v2.scale(Math.sin(i * digree)));
+			} catch (Exception ex) {
+			}
+			rays.add(new Ray(p, newDir));
 		}
 		return rays;
 	}
