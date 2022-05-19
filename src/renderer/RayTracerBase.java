@@ -18,6 +18,7 @@ public abstract class RayTracerBase {
 	protected Scene scene;
 	protected boolean useGS = false;
 	protected boolean useBS = false;
+	protected boolean useBB = false;
 	protected int sizeSuperSamling =0;
 
 	/**
@@ -56,6 +57,17 @@ public abstract class RayTracerBase {
 	 */
 	public RayTracerBase setUseBS(boolean bS) {
 		this.useBS = bS;
+		return this;
+	}
+	
+	/**
+	 * Setter if use blurry glass in ray trace
+	 * 
+	 * @param bB is the the value if want the update
+	 * @return the updated ray trace
+	 */
+	public RayTracerBase setUseBB(boolean bB) {
+		this.useBB = bB;
 		return this;
 	}
 	

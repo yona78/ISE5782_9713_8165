@@ -1,6 +1,8 @@
 package geometries;
 
+import primitives.Point;
 import primitives.Ray;
+import primitives.Vector;
 
 import java.util.*;
 
@@ -10,9 +12,9 @@ import java.util.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 
-public class Geometries extends Intersectable {
+public class Geometries extends Geometry {
 
-	private List<Intersectable> geometries = new LinkedList<>();
+	private List<Geometry> geometries = new LinkedList<>();
 
 	/**
 	 * Constructor to initialize Geometries empty list of geometries
@@ -26,7 +28,7 @@ public class Geometries extends Intersectable {
 	 * 
 	 * @param geometries few geometries to add to the list of the object
 	 */
-	public Geometries(Intersectable... geometries) {
+	public Geometries(Geometry... geometries) {
 		add(geometries);
 	}
 
@@ -35,22 +37,36 @@ public class Geometries extends Intersectable {
 	 * 
 	 * @param geometriesAdd - the objects to add to the list
 	 */
-	public void add(Intersectable... geometriesAdd) {
+	public void add(Geometry... geometriesAdd) {
 		geometries.addAll(List.of(geometriesAdd));
 	}
 
 	@Override
 	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		List<GeoPoint> lst1 = null;
-		for (Intersectable geometry : geometries) {
+		for (Geometry geometry : geometries) {
+			if(geometry.getBoundingBox().intersecte(ray)) {
 			List<GeoPoint> tmp = geometry.findGeoIntersections(ray, maxDistance);
 			if (tmp != null) {
 				if (lst1 == null)
 					lst1 = new LinkedList<>();
 				lst1.addAll(tmp);
 			}
+			}
 		}
 		return lst1;
+	}
+
+	@Override
+	public Vector getNormal(Point point) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void calculateBX() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
