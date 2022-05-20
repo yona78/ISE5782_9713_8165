@@ -140,25 +140,42 @@ public class Polygon extends Geometry {
 		double minX = this.vertices.get(0).getX();
 		double minY = this.vertices.get(0).getY();
 		double minZ = this.vertices.get(0).getZ();
-		for( int i = 1; i< vertices.size();i++) {
-			Point help = vertices.get(i);
-			double x = help.getX();
-			double y = help.getY();
-			double z = help.getZ();
-			if (maxX < x) 
+
+		Point help;
+		double x;
+		double y;
+		double z;
+		for (int i = 1; i < vertices.size(); i++) {
+			help = vertices.get(i);
+			x = help.getX();
+			y = help.getY();
+			z = help.getZ();
+			if (maxX < x)
 				maxX = x;
-			if (maxY < y) 
+			if (maxY < y)
 				maxY = y;
-			if (maxZ < z) 
+			if (maxZ < z)
 				maxZ = z;
-			if (minX < x) 
+			if (minX < x)
 				minX = x;
-			if (minY < y) 
+			if (minY < y)
 				minY = y;
-			if (minZ < z) 
+			if (minZ < z)
 				minZ = z;
 		}
-		this.bx = new BoundingBox(minX,minY,minZ,maxX,maxY,maxZ);
-		
+		this.bx = new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
+	}
+
+	/**
+	 * The function checks if the point is on the polygon.
+	 * 
+	 * @param p - the point.
+	 * @return if it on the polygon.
+	 */
+	public boolean onPolygon(Point p) {
+		if (plane.onPlane(p)) {
+			// TODO
+		}
+		return false;
 	}
 }

@@ -16,7 +16,7 @@ public class CastMultipleRays {
 	 * 
 	 * @param point  - point with distance from the original point.
 	 * @param last   - the original point.
-	 * @param l      - the diraction vector
+	 * @param l      - the direction vector
 	 * @param size   - the size of the grid
 	 * @param radius - the radius between each point on the grid
 	 * 

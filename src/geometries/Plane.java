@@ -16,7 +16,7 @@ import primitives.*;
 public class Plane extends Geometry {
 	final private Point point;
 	final private Vector normalVector;
-
+	final private double d;
 	/**
 	 * Constructor to initialize Plane based object with its point and vector
 	 * 
@@ -26,6 +26,7 @@ public class Plane extends Geometry {
 	public Plane(Point point, Vector normalVector) {
 		this.point = point;
 		this.normalVector = normalVector.normalize();
+		d = -this.normalVector.dotProduct(new Vector(point));
 	}
 
 	/**
@@ -42,6 +43,7 @@ public class Plane extends Geometry {
 		Vector v1 = point2.subtract(point1);
 		Vector v2 = point3.subtract(point1);
 		this.normalVector = v1.crossProduct(v2).normalize();
+		d = -this.normalVector.dotProduct(new Vector(point));
 	}
 
 	@Override
@@ -92,6 +94,15 @@ public class Plane extends Geometry {
 		this.bx = new BoundingBox(-Double.MAX_VALUE,-Double.MAX_VALUE,-Double.MAX_VALUE
                 ,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE
                 );
-		
+	}
+	
+	/**
+	 * The function checks if the point is on the plane.
+	 * 
+	 * @param p - the point.
+	 * @return if it on the plane.
+	 */
+	public boolean onPlane(Point p) {
+		return Util.isZero(d - normalVector.dotProduct(new Vector(p)));
 	}
 }
