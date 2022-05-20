@@ -42,11 +42,11 @@ public class Geometries extends Geometry {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance,boolean useBB) {
 		List<GeoPoint> lst1 = null;
 		for (Geometry geometry : geometries) {
-			if(geometry.getBoundingBox().intersecte(ray)) {
-			List<GeoPoint> tmp = geometry.findGeoIntersections(ray, maxDistance);
+			if(geometry.getBoundingBox().intersecte(ray) || !useBB) {
+			List<GeoPoint> tmp = geometry.findGeoIntersections(ray, maxDistance,useBB);
 			if (tmp != null) {
 				if (lst1 == null)
 					lst1 = new LinkedList<>();
