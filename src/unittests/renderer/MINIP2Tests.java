@@ -82,5 +82,8 @@ class MINIP2Tests {
 								.setEmission(colors.get((i + j) % 15)).setMaterial(randMat(i, j)));
 			}
 		}
+		scene.geometries.add(new Plane(new Point(0,-100,0), vUp).setEmission(new Color(WHITE)).setMaterial(new Material().setKt(0.5d)));
+		scene.geometries.add(new Plane(new Point(0,0,-220), vUp).setEmission(new Color(LIGHT_GRAY)).setMaterial(new Material().setKr(0.9d)));
+
 	}
 }
