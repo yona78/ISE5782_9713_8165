@@ -51,6 +51,11 @@ class MINIP2Tests {
 				.setVPSize(200, 200).setVPDistance(1000); //
 		Scene scene = new Scene("Test scene");
 		scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), new Double3(0.1)));
+		scene.lights.add(new DirectionalLight(colors.get(1), vRight.add(vUp.scale(-1))));
+		scene.lights.add(new DirectionalLight(colors.get(10), vRight.add(vUp.scale(-1))));
+		scene.lights.add(new PointLight(colors.get(5), new Point(0, 100, -100)));
+		scene.lights.add(new PointLight(colors.get(9), new Point(50, 50, -150)));
+		scene.lights.add(new PointLight(colors.get(12), new Point(-50, 50, -150)));
 
 		Point p1 = new Point(200, -200, 0);
 		Point p2 = new Point(-200, -200, 0);
@@ -75,15 +80,17 @@ class MINIP2Tests {
 			for (int j = 0; j < 99; ++j) {
 				scene.geometries.add(new Box(points1.get(temp + j), points1.get(temp + j + 1),
 						points1.get(temp + j + 100), points1.get(temp + j).add(vLeft))
-								.setEmission(colors.get((i + j) % 15)).setMaterial(randMat(i, j)));
+								.setEmission(colors.get((i + j) % 13)).setMaterial(randMat(i, j)));
 
 				scene.geometries.add(new Box(points2.get(temp + j), points2.get(temp + j + 1),
 						points2.get(temp + j + 100), points2.get(temp + j).add(vRight))
-								.setEmission(colors.get((i + j) % 15)).setMaterial(randMat(i, j)));
+								.setEmission(colors.get((i + j) % 13)).setMaterial(randMat(i, j)));
 			}
 		}
-		scene.geometries.add(new Plane(new Point(0,-100,0), vUp).setEmission(new Color(WHITE)).setMaterial(new Material().setKt(0.5d)));
-		scene.geometries.add(new Plane(new Point(0,0,-220), vUp).setEmission(new Color(LIGHT_GRAY)).setMaterial(new Material().setKr(0.9d)));
+		scene.geometries.add(new Plane(new Point(0, -100, 0), vUp).setEmission(colors.get(11))
+				.setMaterial(new Material().setKt(0.5d)));
+		scene.geometries.add(new Plane(new Point(0, 0, -220), vUp).setEmission(colors.get(6))
+				.setMaterial(new Material().setKr(0.9d)));
 
 	}
 }
