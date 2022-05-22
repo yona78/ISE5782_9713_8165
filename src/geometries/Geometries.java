@@ -35,6 +35,17 @@ public class Geometries extends Intersectable {
 	}
 
 	/**
+	 * Constructor to initialize Geometries empty list of geometries.
+	 * @param rightNode is the right node of the tree.
+	 * @param leftNode  is the left node of the tree.
+	 * 
+	 */
+	public Geometries(Geometries leftNode, Geometries rightNode) {
+		geometries.addAll(leftNode.geometries);
+		geometries.addAll(rightNode.geometries);
+	}
+	
+	/**
 	 * Add to the list of the object more geometries
 	 * 
 	 * @param geometriesAdd - the objects to add to the list
