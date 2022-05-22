@@ -73,6 +73,7 @@ public class Geometries extends Geometry {
             boundingBox = boundingBox.union(geometries.get(i).getBoundingBox());
         }
     }
+	
 	 public Geometries buildHierarchy(int sizeOfNode) {
 	    	if(geometries.size()<= sizeOfNode ) {
 	    		return new Geometries(geometries.toArray(new Geometry[0]));
@@ -95,8 +96,9 @@ public class Geometries extends Geometry {
 	        }
 	        Point center = bx.getCenterPoint();
 	        for (Geometry geo : geometries) {
+	        	geo.calculateBX();
 	            double differenceOnAxis = 0;
-	            Point geoBxCenter = geo.bx.getCenterPoint();
+	            Point geoBxCenter = geo.getBoundingBox().getCenterPoint();
 	            if (!geoBxCenter.equals(center)) {
 	                differenceOnAxis = geoBxCenter.subtract(center).dotProduct(axis);
 	            }
