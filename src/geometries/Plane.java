@@ -26,11 +26,8 @@ public class Plane extends Geometry {
 	public Plane(Point point, Vector normalVector) {
 		this.point = point;
 		this.normalVector = normalVector.normalize();
-<<<<<<< HEAD
 		d = -this.normalVector.dotProduct(new Vector(point));
-=======
 		calculateBX();
->>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 	}
 
 	/**
@@ -47,11 +44,10 @@ public class Plane extends Geometry {
 		Vector v1 = point2.subtract(point1);
 		Vector v2 = point3.subtract(point1);
 		this.normalVector = v1.crossProduct(v2).normalize();
-<<<<<<< HEAD
+
 		d = -this.normalVector.dotProduct(new Vector(point));
-=======
+
 		calculateBX();
->>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 	}
 
 	@Override
