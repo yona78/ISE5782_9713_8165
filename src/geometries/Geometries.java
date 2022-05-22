@@ -13,8 +13,7 @@ import java.util.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 
-public class Geometries extends Intersectable {
-	private BoundingBox bx;
+public class Geometries extends Geometry {
 
 	private List<Geometry> geometries = new LinkedList<>();
 
@@ -35,17 +34,6 @@ public class Geometries extends Intersectable {
 	}
 
 	/**
-	 * Constructor to initialize Geometries empty list of geometries.
-	 * @param rightNode is the right node of the tree.
-	 * @param leftNode  is the left node of the tree.
-	 * 
-	 */
-	public Geometries(Geometries leftNode, Geometries rightNode) {
-		geometries.addAll(leftNode.geometries);
-		geometries.addAll(rightNode.geometries);
-	}
-	
-	/**
 	 * Add to the list of the object more geometries
 	 * 
 	 * @param geometriesAdd - the objects to add to the list
@@ -53,7 +41,7 @@ public class Geometries extends Intersectable {
 	public void add(Geometry... geometriesAdd) {
 		geometries.addAll(List.of(geometriesAdd));
 	}
-
+	
 	public List<Geometry> getGeometrie() {
 		return this.geometries;
 	}
@@ -73,59 +61,66 @@ public class Geometries extends Intersectable {
 	}
 
 	@Override
-	public BoundingBox getBoundingBox() {
-		return bx;
+	public Vector getNormal(Point point) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void calculateBX() {
 		BoundingBox boundingBox = geometries.get(0).getBoundingBox();
-		for (int i = 0; i < geometries.size(); i++) {
-			boundingBox = boundingBox.union(geometries.get(i).getBoundingBox());
-		}
-	}
+        for (int i =0; i<geometries.size();i++ ) {
+            boundingBox = boundingBox.union(geometries.get(i).getBoundingBox());
+        }
+    }
+	 public Geometries buildHierarchy(int sizeOfNode) {
+	    	if(geometries.size()<= sizeOfNode ) {
+	    		return new Geometries(geometries.toArray(new Geometry[0]));
+	    	}
+	    	Geometries leftNode = new Geometries();
+	        Geometries rightNode = new Geometries();
+	        Point calAxis = bx.getMaxPoint().subtract(bx.getMinPoint());
+	        Vector axis;
+	        double x = calAxis.getX();
+	        double y = calAxis.getY();
+	        double z = calAxis.getZ();
+	        if(x> y && x>z) {
+	        	axis = new Vector(1,0,0);
+	        }
+	        else if(y> x && y>z) {
+	        	axis = new Vector(0,1,0);
+	        }
+	        else {
+	        	axis = new Vector(0,0,1);
+	        }
+	        Point center = bx.getCenterPoint();
+	        for (Geometry geo : geometries) {
+	            double differenceOnAxis = 0;
+	            Point geoBxCenter = geo.bx.getCenterPoint();
+	            if (!geoBxCenter.equals(center)) {
+	                differenceOnAxis = geoBxCenter.subtract(center).dotProduct(axis);
+	            }
+	            if (differenceOnAxis < 0) {
+	                leftNode.add(geo);
+	            }
+	            else {
+	                rightNode.add(geo);
+	            }
+	        }
 
-	public Geometries buildHierarchy(int sizeOfNode) {
-		if (geometries.size() <= sizeOfNode) {
-			return new Geometries(geometries.toArray(new Geometry[0]));
-		}
-		Geometries leftNode = new Geometries();
-		Geometries rightNode = new Geometries();
-		Point calAxis = bx.getMaxPoint().subtract(bx.getMinPoint());
-		Vector axis;
-		double x = calAxis.getX();
-		double y = calAxis.getY();
-		double z = calAxis.getZ();
-		if (x > y && x > z) {
-			axis = new Vector(1, 0, 0);
-		} else if (y > x && y > z) {
-			axis = new Vector(0, 1, 0);
-		} else {
-			axis = new Vector(0, 0, 1);
-		}
-		Point center = bx.getCenterPoint();
-		for (Geometry geo : geometries) {
-			double differenceOnAxis = 0;
-			Point geoBxCenter = geo.bx.getCenterPoint();
-			if (!geoBxCenter.equals(center)) {
-				differenceOnAxis = geoBxCenter.subtract(center).dotProduct(axis);
-			}
-			if (differenceOnAxis < 0) {
-				leftNode.add(geo);
-			} else {
-				rightNode.add(geo);
-			}
-		}
-
-		// recursive calls
-		leftNode = leftNode.buildHierarchy(sizeOfNode);
-		rightNode = rightNode.buildHierarchy(sizeOfNode);
-		return new Geometries(leftNode, rightNode);
-	}
+	        // recursive calls
+	        leftNode = leftNode.buildHierarchy(sizeOfNode);
+	        rightNode = rightNode.buildHierarchy(sizeOfNode);
+	        return new Geometries(leftNode, rightNode);
+	 }
 
 	public void add(Intersectable intersectableAdd, Geometry... geometriesAdd) {
 		geometries.add((Geometry) List.of(intersectableAdd));
 		geometries.addAll(List.of(geometriesAdd));
-
+		
 	}
+	        
+
+
 }
+
