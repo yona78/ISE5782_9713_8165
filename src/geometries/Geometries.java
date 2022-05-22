@@ -95,8 +95,9 @@ public class Geometries extends Geometry {
 	        }
 	        Point center = bx.getCenterPoint();
 	        for (Geometry geo : geometries) {
+	        	geo.calculateBX();
 	            double differenceOnAxis = 0;
-	            Point geoBxCenter = geo.bx.getCenterPoint();
+	            Point geoBxCenter = geo.getBoundingBox().getCenterPoint();
 	            if (!geoBxCenter.equals(center)) {
 	                differenceOnAxis = geoBxCenter.subtract(center).dotProduct(axis);
 	            }
