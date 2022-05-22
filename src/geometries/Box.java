@@ -76,6 +76,8 @@ public class Box extends Geometry {
 			if (sides.get(i).onPolygon(point))
 				return sides.get(i).getNormal(point);
 		}
+		//Won't happen
+		return new Vector(1,0,0);
 	}
 
 	@Override
