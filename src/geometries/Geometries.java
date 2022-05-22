@@ -73,6 +73,7 @@ public class Geometries extends Geometry {
             boundingBox = boundingBox.union(geometries.get(i).getBoundingBox());
         }
     }
+	
 	 public Geometries buildHierarchy(int sizeOfNode) {
 	    	if(geometries.size()<= sizeOfNode ) {
 	    		return new Geometries(geometries.toArray(new Geometry[0]));
