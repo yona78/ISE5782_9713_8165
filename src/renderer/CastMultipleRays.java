@@ -10,8 +10,8 @@ import primitives.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class CastMultipleRays {
-	private static Vector z = new Vector(0, 0, 1);
-	private static Vector y = new Vector(0, 1, 0);
+	private final static Vector z = new Vector(0, 0, 1);
+	private final static Vector y = new Vector(0, 1, 0);
 	/**
 	 * The function calculates the rays.
 	 * 
