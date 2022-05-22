@@ -68,8 +68,8 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the color of the point.
 	 */
 	private Color reflectedEffect(Point p, Vector v, Vector n, int level, Double3 kR, Double3 kkr, double kG) {
-		Color color = Color.BLACK;
 		Ray reflectedRay = constructReflectedRay(p, v, n);
+		Color color = calcGlobalEffect(reflectedRay, level, kR, kkr);
 		if (this.useGS) {
 			List<Ray> lst = CastMultipleRays.superSampling(reflectedRay.getPoint(10), p, reflectedRay.getDir(),
 					sizeSuperSamling, kG);
@@ -84,7 +84,7 @@ public class RayTracerBasic extends RayTracerBase {
 			if (i != 0)
 				color = color.reduce(i);
 		}
-		return color.add(calcGlobalEffect(reflectedRay, level, kR, kkr));
+		return color;
 	}
 
 	/**
@@ -100,23 +100,23 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the color of the point.
 	 */
 	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt, double kB) {
-		Color color = Color.BLACK;
 		Ray refractedRay = new Ray(p, v, n);
+		Color color = calcGlobalEffect(refractedRay, level, kT, kkt);
 		if (this.useBS) {
 			Point test = p;
 			List<Ray> lst = CastMultipleRays.superSampling(p.add(v.scale(10)), test, v, sizeSuperSamling, kB);
 			double help = alignZero(n.dotProduct(v));
-			int i = 0;
+			int i = 1;
 			for (Ray ray : lst) {
 				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
 					color = color.add(calcGlobalEffect(ray, level, kT, kkt));
 					i++;
 				}
 			}
-			if (i != 0)
+			if (i != 1)
 				color = color.reduce(i);
 		}
-		return color.add(calcGlobalEffect(refractedRay, level, kT, kkt));
+		return color;
 	}
 
 	/**
