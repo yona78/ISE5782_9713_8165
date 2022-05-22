@@ -16,8 +16,8 @@ public abstract class Intersectable {
 	 * @param ray The ray to check intersection points with.
 	 * @return list of intersection points
 	 */
-	public List<Point> findIntersections(Ray ray,boolean useBB) {
-		var geoList = findGeoIntersections(ray,useBB);
+	public List<Point> findIntersections(Ray ray) {
+		var geoList = findGeoIntersections(ray);
 		return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
 	}
 
@@ -63,8 +63,8 @@ public abstract class Intersectable {
 	 * @param ray The ray to check intersection GeoPoint with the object.
 	 * @return list of intersection GeoPoints
 	 */
-	public final List<GeoPoint> findGeoIntersections(Ray ray,boolean useBB) {
-		return findGeoIntersections(ray, Double.POSITIVE_INFINITY,useBB);
+	public final List<GeoPoint> findGeoIntersections(Ray ray) {
+		return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
 	}
 
 	/**
@@ -73,8 +73,8 @@ public abstract class Intersectable {
 	 * @param ray The ray to check intersection GeoPoint with the object.
 	 * @return list of intersection GeoPoints
 	 */
-	public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance,boolean useBB) {
-		return findGeoIntersectionsHelper(ray, maxDistance, useBB);
+	public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+		return findGeoIntersectionsHelper(ray, maxDistance);
 	}
 
 	/**
@@ -85,6 +85,6 @@ public abstract class Intersectable {
 	 * @param maxDistance - Is the maximum distance to look for intersections.
 	 * @return list of intersection GeoPoints.
 	 */
-	protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance,boolean useBB);
+	protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
 }

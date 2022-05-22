@@ -3,7 +3,12 @@ package renderer;
 import primitives.*;
 
 import scene.Scene;
+
+import java.util.LinkedList;
 import java.util.List;
+
+import geometries.Geometries;
+import geometries.Geometry;
 import geometries.Intersectable.GeoPoint;
 import lighting.LightSource;
 import static primitives.Util.*;
@@ -167,7 +172,7 @@ public class RayTracerBasic extends RayTracerBase {
 		Ray lightRay = new Ray(geoPoint.point, l.scale(-1), n);
 
 		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay,
-				light.getDistance(geoPoint.point),useBB);
+				light.getDistance(geoPoint.point));
 
 		return intersections == null || geoPoint.geometry.getMaterial().kT != Double3.ZERO;
 	}
@@ -186,7 +191,7 @@ public class RayTracerBasic extends RayTracerBase {
 		double lightDistance = lS.getDistance(geoPoint.point);
 		Double3 ktr = new Double3(1.0);
 
-		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, lightDistance,useBB);
+		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, lightDistance);
 		if (intersections == null)
 			return ktr;
 
@@ -202,6 +207,7 @@ public class RayTracerBasic extends RayTracerBase {
 
 	@Override
 	public Color traceRay(Ray ray) {
+		scene.geometries.buildHierarchy(numerForNode);
 		GeoPoint closestPoint = findClosestIntersection(ray);
 		return closestPoint == null ? scene.background : calcColor(closestPoint, ray);
 	}
@@ -298,7 +304,26 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the closes point to the ray's source
 	 */
 	private GeoPoint findClosestIntersection(Ray ray) {
-		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(ray,useBB);
+		List<GeoPoint> intersections = null;
+		if (useBB) {
+			LinkedList<Geometry> geometries = new LinkedList<>();
+            Geometries boundingBoxIntersectedGeometries = new Geometries();
+            geometries.add(scene.geometries);
+            for(Geometry geometry : geometries) {
+            	if(geometry.getBoundingBox().intersecte(ray)) {
+            		if(geometry instanceof Geometries) {
+            			geometries.addAll(((Geometries) geometry).getGeometrie());
+            		}
+            		else {
+            			boundingBoxIntersectedGeometries.add(geometry);
+            		}
+            	}
+            }
+            intersections = boundingBoxIntersectedGeometries.findGeoIntersections(ray);
+		}
+		else {
+		   intersections = scene.geometries.findGeoIntersections(ray);
+		}
 		return intersections == null ? null : ray.findClosestGeoPoint(intersections);
 	}
 }

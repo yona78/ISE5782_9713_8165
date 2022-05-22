@@ -15,6 +15,10 @@ public class BoundingBox {
 		this.minX =  maxX;
 		this.minY=  maxY;
 		this.minZ =  maxZ;
+		if (minX ==maxX ||minY ==maxY||minZ ==maxZ) {
+			throw new IllegalArgumentException(
+                    "ERROR: Trying create non-box object ");
+		}
 	
 	}
 	
@@ -47,4 +51,23 @@ public class BoundingBox {
        return true;
        
 	}
+	
+	public BoundingBox union(BoundingBox other) {
+        return new BoundingBox(Math.min(minX, other.minX),Math.max(minY, other.minY),Math.max(minZ, other.minZ),Math.max(maxX, other.maxX)
+        		,Math.max(maxY, other.maxY),Math.max(maxZ, other.maxZ));
+    }
+	
+	public Point getMaxPoint() {
+		return new Point(maxX,maxY,maxZ);
+	}
+	
+	public Point getMinPoint() {
+		return new Point(minX,minY,minZ);
+	}
+	
+	public Point getCenterPoint() {
+		return new Point((maxX-minX)*0.5,(maxY-minY)*0.5,(maxZ-minZ)*0.5);
+	}
+	
+	
 }
