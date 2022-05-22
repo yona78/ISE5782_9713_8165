@@ -10,7 +10,8 @@ import primitives.*;
  * @author Hillel Kroitoro, Yona Orunov
  */
 public class CastMultipleRays {
-
+	private static Vector z = new Vector(0, 0, 1);
+	private static Vector y = new Vector(0, 1, 0);
 	/**
 	 * The function calculates the rays.
 	 * 
@@ -27,19 +28,18 @@ public class CastMultipleRays {
 		try {
 			Vector l1;
 			try {
-				l1 = l.crossProduct(l.add(new Vector(0, 0, 1)));
+				l1 = l.crossProduct(l.add(z));
 			} catch (Exception ex) {
-				l1 = l.crossProduct(l.add(new Vector(0, 1, 0)));
+				l1 = l.crossProduct(l.add(y));
 			}
 			Vector l2 = l.crossProduct(l1);
 			l1.normalize();
 			l2.normalize();
 			Point help = point;
-			double newSize = Math.sqrt(size);
-			for (int k = 1; k < newSize + 1; k++) {
-				for (int t = 1; t < newSize + 1; t++) {
-					Point newPoint = point.add(l1.scale(radius * (1 - ((k * 2) / newSize))));
-					newPoint = newPoint.add(l2.scale(radius * (1 - ((t * 2) / newSize))));
+			for (int k = 1; k < size + 1; k++) {
+				for (int t = 1; t < size + 1; t++) {
+					Point newPoint = point.add(l1.scale(radius * (1 - ((k * 2) / size))));
+					newPoint = newPoint.add(l2.scale(radius * (1 - ((t * 2) / size))));
 					points.add(new Ray(last, newPoint.subtract(last)));
 				}
 			}

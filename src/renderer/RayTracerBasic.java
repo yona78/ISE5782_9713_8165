@@ -44,46 +44,16 @@ public class RayTracerBasic extends RayTracerBase {
 	 */
 	private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, Double3 k) {
 		Color color = Color.BLACK;
-		Vector n = gp.geometry.getNormal(gp.point);
+		Point p0 = gp.point;
+		Vector n = gp.geometry.getNormal(p0);
 		Material material = gp.geometry.getMaterial();
 		Double3 kkr = material.kR.product(k);
 		if (!kkr.lowerThan(MIN_CALC_COLOR_K))
-			color = reflectedEffect(gp.point, v, n, level, material.kR, kkr, material.kG);
+			color = specificEffect(p0, v, n, constructReflectedRay(p0, v, n), level, material.kR, kkr, material.kG);
 		Double3 kkt = material.kT.product(k);
 		if (!kkt.lowerThan(MIN_CALC_COLOR_K))
-			color = color.add(refractedEffect(gp.point, v, n, level, material.kT, kkt, material.kB));
-		return color;
-	}
-
-	/**
-	 * The function calculates the reflected effect on the point.
-	 * 
-	 * @param gp    - is the point.
-	 * @param v     - is the direction of the reflected ray.
-	 * @param level - is the level of the recreation.
-	 * @param n     - normal vector .
-	 * @param kR    - Kr of the metrial of the object.
-	 * @param kG    - KG of the metrial of the object.
-	 * @param kkr   - totel Kr till now.
-	 * @return the color of the point.
-	 */
-	private Color reflectedEffect(Point p, Vector v, Vector n, int level, Double3 kR, Double3 kkr, double kG) {
-		Ray reflectedRay = constructReflectedRay(p, v, n);
-		Color color = calcGlobalEffect(reflectedRay, level, kR, kkr);
-		if (this.useGS) {
-			List<Ray> lst = CastMultipleRays.superSampling(reflectedRay.getPoint(10), p, reflectedRay.getDir(),
-					sizeSuperSamling, kG);
-			double help = alignZero(n.dotProduct(reflectedRay.getDir()));
-			int i = 0;
-			for (Ray ray : lst) {
-				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
-					color = color.add(calcGlobalEffect(ray, level, kR, kkr));
-					i++;
-				}
-			}
-			if (i != 0)
-				color = color.reduce(i);
-		}
+			color = color.add(
+					specificEffect(p0, v, n, constructRefractedRay(p0, v, n), level, material.kT, kkt, material.kB));
 		return color;
 	}
 
@@ -99,18 +69,17 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @param kkt   - totel Kt till now.
 	 * @return the color of the point.
 	 */
-	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt, double kB) {
-		Ray refractedRay = new Ray(p, v, n);
-		Color color = calcGlobalEffect(refractedRay, level, kT, kkt);
+	private Color specificEffect(Point p, Vector v, Vector n, Ray mainRay, int level, Double3 kSE, Double3 kkSP,
+			double kGB) {
+		Color color = calcGlobalEffect(mainRay, level, kSE, kkSP);
 		if (this.useBS) {
-			Point test = p;
-			List<Ray> lst = CastMultipleRays.superSampling(p.add(v.scale(10)), test, v, sizeSuperSamling, kB);
+			List<Ray> lst = CastMultipleRays.superSampling(mainRay.getPoint(10), p, v, sqwuerSizeSuperSamling, kGB);
 			double help = alignZero(n.dotProduct(v));
 			int i = 1;
 			for (Ray ray : lst) {
 				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
-					color = color.add(calcGlobalEffect(ray, level, kT, kkt));
-					i++;
+					color = color.add(calcGlobalEffect(ray, level, kSE, kkSP));
+					++i;
 				}
 			}
 			if (i != 1)

@@ -19,8 +19,8 @@ public abstract class RayTracerBase {
 	protected boolean useGS = false;
 	protected boolean useBS = false;
 	protected boolean useBB = false;
-	protected int sizeSuperSamling =0;
-	protected int numerForNode =3;
+	protected int sqwuerSizeSuperSamling = 0;
+	protected int numerForNode = 3;
 
 	/**
 	 * Construct ray tracer base with scene
@@ -38,7 +38,7 @@ public abstract class RayTracerBase {
 	 * @return The color of the intersection point.
 	 */
 	public abstract Color traceRay(Ray ray);
-	
+
 	/**
 	 * Setter if use glossy surfaces in ray trace
 	 * 
@@ -49,7 +49,7 @@ public abstract class RayTracerBase {
 		this.useGS = gS;
 		return this;
 	}
-	
+
 	/**
 	 * Setter if use blurry glass in ray trace
 	 * 
@@ -60,7 +60,7 @@ public abstract class RayTracerBase {
 		this.useBS = bS;
 		return this;
 	}
-	
+
 	/**
 	 * Setter if use blurry glass in ray trace
 	 * 
@@ -71,7 +71,7 @@ public abstract class RayTracerBase {
 		this.useBB = bB;
 		return this;
 	}
-	
+
 	/**
 	 * Setter for the amount of ray that the object creates.
 	 * 
@@ -79,10 +79,10 @@ public abstract class RayTracerBase {
 	 * @return the updated ray trace
 	 */
 	public RayTracerBase setSizeSuperSamling(int size) {
-		this.sizeSuperSamling = size ;
+		this.sqwuerSizeSuperSamling = size;
 		return this;
 	}
-	
+
 	/**
 	 * Setter for the amount of objects for each node.
 	 * 
@@ -91,9 +91,9 @@ public abstract class RayTracerBase {
 	 */
 	public RayTracerBase setNumerForNode(int size) {
 		if (size < 3) {
-            throw new IllegalArgumentException("ERROR: less then 3 objects for each node is not useful");
-        }
-		this.numerForNode = size ;
+			throw new IllegalArgumentException("ERROR: less then 3 objects for each node is not useful");
+		}
+		this.numerForNode = size;
 		return this;
 	}
 
