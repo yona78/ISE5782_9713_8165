@@ -3,7 +3,12 @@ package renderer;
 import primitives.*;
 
 import scene.Scene;
+
+import java.util.LinkedList;
 import java.util.List;
+
+import geometries.Geometries;
+import geometries.Geometry;
 import geometries.Intersectable.GeoPoint;
 import lighting.LightSource;
 import static primitives.Util.*;
@@ -202,6 +207,7 @@ public class RayTracerBasic extends RayTracerBase {
 
 	@Override
 	public Color traceRay(Ray ray) {
+		scene.geometries.buildHierarchy(numerForNode);
 		GeoPoint closestPoint = findClosestIntersection(ray);
 		return closestPoint == null ? scene.background : calcColor(closestPoint, ray);
 	}
@@ -298,7 +304,26 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the closes point to the ray's source
 	 */
 	private GeoPoint findClosestIntersection(Ray ray) {
-		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(ray);
+		List<GeoPoint> intersections = null;
+		if (useBB) {
+			LinkedList<Geometry> geometries = new LinkedList<>();
+            Geometries boundingBoxIntersectedGeometries = new Geometries();
+            geometries.add(scene.geometries);
+            for(Geometry geometry : geometries) {
+            	if(geometry.getBoundingBox().intersecte(ray)) {
+            		if(geometry instanceof Geometries) {
+            			geometries.addAll(((Geometries) geometry).getGeometrie());
+            		}
+            		else {
+            			boundingBoxIntersectedGeometries.add(geometry);
+            		}
+            	}
+            }
+            intersections = boundingBoxIntersectedGeometries.findGeoIntersections(ray);
+		}
+		else {
+		   intersections = scene.geometries.findGeoIntersections(ray);
+		}
 		return intersections == null ? null : ray.findClosestGeoPoint(intersections);
 	}
 }

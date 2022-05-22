@@ -23,8 +23,6 @@ public abstract class Geometry extends Intersectable {
 	 * @return the normal vector to the point.
 	 */
 	public abstract Vector getNormal(Point point);
-	
-	public abstract void calculateBX();
 
 	/**
 	 * Getter of the emission of the geometry.
@@ -65,12 +63,8 @@ public abstract class Geometry extends Intersectable {
 		this.material = setMaterial;
 		return this;
 	}
-	
-	/**
-	 * Getter of the BoundingBox of the geometry.
-	 * 
-	 * @return the BoundingBox.
-	 */
+
+	@Override
 	public BoundingBox getBoundingBox() {
 		return bx;
 	}

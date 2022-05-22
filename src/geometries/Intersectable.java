@@ -87,4 +87,15 @@ public abstract class Intersectable {
 	 */
 	protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
+	/**
+	 * This function calculates the bounding box.
+	 */
+	public abstract void calculateBX();
+
+	/**
+	 * Getter of the BoundingBox of the geometry.
+	 * 
+	 * @return the BoundingBox.
+	 */
+	public abstract BoundingBox getBoundingBox();
 }

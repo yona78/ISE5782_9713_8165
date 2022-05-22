@@ -18,7 +18,9 @@ public abstract class RayTracerBase {
 	protected Scene scene;
 	protected boolean useGS = false;
 	protected boolean useBS = false;
+	protected boolean useBB = false;
 	protected int sizeSuperSamling =0;
+	protected int numerForNode =3;
 
 	/**
 	 * Construct ray tracer base with scene
@@ -60,6 +62,17 @@ public abstract class RayTracerBase {
 	}
 	
 	/**
+	 * Setter if use blurry glass in ray trace
+	 * 
+	 * @param bB is the the value if want the update
+	 * @return the updated ray trace
+	 */
+	public RayTracerBase setUseBB(boolean bB) {
+		this.useBB = bB;
+		return this;
+	}
+	
+	/**
 	 * Setter for the amount of ray that the object creates.
 	 * 
 	 * @param size - the size to set in ray trace.
@@ -70,5 +83,18 @@ public abstract class RayTracerBase {
 		return this;
 	}
 	
+	/**
+	 * Setter for the amount of objects for each node.
+	 * 
+	 * @param size - the size to set in ray trace.
+	 * @return the updated ray trace
+	 */
+	public RayTracerBase setNumerForNode(int size) {
+		if (size < 3) {
+            throw new IllegalArgumentException("ERROR: less then 3 objects for each node is not useful");
+        }
+		this.numerForNode = size ;
+		return this;
+	}
 
 }

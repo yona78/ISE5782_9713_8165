@@ -30,6 +30,7 @@ public class Sphere extends Geometry {
 		this.center = center;
 		this.radius = radius;
 		this.radius2 = radius * radius;
+		calculateBX();
 	}
 
 	/**
