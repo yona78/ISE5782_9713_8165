@@ -54,46 +54,49 @@ public class RayTracerBasic extends RayTracerBase {
 			color = color.add(refractedEffect(gp.point, v, n, level, material.kT, kkt, material.kB));
 		return color;
 	}
+
 	/**
 	 * The function calculates the reflected effect on the point.
 	 * 
 	 * @param gp    - is the point.
 	 * @param v     - is the direction of the reflected ray.
 	 * @param level - is the level of the recreation.
-	 * @param n - normal vector .
-	 * @param kR - Kr of the metrial of the object.
-	 * @param kG - KG of the metrial of the object.
-	 * @param kkr - totel Kr till now.
+	 * @param n     - normal vector .
+	 * @param kR    - Kr of the metrial of the object.
+	 * @param kG    - KG of the metrial of the object.
+	 * @param kkr   - totel Kr till now.
 	 * @return the color of the point.
 	 */
 	private Color reflectedEffect(Point p, Vector v, Vector n, int level, Double3 kR, Double3 kkr, double kG) {
 		Color color = Color.BLACK;
 		Ray reflectedRay = constructReflectedRay(p, v, n);
 		if (this.useGS) {
-			List<Ray> lst = CastMultipleRays.superSampling(reflectedRay.getPoint(10),p, reflectedRay.getDir(),sizeSuperSamling,  kG);
+			List<Ray> lst = CastMultipleRays.superSampling(reflectedRay.getPoint(10), p, reflectedRay.getDir(),
+					sizeSuperSamling, kG);
 			double help = alignZero(n.dotProduct(reflectedRay.getDir()));
-			int i =0;
+			int i = 0;
 			for (Ray ray : lst) {
 				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
 					color = color.add(calcGlobalEffect(ray, level, kR, kkr));
 					i++;
 				}
 			}
-			if ( i!=0)
-			color =  color.reduce(i);
+			if (i != 0)
+				color = color.reduce(i);
 		}
 		return color.add(calcGlobalEffect(reflectedRay, level, kR, kkr));
 	}
+
 	/**
 	 * The function calculates the refracted effect on the point.
 	 * 
 	 * @param gp    - is the point.
 	 * @param v     - is the direction of the reflected ray.
 	 * @param level - is the level of the recreation.
-	 * @param n - normal vector .
-	 * @param kT - KT of the metrial of the object.
-	 * @param kB - KB of the metrial of the object.
-	 * @param kkt - totel Kt till now.
+	 * @param n     - normal vector .
+	 * @param kT    - KT of the metrial of the object.
+	 * @param kB    - KB of the metrial of the object.
+	 * @param kkt   - totel Kt till now.
 	 * @return the color of the point.
 	 */
 	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt, double kB) {
@@ -101,17 +104,17 @@ public class RayTracerBasic extends RayTracerBase {
 		Ray refractedRay = new Ray(p, v, n);
 		if (this.useBS) {
 			Point test = p;
-			List<Ray> lst = CastMultipleRays.superSampling(p.add(v.scale(10)),test, v,  sizeSuperSamling, kB);
+			List<Ray> lst = CastMultipleRays.superSampling(p.add(v.scale(10)), test, v, sizeSuperSamling, kB);
 			double help = alignZero(n.dotProduct(v));
-			int i  = 0;
+			int i = 0;
 			for (Ray ray : lst) {
 				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
 					color = color.add(calcGlobalEffect(ray, level, kT, kkt));
 					i++;
 				}
 			}
-			if ( i!=0)
-			  color =  color.reduce(i);
+			if (i != 0)
+				color = color.reduce(i);
 		}
 		return color.add(calcGlobalEffect(refractedRay, level, kT, kkt));
 	}
@@ -207,7 +210,10 @@ public class RayTracerBasic extends RayTracerBase {
 
 	@Override
 	public Color traceRay(Ray ray) {
-		scene.geometries.buildHierarchy(numerForNode);
+		if (useBB) {
+			scene.geometries.calculateBX();
+			scene.geometries.buildHierarchy(numerForNode);
+		}
 		GeoPoint closestPoint = findClosestIntersection(ray);
 		return closestPoint == null ? scene.background : calcColor(closestPoint, ray);
 	}
@@ -307,22 +313,20 @@ public class RayTracerBasic extends RayTracerBase {
 		List<GeoPoint> intersections = null;
 		if (useBB) {
 			LinkedList<Geometry> geometries = new LinkedList<>();
-            Geometries boundingBoxIntersectedGeometries = new Geometries();
-            geometries.add(scene.geometries);
-            for(Geometry geometry : geometries) {
-            	if(geometry.getBoundingBox().intersecte(ray)) {
-            		if(geometry instanceof Geometries) {
-            			geometries.addAll(((Geometries) geometry).getGeometrie());
-            		}
-            		else {
-            			boundingBoxIntersectedGeometries.add(geometry);
-            		}
-            	}
-            }
-            intersections = boundingBoxIntersectedGeometries.findGeoIntersections(ray);
-		}
-		else {
-		   intersections = scene.geometries.findGeoIntersections(ray);
+			Geometries boundingBoxIntersectedGeometries = new Geometries();
+			geometries.add(scene.geometries);
+			for (Geometry geometry : geometries) {
+				if (geometry.getBoundingBox().intersecte(ray)) {
+					if (geometry instanceof Geometries) {
+						geometries.addAll(((Geometries) geometry).getGeometrie());
+					} else {
+						boundingBoxIntersectedGeometries.add(geometry);
+					}
+				}
+			}
+			intersections = boundingBoxIntersectedGeometries.findGeoIntersections(ray);
+		} else {
+			intersections = scene.geometries.findGeoIntersections(ray);
 		}
 		return intersections == null ? null : ray.findClosestGeoPoint(intersections);
 	}
