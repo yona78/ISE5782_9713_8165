@@ -3,10 +3,17 @@ package renderer;
 import primitives.*;
 
 import scene.Scene;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import geometries.Geometries;
+import geometries.Geometry;
 import geometries.Intersectable.GeoPoint;
 import lighting.LightSource;
 import static primitives.Util.*;
+import renderer.CastMultipleRays;
 
 /**
  * This class extends RayTracerBas and implement the class
@@ -39,54 +46,51 @@ public class RayTracerBasic extends RayTracerBase {
 	 */
 	private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, Double3 k) {
 		Color color = Color.BLACK;
-		Vector n = gp.geometry.getNormal(gp.point);
+		Point p0 = gp.point;
+		Vector n = gp.geometry.getNormal(p0);
 		Material material = gp.geometry.getMaterial();
 		Double3 kkr = material.kR.product(k);
-		if (!kkr.lowerThan(MIN_CALC_COLOR_K))
-			color = reflectedEffect(gp.point, v, n, level, material.kR, kkr, material.kG);
+		if (!kkr.lowerThan(MIN_CALC_COLOR_K)) {
+			Ray help = constructReflectedRay(p0, v, n);
+			color = specificEffect(p0,help.getP0(), help.getDir(), n, help, level, material.kR, kkr, material.kG);
+		}
 		Double3 kkt = material.kT.product(k);
 		if (!kkt.lowerThan(MIN_CALC_COLOR_K))
-			color = color.add(refractedEffect(gp.point, v, n, level, material.kT, kkt, material.kB));
+			color = color.add(
+					specificEffect(p0,p0, v, n, constructRefractedRay(p0, v, n), level, material.kT, kkt, material.kB));
 		return color;
 	}
 
-	private Color reflectedEffect(Point p, Vector v, Vector n, int level, Double3 kR, Double3 kkr, double kG) {
+	/**
+	 * The function calculates the refracted effect on the point.
+	 * 
+	 * @param gp    - is the point.
+	 * @param v     - is the direction of the reflected ray.
+	 * @param level - is the level of the recreation.
+	 * @param n     - normal vector .
+	 * @param kT    - KT of the metrial of the object.
+	 * @param kB    - KB of the metrial of the object.
+	 * @param kkt   - totel Kt till now.
+	 * @return the color of the point.
+	 */
+	private Color specificEffect(Point p,Point traget,Vector v, Vector n, Ray mainRay, int level, Double3 kSE, Double3 kkSP,
+			double kGB) {
 		Color color = Color.BLACK;
-		Ray reflectedRay = constructReflectedRay(p, v, n);
-		if (this.useGS) {
-			List<Ray> lst = CastMultipleRays.superSampling(reflectedRay.getPoint(10),p, reflectedRay.getDir(),sizeSuperSamling,  kG);
-			double help = alignZero(n.dotProduct(reflectedRay.getDir()));
-			int i =0;
-			for (Ray ray : lst) {
-				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
-					color = color.add(calcGlobalEffect(ray, level, kR, kkr));
-					i++;
-				}
-			}
-			if ( i!=0)
-			color =  color.reduce(i);
+		List<Ray> lst = new ArrayList<Ray>();
+		lst.add(mainRay);
+		if (this.useGBS) {
+			 lst.addAll(CastMultipleRays.superSampling(traget.add(v.scale(10)), p, v, this.sqwuerSizeSuperSamling, kGB));
 		}
-		return color.add(calcGlobalEffect(reflectedRay, level, kR, kkr));
-	}
-
-	private Color refractedEffect(Point p, Vector v, Vector n, int level, Double3 kT, Double3 kkt, double kB) {
-		Color color = Color.BLACK;
-		Ray refractedRay = new Ray(p, v, n);
-		if (this.useBS) {
-			Point test = p;
-			List<Ray> lst = CastMultipleRays.superSampling(p.add(v.scale(10)),test, v,  sizeSuperSamling, kB);
-			double help = alignZero(n.dotProduct(v));
-			int i  = 0;
-			for (Ray ray : lst) {
-				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
-					color = color.add(calcGlobalEffect(ray, level, kT, kkt));
-					i++;
-				}
+		double help = alignZero(n.dotProduct(v));
+		int i = 0;
+		for (Ray ray : lst) {
+			if (alignZero(n.dotProduct(ray.getDir())) * help >= 0) {
+				color = color.add(calcGlobalEffect(ray, level, kSE, kkSP));
+				i++;
 			}
-			if ( i!=0)
-			  color =  color.reduce(i);
 		}
-		return color.add(calcGlobalEffect(refractedRay, level, kT, kkt));
+	    color = color.reduce(i);
+		return color;
 	}
 
 	/**
@@ -112,7 +116,8 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the reflected ray.
 	 */
 	private Ray constructReflectedRay(Point p, Vector v, Vector n) {
-		return new Ray(p, v.add(n.scale(-2 * v.dotProduct(n))).normalize(), n.scale(-1));
+		Vector r = v.subtract(n.scale(2 * v.dotProduct(n)));
+		return new Ray(p, r, n);
 	}
 
 	/**
@@ -179,6 +184,11 @@ public class RayTracerBasic extends RayTracerBase {
 
 	@Override
 	public Color traceRay(Ray ray) {
+		/*if (useBB) {
+			scene.geometries.calculateBX();
+			scene.geometries.buildHierarchy(numerForNode);
+		}
+		*/
 		GeoPoint closestPoint = findClosestIntersection(ray);
 		return closestPoint == null ? scene.background : calcColor(closestPoint, ray);
 	}

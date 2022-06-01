@@ -115,7 +115,7 @@ public class Material {
 	}
 
 	/**
-	 * Setter with doubl3 object of the kG field of the material
+	 * Setter with double object of the kG field of the material
 	 * 
 	 * @param kG is the new kG
 	 * @return the updated material
@@ -124,11 +124,12 @@ public class Material {
 		this.kG = kG;
 		return this;
 	}
+	
 
 	/**
-	 * Setter with double object of the kb field of the material
+	 * Setter with double object of the kB field of the material
 	 * 
-	 * @param kb is the new kb
+	 * @param kB is the new kB
 	 * @return the updated material
 	 */
 	public Material setKB(double kB) {
