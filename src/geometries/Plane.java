@@ -86,4 +86,12 @@ public class Plane extends Geometry {
 		double t = Util.alignZero(normalVector.dotProduct(u) / nv);
 		return t > 0 && Util.alignZero(t - maxDistance) <= 0 ? List.of(new GeoPoint(this, ray.getPoint(t))) : null;
 	}
+
+	@Override
+	public void createBoundingBox() {
+		boundingBox = new BoundingBox(-Double.MAX_VALUE,-Double.MAX_VALUE,-Double.MAX_VALUE
+                ,
+              Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE);
+		
+	}
 }

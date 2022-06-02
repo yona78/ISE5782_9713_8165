@@ -130,4 +130,41 @@ public class Polygon extends Geometry {
 		}
 		return newGeoPoints;
 	}
+
+	@Override
+	public void createBoundingBox() {
+		Point first = vertices.get(0);
+        double minX = first.getX(), minY = first.getY(), minZ = first.getZ();
+        double maxX = first.getX(), maxY = first.getY(), maxZ = first.getZ();
+        for (int i = 1; i < vertices.size(); ++i)
+        {
+            Point p = vertices.get(i);
+            if (p.getX() < minX)
+            {
+                minX = p.getX();
+            }
+            if (p.getY() < minY)
+            {
+                minY = p.getY();
+            }
+            if (p.getZ() < minZ)
+            {
+                minZ = p.getZ();
+            }
+            if (p.getX() > maxX)
+            {
+                maxX = p.getX();
+            }
+            if (p.getY() > maxY)
+            {
+                maxY = p.getY();
+            }
+            if (p.getZ() > maxZ)
+            {
+                maxZ = p.getZ();
+            }
+        }
+		this.boundingBox = new BoundingBox(minX,minY,minZ,maxX,maxY,maxZ );
+		
+	}
 }

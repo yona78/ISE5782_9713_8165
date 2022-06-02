@@ -88,4 +88,11 @@ public class Sphere extends Geometry {
 			return t2IsTooFar ? List.of(new GeoPoint(this, ray.getPoint(t1))) //
 					: List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
 	}
+
+	@Override
+	public void createBoundingBox() {
+		this.boundingBox = new BoundingBox(center.getX()+radius,center.getY()+radius,center.getZ()+radius
+                ,center.getX()-radius,center.getY()-radius,center.getZ()-radius);
+		
+	}
 }

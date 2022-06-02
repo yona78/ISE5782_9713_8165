@@ -14,6 +14,7 @@ import primitives.*;
 public abstract class Geometry extends Intersectable {
 	protected Color emission = Color.BLACK;
 	private Material material = new Material();
+	protected BoundingBox boundingBox = null;
 
 	/**
 	 * This method calculates the normal vector to the given point on the geometry
@@ -62,4 +63,21 @@ public abstract class Geometry extends Intersectable {
 		this.material = setMaterial;
 		return this;
 	}
+	
+	/**
+    * Builds the geometry bounding box
+    */
+   abstract public void createBoundingBox();
+
+   /**
+    * @param ray ray to test for
+    * @return whether the ray hits the bounding box
+    */
+   public boolean isBoundingBoxHit(Ray ray) {
+       return boundingBox == null || boundingBox.isIntersectedByRay(ray);
+   }
+   
+   public BoundingBox getBoundingBox() {
+       return boundingBox;
+   }
 }

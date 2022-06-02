@@ -10,6 +10,7 @@ import java.util.List;
 
 import geometries.Geometries;
 import geometries.Geometry;
+import geometries.Intersectable;
 import geometries.Intersectable.GeoPoint;
 import lighting.LightSource;
 import static primitives.Util.*;
@@ -184,11 +185,10 @@ public class RayTracerBasic extends RayTracerBase {
 
 	@Override
 	public Color traceRay(Ray ray) {
-		/*if (useBB) {
-			scene.geometries.calculateBX();
-			scene.geometries.buildHierarchy(numerForNode);
+		if (useBB) {
+			scene.geometries.createBoundingBox();
+			scene.setGeometries(scene.geometries.buliedTree(numerForNode));
 		}
-		*/
 		GeoPoint closestPoint = findClosestIntersection(ray);
 		return closestPoint == null ? scene.background : calcColor(closestPoint, ray);
 	}
@@ -285,7 +285,28 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the closes point to the ray's source
 	 */
 	private GeoPoint findClosestIntersection(Ray ray) {
-		List<GeoPoint> intersections = scene.geometries.findGeoIntersections(ray);
+		List<GeoPoint> intersections = new ArrayList<GeoPoint>();
+		  if (useBB) { // in case we are using BVH
+	            LinkedList<Intersectable> geometries = new LinkedList<>();
+	            Geometries boundingBoxIntersectedGeometries = new Geometries();
+	            // sort out any geometry whose bounding box isn't intersected by the ray
+	            geometries.add(scene.geometries);
+	            for (int i = 0; i < geometries.size(); ++i) {
+	                if (geometries.get(i).getBoundingBox().isIntersectedByRay(ray)) { // if bounding box isn't intersected, ignore!
+	                    if (geometries.get(i) instanceof Geometries) { // open up the "tree" till the end like this
+	                        geometries.addAll(((Geometries) geometries.get(i)).getGeometries());
+	                    }
+	                    else {
+	                        boundingBoxIntersectedGeometries.add(geometries.get(i));
+	                    }
+	                }
+	            }
+	            // finally, find intersection only of geometries that their bounding box was intersected!
+	            intersections = boundingBoxIntersectedGeometries.findGeoIntersections(ray);
+	        }
+	        else {
+	        	intersections = scene.geometries.findGeoIntersections(ray);
+	        }
 		return intersections == null ? null : ray.findClosestGeoPoint(intersections);
 	}
 }

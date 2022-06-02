@@ -87,6 +87,11 @@ class MINIP1Tests {
 				.setRayTracerBase(help) //
 				.renderImage() //
 				.writeToImage(); //
+		ImageWriter imageWriter2 = new ImageWriter("mirror3", 500, 500);
+		camera.setImageWriter(imageWriter2) //
+		.setRayTracerBase(new RayTracerBasic(scene).setUseGBS(true).setUseBB(true)) //
+		.renderImage() //
+		.writeToImage(); 
 		ImageWriter imageWriter1 = new ImageWriter("mirror2", 500, 500);
 		camera.setImageWriter(imageWriter1) //
 		.setRayTracerBase(new RayTracerBasic(scene)) //
