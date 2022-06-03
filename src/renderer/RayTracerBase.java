@@ -16,10 +16,10 @@ import scene.Scene;
 
 public abstract class RayTracerBase {
 	protected Scene scene;
-	protected boolean useGS = false;
-	protected boolean useBS = false;
+
+	protected boolean useGBS = false;
 	protected boolean useBB = false;
-	protected int sqwuerSizeSuperSamling = 0;
+	protected double sqwuerSizeSuperSamling = 0;
 	protected int numerForNode = 3;
 
 	/**
@@ -42,25 +42,18 @@ public abstract class RayTracerBase {
 	/**
 	 * Setter if use glossy surfaces in ray trace
 	 * 
-	 * @param gS is the the value if want the update
+	 * @param gBS is the the value if want the update
 	 * @return the updated ray trace
 	 */
-	public RayTracerBase setUseGS(boolean gS) {
-		this.useGS = gS;
+	public RayTracerBase setUseGBS(boolean gBS) {
+		this.useGBS = gBS;
 		return this;
 	}
 
-	/**
-	 * Setter if use blurry glass in ray trace
-	 * 
-	 * @param bS is the the value if want the update
-	 * @return the updated ray trace
-	 */
-	public RayTracerBase setUseBS(boolean bS) {
-		this.useBS = bS;
-		return this;
-	}
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 	/**
 	 * Setter if use blurry glass in ray trace
 	 * 
@@ -72,16 +65,52 @@ public abstract class RayTracerBase {
 		return this;
 	}
 
+<<<<<<< HEAD
+	/**
+	 * Setter if use blurry glass in ray trace
+	 * 
+	 * @param bB is the the value if want the update
+	 * @return the updated ray trace
+	 */
+	public RayTracerBase setUseBB(boolean bB) {
+		this.useBB = bB;
+		return this;
+	}
+
+=======
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 	/**
 	 * Setter for the amount of ray that the object creates.
 	 * 
 	 * @param size - the size to set in ray trace.
 	 * @return the updated ray trace
 	 */
+<<<<<<< HEAD
 	public RayTracerBase setSizeSuperSamling(int size) {
 		this.sqwuerSizeSuperSamling = size;
+=======
+	public RayTracerBase setSizeSuperSamling(double size) {
+		this.sqwuerSizeSuperSamling = Math.sqrt(size);
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 		return this;
 	}
+<<<<<<< HEAD
+
+	/**
+	 * Setter for the amount of objects for each node.
+	 * 
+	 * @param size - the size to set in ray trace.
+	 * @return the updated ray trace
+	 */
+	public RayTracerBase setNumerForNode(int size) {
+		if (size < 3) {
+			throw new IllegalArgumentException("ERROR: less then 3 objects for each node is not useful");
+		}
+		this.numerForNode = size;
+		return this;
+	}
+=======
+>>>>>>> branch 'main' of https://github.com/TFMHK/ISE5782_9713_8165.git
 
 	/**
 	 * Setter for the amount of objects for each node.

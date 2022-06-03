@@ -132,50 +132,40 @@ public class Polygon extends Geometry {
 	}
 
 	@Override
-	public void calculateBX() {
-		// TODO Auto-generated method stub
-		double maxX = this.vertices.get(0).getX();
-		double maxY = this.vertices.get(0).getY();
-		double maxZ = this.vertices.get(0).getZ();
-		double minX = this.vertices.get(0).getX();
-		double minY = this.vertices.get(0).getY();
-		double minZ = this.vertices.get(0).getZ();
 
-		Point help;
-		double x;
-		double y;
-		double z;
-		for (int i = 1; i < vertices.size(); i++) {
-			help = vertices.get(i);
-			x = help.getX();
-			y = help.getY();
-			z = help.getZ();
-			if (maxX < x)
-				maxX = x;
-			if (maxY < y)
-				maxY = y;
-			if (maxZ < z)
-				maxZ = z;
-			if (minX < x)
-				minX = x;
-			if (minY < y)
-				minY = y;
-			if (minZ < z)
-				minZ = z;
-		}
-		this.bx = new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
-	}
-
-	/**
-	 * The function checks if the point is on the polygon.
-	 * 
-	 * @param p - the point.
-	 * @return if it on the polygon.
-	 */
-	public boolean onPolygon(Point p) {
-		if (plane.onPlane(p)) {
-			// TODO
-		}
-		return false;
+	public void createBoundingBox() {
+		Point first = vertices.get(0);
+        double minX = first.getX(), minY = first.getY(), minZ = first.getZ();
+        double maxX = first.getX(), maxY = first.getY(), maxZ = first.getZ();
+        for (int i = 1; i < vertices.size(); ++i)
+        {
+            Point p = vertices.get(i);
+            if (p.getX() < minX)
+            {
+                minX = p.getX();
+            }
+            if (p.getY() < minY)
+            {
+                minY = p.getY();
+            }
+            if (p.getZ() < minZ)
+            {
+                minZ = p.getZ();
+            }
+            if (p.getX() > maxX)
+            {
+                maxX = p.getX();
+            }
+            if (p.getY() > maxY)
+            {
+                maxY = p.getY();
+            }
+            if (p.getZ() > maxZ)
+            {
+                maxZ = p.getZ();
+            }
+        }
+		this.boundingBox = new BoundingBox(minX,minY,minZ,maxX,maxY,maxZ );
+		
 	}
 }

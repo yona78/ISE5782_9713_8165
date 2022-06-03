@@ -90,8 +90,10 @@ public class Sphere extends Geometry {
 	}
 
 	@Override
-	public void calculateBX() {
-		this.bx = new BoundingBox(center.getX() - radius,center.getY() - radius,center.getZ() - radius,//
-				center.getX() +radius,center.getY() + radius,center.getZ() + radius );
+
+	public void createBoundingBox() {
+		this.boundingBox = new BoundingBox(center.getX()+radius,center.getY()+radius,center.getZ()+radius
+                ,center.getX()-radius,center.getY()-radius,center.getZ()-radius);
+		
 	}
 }

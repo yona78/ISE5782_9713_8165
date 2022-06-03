@@ -60,7 +60,8 @@ public class Tube extends Geometry {
 	}
 
 	@Override
-	public void calculateBX() {
+
+	public void createBoundingBox() {
 		// TODO Auto-generated method stub
 		
 	}

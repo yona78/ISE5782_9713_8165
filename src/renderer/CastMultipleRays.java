@@ -23,7 +23,7 @@ public class CastMultipleRays {
 	 * 
 	 * @return the function return size number vector
 	 */
-	public static List<Ray> superSampling(Point point, Point last, Vector l, int size, double radius) {
+	public static List<Ray> superSampling(Point point, Point last, Vector l, double size, double radius) {
 		List<Ray> points = new ArrayList<Ray>();
 		try {
 			Vector l1;
@@ -33,11 +33,9 @@ public class CastMultipleRays {
 				l1 = l.crossProduct(l.add(y));
 			}
 			Vector l2 = l.crossProduct(l1);
-			l1.normalize();
-			l2.normalize();
 			Point help = point;
-			for (int k = 1; k < size + 1; k++) {
-				for (int t = 1; t < size + 1; t++) {
+			for (int k = 0; k < size+1; k++) {
+				for (int t = 0; t < size+1; t++) {
 					Point newPoint = point.add(l1.scale(radius * (1 - ((k * 2) / size))));
 					newPoint = newPoint.add(l2.scale(radius * (1 - ((t * 2) / size))));
 					points.add(new Ray(last, newPoint.subtract(last)));

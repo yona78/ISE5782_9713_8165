@@ -100,18 +100,11 @@ public class Plane extends Geometry {
 	}
 
 	@Override
-	public void calculateBX() {
-		this.bx = new BoundingBox(-Double.MAX_VALUE, -Double.MAX_VALUE, -Double.MAX_VALUE, Double.MAX_VALUE,
-				Double.MAX_VALUE, Double.MAX_VALUE);
-	}
 
-	/**
-	 * The function checks if the point is on the plane.
-	 * 
-	 * @param p - the point.
-	 * @return if it on the plane.
-	 */
-	public boolean onPlane(Point p) {
-		return Util.isZero(d - normalVector.dotProduct(new Vector(p)));
+	public void createBoundingBox() {
+		boundingBox = new BoundingBox(-Double.MAX_VALUE,-Double.MAX_VALUE,-Double.MAX_VALUE
+                ,
+              Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE);
+		
 	}
 }

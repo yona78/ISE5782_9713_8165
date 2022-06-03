@@ -2,6 +2,8 @@ package renderer;
 
 import primitives.*;
 import java.util.MissingResourceException;
+import java.util.stream.IntStream;
+import java.util.stream.*;
 
 /**
  * This class represents a camera in the project.
@@ -184,11 +186,14 @@ public class Camera {
 			throw new MissingResourceException("Missing tracer object!", "RayTracerBase", "");
 		int nX = cameraImageWriter.getNx();
 		int nY = cameraImageWriter.getNy();
-		for (int i = 0; i < nX; ++i) {
-			for (int j = 0; j < nY; ++j) {
-				cameraImageWriter.writePixel(i, j, castRay(nX, nY, i, j));
-			}
-		}
+		Pixel.initialize(nY, nX, 0); 
+		IntStream.range(0, nY).parallel().forEach(i -> {   
+			IntStream.range(0, nX).parallel().forEach(j -> {     
+				cameraImageWriter.writePixel(j, i,castRay(nX, nY, j, i));        
+				Pixel.pixelDone();        
+				Pixel.printPixel();    
+				}); 
+			}); 
 		return this;
 	}
 

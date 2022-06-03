@@ -4,14 +4,17 @@ import primitives.*;
 
 import scene.Scene;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import geometries.Geometries;
 import geometries.Geometry;
+import geometries.Intersectable;
 import geometries.Intersectable.GeoPoint;
 import lighting.LightSource;
 import static primitives.Util.*;
+import renderer.CastMultipleRays;
 
 /**
  * This class extends RayTracerBas and implement the class
@@ -48,12 +51,14 @@ public class RayTracerBasic extends RayTracerBase {
 		Vector n = gp.geometry.getNormal(p0);
 		Material material = gp.geometry.getMaterial();
 		Double3 kkr = material.kR.product(k);
-		if (!kkr.lowerThan(MIN_CALC_COLOR_K))
-			color = specificEffect(p0, v, n, constructReflectedRay(p0, v, n), level, material.kR, kkr, material.kG);
+		if (!kkr.lowerThan(MIN_CALC_COLOR_K)) {
+			Ray help = constructReflectedRay(p0, v, n);
+			color = specificEffect(p0,help.getP0(), help.getDir(), n, help, level, material.kR, kkr, material.kG);
+		}
 		Double3 kkt = material.kT.product(k);
 		if (!kkt.lowerThan(MIN_CALC_COLOR_K))
 			color = color.add(
-					specificEffect(p0, v, n, constructRefractedRay(p0, v, n), level, material.kT, kkt, material.kB));
+					specificEffect(p0,p0, v, n, constructRefractedRay(p0, v, n), level, material.kT, kkt, material.kB));
 		return color;
 	}
 
@@ -69,22 +74,23 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @param kkt   - totel Kt till now.
 	 * @return the color of the point.
 	 */
-	private Color specificEffect(Point p, Vector v, Vector n, Ray mainRay, int level, Double3 kSE, Double3 kkSP,
+	private Color specificEffect(Point p,Point traget,Vector v, Vector n, Ray mainRay, int level, Double3 kSE, Double3 kkSP,
 			double kGB) {
-		Color color = calcGlobalEffect(mainRay, level, kSE, kkSP);
-		if (this.useBS) {
-			List<Ray> lst = CastMultipleRays.superSampling(mainRay.getPoint(10), p, v, sqwuerSizeSuperSamling, kGB);
-			double help = alignZero(n.dotProduct(v));
-			int i = 1;
-			for (Ray ray : lst) {
-				if (alignZero(n.dotProduct(ray.getDir())) * help > 0) {
-					color = color.add(calcGlobalEffect(ray, level, kSE, kkSP));
-					++i;
-				}
-			}
-			if (i != 1)
-				color = color.reduce(i);
+		Color color = Color.BLACK;
+		List<Ray> lst = new ArrayList<Ray>();
+		lst.add(mainRay);
+		if (this.useGBS) {
+			 lst.addAll(CastMultipleRays.superSampling(traget.add(v.scale(10)), p, v, this.sqwuerSizeSuperSamling, kGB));
 		}
+		double help = alignZero(n.dotProduct(v));
+		int i = 0;
+		for (Ray ray : lst) {
+			if (alignZero(n.dotProduct(ray.getDir())) * help >= 0) {
+				color = color.add(calcGlobalEffect(ray, level, kSE, kkSP));
+				i++;
+			}
+		}
+	    color = color.reduce(i);
 		return color;
 	}
 
@@ -180,8 +186,8 @@ public class RayTracerBasic extends RayTracerBase {
 	@Override
 	public Color traceRay(Ray ray) {
 		if (useBB) {
-			scene.geometries.calculateBX();
-			scene.geometries.buildHierarchy(numerForNode);
+			scene.geometries.createBoundingBox();
+			scene.setGeometries(scene.geometries.buliedTree(numerForNode));
 		}
 		GeoPoint closestPoint = findClosestIntersection(ray);
 		return closestPoint == null ? scene.background : calcColor(closestPoint, ray);
@@ -279,24 +285,28 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return the closes point to the ray's source
 	 */
 	private GeoPoint findClosestIntersection(Ray ray) {
-		List<GeoPoint> intersections = null;
-		if (useBB) {
-			LinkedList<Geometry> geometries = new LinkedList<>();
-			Geometries boundingBoxIntersectedGeometries = new Geometries();
-			geometries.add(scene.geometries);
-			for (Geometry geometry : geometries) {
-				if (geometry.getBoundingBox().intersecte(ray)) {
-					if (geometry instanceof Geometries) {
-						geometries.addAll(((Geometries) geometry).getGeometrie());
-					} else {
-						boundingBoxIntersectedGeometries.add(geometry);
-					}
-				}
-			}
-			intersections = boundingBoxIntersectedGeometries.findGeoIntersections(ray);
-		} else {
-			intersections = scene.geometries.findGeoIntersections(ray);
-		}
+		List<GeoPoint> intersections = new ArrayList<GeoPoint>();
+		  if (useBB) { // in case we are using BVH
+	            LinkedList<Intersectable> geometries = new LinkedList<>();
+	            Geometries boundingBoxIntersectedGeometries = new Geometries();
+	            // sort out any geometry whose bounding box isn't intersected by the ray
+	            geometries.add(scene.geometries);
+	            for (int i = 0; i < geometries.size(); ++i) {
+	                if (geometries.get(i).getBoundingBox().isIntersectedByRay(ray)) { // if bounding box isn't intersected, ignore!
+	                    if (geometries.get(i) instanceof Geometries) { // open up the "tree" till the end like this
+	                        geometries.addAll(((Geometries) geometries.get(i)).getGeometries());
+	                    }
+	                    else {
+	                        boundingBoxIntersectedGeometries.add(geometries.get(i));
+	                    }
+	                }
+	            }
+	            // finally, find intersection only of geometries that their bounding box was intersected!
+	            intersections = boundingBoxIntersectedGeometries.findGeoIntersections(ray);
+	        }
+	        else {
+	        	intersections = scene.geometries.findGeoIntersections(ray);
+	        }
 		return intersections == null ? null : ray.findClosestGeoPoint(intersections);
 	}
 }

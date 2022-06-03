@@ -81,12 +81,18 @@ class MINIP1Tests {
                 .setKl(4E-5).setKq(2E-7));
         scene.lights.add(new DirectionalLight(new Color(0, 40, 400), new Vector(0, 0, 1)));
 
-		ImageWriter imageWriter = new ImageWriter("mirror", 1, 1);
-		RayTracerBasic help = (RayTracerBasic) new RayTracerBasic(scene).setUseBS(true).setUseGS(true).setSizeSuperSamling(81);
+
+		ImageWriter imageWriter = new ImageWriter("mirror", 500, 500);
+		RayTracerBasic help = (RayTracerBasic) new RayTracerBasic(scene).setUseGBS(true).setSizeSuperSamling(100);
 		camera.setImageWriter(imageWriter) //
 				.setRayTracerBase(help) //
 				.renderImage() //
 				.writeToImage(); //
+		ImageWriter imageWriter2 = new ImageWriter("mirror3", 500, 500);
+		camera.setImageWriter(imageWriter2) //
+		.setRayTracerBase(new RayTracerBasic(scene).setUseGBS(true).setUseBB(true)) //
+		.renderImage() //
+		.writeToImage(); 
 		ImageWriter imageWriter1 = new ImageWriter("mirror2", 500, 500);
 		camera.setImageWriter(imageWriter1) //
 		.setRayTracerBase(new RayTracerBasic(scene)) //

@@ -9,6 +9,7 @@ import java.util.List;
  * @author Hillel Kroitoro, Yona Orunov
  */
 public abstract class Intersectable {
+	BoundingBox boundingBox = null;
 	/**
 	 * The function will calculate all the intersection points of the ray with the
 	 * object
@@ -55,6 +56,7 @@ public abstract class Intersectable {
 			return "(" + point + "," + geometry + ")";
 		}
 	}
+	abstract public void createBoundingBox();
 
 	/**
 	 * The function will calculate all the intersection points of the ray with the
@@ -86,5 +88,9 @@ public abstract class Intersectable {
 	 * @return list of intersection GeoPoints.
 	 */
 	protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
+	
+	public BoundingBox getBoundingBox() {
+		return boundingBox;
+	}
 
 }
