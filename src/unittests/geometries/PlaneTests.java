@@ -114,13 +114,13 @@ class PlaneTests {
 		assertNull(plane.findIntersections(ray),
 				"Ray is orthogonal to the plane and after the plane BVA doesn't work.");
 
-		// **** Group:Ray is neither orthogonal nor parallel to and ) begins at the
+		// **** Group:Ray is neither orthogonal nor parallel to and ) begins on the
 		// plane
-		// TC16: Ray is neither orthogonal nor parallel to and begins at the plane
+		// TC16: Ray is neither orthogonal nor parallel to and begins on the plane
 		ray = new Ray(new Point(0, 0, 0), new Vector(0, 1, 1));
 
 		assertNull(plane.findIntersections(ray),
-				"Ray is neither orthogonal nor parallel to and  begins at the plane BVA doesn't work.");
+				"Ray is neither orthogonal nor parallel to and  begins on the plane BVA doesn't work.");
 
 		// TC17: Ray begins in the same point which appears as the plane's reference
 		// point.

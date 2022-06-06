@@ -164,7 +164,7 @@ class TubeTests {
 		assertEquals(1, intersections.size(), "ERROR: Wrong number of points.");
 		assertEquals(new Point(1, 2, 0), intersections.get(0), "ERROR: incorrect intersection points.");
 
-		// **** Group: Ray is tangent to tube (no intersections at all)
+		// **** Group: Ray is tangent to tube (no intersections on all)
 		// TC123: ray starts before tube
 		assertNull(tube.findIntersections(new Ray(new Point(-2, 2, 1), new Vector(1, 0, 0))),
 				"ERROR: intersection list should be null");

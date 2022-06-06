@@ -69,7 +69,7 @@ public class SphereTests {
 		// =============== Boundary Values Tests ==================
 
 		// **** Group: Ray's line crosses the sphere (but not the center)
-		// TC11: Ray starts at sphere and goes inside (1 points)
+		// TC11: Ray starts on sphere and goes inside (1 points)
 		ray = new Ray(new Point(2, 0, 0), new Vector(-1, 0, 1));
 		expRes = List.of(new Point(1, 0, 1));
 		res = sphere.findIntersections(ray);
@@ -78,7 +78,7 @@ public class SphereTests {
 
 		assertEquals(expRes, res, "Ray from the sphere inwards BVA doesn't work.");
 
-		// TC12: Ray starts at sphere and goes outside (0 points)
+		// TC12: Ray starts on sphere and goes outside (0 points)
 		ray = new Ray(new Point(0, 0, 0), new Vector(-1, 0, -1));
 		assertNull(sphere.findIntersections(ray), "Ray from the sphere outwards BVA doesn't work.");
 
@@ -91,7 +91,7 @@ public class SphereTests {
 		assertEquals(res.size(), 2, "Ray through center 2 points BVA doesn't work.");
 
 		assertEquals(expRes, res, "Ray through center 2 points BVA doesn't work.");
-		// TC14: Ray starts at sphere and goes inside (1 points)
+		// TC14: Ray starts on sphere and goes inside (1 points)
 		ray = new Ray(new Point(2, 0, 0), new Vector(-4, 0, 0));
 		expRes = List.of(new Point(0, 0, 0));
 		res = sphere.findIntersections(ray);
@@ -108,7 +108,7 @@ public class SphereTests {
 		assertEquals(res.size(), 1, "Ray in sphere through center BVA doesn't work.");
 
 		assertEquals(expRes, res, "Ray in sphere through center BVA doesn't work.");
-		// TC16: Ray starts at the center (1 points)
+		// TC16: Ray starts on the center (1 points)
 		ray = new Ray(new Point(1, 0, 0), new Vector(2, 0, 0));
 		expRes = List.of(new Point(2, 0, 0));
 		res = sphere.findIntersections(ray);
@@ -116,7 +116,7 @@ public class SphereTests {
 		assertEquals(res.size(), 1, "Ray from center BVA doesn't work.");
 
 		assertEquals(expRes, res, "Ray from center BVA doesn't work.");
-		// TC17: Ray starts at sphere and goes outside (0 points)
+		// TC17: Ray starts on sphere and goes outside (0 points)
 		ray = new Ray(new Point(0, 0, 0), new Vector(-1, 0, 0));
 		res = sphere.findIntersections(ray);
 
@@ -134,7 +134,7 @@ public class SphereTests {
 
 		assertNull(sphere.findIntersections(ray), "Ray tangent to the sphere BVA doesn't work.");
 
-		// TC20: Ray starts at the tangent point
+		// TC20: Ray starts on the tangent point
 		ray = new Ray(new Point(1, 0, 1), new Vector(-1, 0, 0));
 
 		assertNull(sphere.findIntersections(ray), "Ray tangent to the sphere BVA doesn't work.");

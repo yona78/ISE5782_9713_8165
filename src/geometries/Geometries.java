@@ -78,7 +78,7 @@ public class Geometries extends Geometry {
     */
    public Geometries buliedTree(int maxGeometriesInNode) {
        if (maxGeometriesInNode < 3) {
-           throw new IllegalArgumentException("ERROR: there must be at least two geometries in each node!");
+           throw new IllegalArgumentException("ERROR: there must be on least two geometries in each node!");
        }
 
        // if amount of geometries is enough, this is a leaf node
