@@ -74,13 +74,16 @@ class MINIP2Tests {
 		Scene scene = new Scene("Test scene");
 
 		points.forEach(p -> p = (new Vector(p)).scale(100).subtract(Point.ZERO));
-		points.forEach(p -> p = p.add(vTo.scale(20)));
+		points.forEach(p -> p = p.add(vTo.scale(120)));
 		scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), new Double3(0.1)));
 
-		scene.geometries.add(genPoly(0, 1, 2), genPoly(0, 2, 3), genPoly(0, 3, 4), genPoly(0, 4, 5), genPoly(0, 5, 1),
-				genPoly(1, 2, 8), genPoly(2, 3, 10), genPoly(3, 4, 12), genPoly(4, 5, 14), genPoly(0, 1, 2),
-				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
-				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
+		scene.geometries.add(genPoly(0, 12, 13), genPoly(0, 13, 16), genPoly(0, 16, 19), genPoly(0, 19, 17),
+				genPoly(0, 17, 12),
+				genPoly(12, 13, 14), genPoly(13, 16, 15), genPoly(16, 19, 21), genPoly(19, 17, 20),
+				genPoly(17, 12, 18), genPoly(12, 14, 2), genPoly(13, 14, 1), genPoly(13, 1, 15), genPoly(16, 15, 5),
+				genPoly(15, 5, 21), genPoly(19, 21, 4), genPoly(19, 4, 20), genPoly(17, 20, 3), genPoly(17, 3, 18),
+				genPoly(18, 12, 2), genPoly(12, 14, 2),
+				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
 				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
 				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
 				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
