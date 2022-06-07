@@ -54,9 +54,9 @@ class MINIP2Tests {
 				.setKs(rand(0.5d, j * i)).setKt(0.5);
 	}
 
-	private Geometry genPoly(int a, int b, int c) {
-		return new Polygon(points.get(a), points.get(b), points.get(c)).setEmission(colors.get((a + b + c) % 13))
-				.setMaterial(randMat(a + c, b + c));
+	private Geometry genTriangle(int a, int b, int c) {
+		return new Triangle(points.get(a + 1), points.get(b + 1), points.get(c + 1))
+				.setEmission(colors.get((a + b + c) % 13)).setMaterial(randMat(a + c, b + c));
 	}
 
 	/**
@@ -77,18 +77,22 @@ class MINIP2Tests {
 		points.forEach(p -> p = p.add(vTo.scale(120)));
 		scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), new Double3(0.1)));
 
-		scene.geometries.add(genPoly(0, 12, 13), genPoly(0, 13, 16), genPoly(0, 16, 19), genPoly(0, 19, 17),
-				genPoly(0, 17, 12),
-				genPoly(12, 13, 14), genPoly(13, 16, 15), genPoly(16, 19, 21), genPoly(19, 17, 20),
-				genPoly(17, 12, 18), genPoly(12, 14, 2), genPoly(13, 14, 1), genPoly(13, 1, 15), genPoly(16, 15, 5),
-				genPoly(15, 5, 21), genPoly(19, 21, 4), genPoly(19, 4, 20), genPoly(17, 20, 3), genPoly(17, 3, 18),
-				genPoly(18, 12, 2), genPoly(12, 14, 2),
-				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
-				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
-				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
-				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
-				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
-				genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2), genPoly(0, 1, 2),
-				genPoly(0, 1, 2), genPoly(0, 1, 2));
+		scene.geometries.add(genTriangle(1, 14, 13), genTriangle(2, 14, 16), genTriangle(1, 13, 18), genTriangle(1, 18, 20),
+				genTriangle(1, 20, 17), genTriangle(2, 16, 23), genTriangle(3, 15, 25), genTriangle(4, 19, 27), genTriangle(5, 21, 29),
+				genTriangle(6, 22, 31), genTriangle(2, 23, 26), genTriangle(3, 25, 28), genTriangle(4, 27, 30), genTriangle(5, 29, 32),
+				genTriangle(6, 31, 24), genTriangle(7, 33, 38), genTriangle(8, 34, 40), genTriangle(9, 35, 41), genTriangle(1, 36, 42),
+				genTriangle(1, 37, 39), genTriangle(3, 42, 12), genTriangle(3, 37, 42), genTriangle(3, 10, 42), genTriangle(4, 41, 12),
+				genTriangle(4, 36, 41), genTriangle(3, 9, 41), genTriangle(4, 40, 12), genTriangle(4, 35, 40), genTriangle(3, 8, 40),
+				genTriangle(4, 38, 12), genTriangle(4, 34, 38), genTriangle(3, 7, 38), genTriangle(3, 39, 12), genTriangle(3, 33, 39),
+				genTriangle(3, 11, 39), genTriangle(2, 37, 11), genTriangle(2, 31, 37), genTriangle(3, 10, 37), genTriangle(3, 36, 10),
+				genTriangle(3, 29, 36), genTriangle(2, 9, 36), genTriangle(3, 35, 9), genTriangle(3, 27, 35), genTriangle(2, 8, 35),
+				genTriangle(2, 34, 8), genTriangle(2, 25, 34), genTriangle(2, 7, 34), genTriangle(2, 33, 7), genTriangle(2, 23, 33),
+				genTriangle(2, 11, 33), genTriangle(3, 32, 10), genTriangle(3, 22, 32), genTriangle(2, 5, 32), genTriangle(2, 30, 9),
+				genTriangle(2, 21, 30), genTriangle(2, 4, 30), genTriangle(2, 28, 8), genTriangle(2, 19, 28), genTriangle(1, 3, 28),
+				genTriangle(2, 26, 7), genTriangle(2, 15, 26), genTriangle(1, 2, 6), genTriangle(2, 24, 11), genTriangle(2, 16, 24),
+				genTriangle(1, 6, 24), genTriangle(1, 22, 6), genTriangle(1, 20, 22), genTriangle(2, 5, 22), genTriangle(2, 21, 5),
+				genTriangle(2, 18, 21), genTriangle(1, 4, 21), genTriangle(1, 19, 4), genTriangle(1, 13, 19), genTriangle(1, 3, 19),
+				genTriangle(1, 17, 6), genTriangle(1, 14, 17), genTriangle(1, 1, 17), genTriangle(1, 15, 3), genTriangle(1, 14, 15),
+				genTriangle(14, 2, 15));
 	}
 }
