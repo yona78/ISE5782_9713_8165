@@ -48,7 +48,7 @@ class TubeTests {
 		Point p2 = new Point(0.8660254037844382, 0.5, 4.866025403784437);
 		Point p3 = new Point(1, 0, 2);
 		Point p4 = new Point(1, 0, 1);
-		Tube tube = new Tube(new Ray(new Point(0, 0, 0), new Vector(0, 0, 1)), 1d);
+		Tube tube = new Tube(new Ray(new Point(0, 0, 1), new Vector(0, 0, 1)), 1d);
 		// =============== Equivalence Partitions Tests ==================
 
 		// TC01: The ray crosses the tube in 2 points
@@ -267,7 +267,8 @@ class TubeTests {
 		// TC4011: The ray starts after the tube (0 intersection points)
 		assertNull(tube.findIntersections(new Ray(new Point(2, 0.5, 1), v1)), "Should be null");
 
-		// TC4012: The ray starts before the tube and crosses it's center (2 intersection points)
+		// TC4012: The ray starts before the tube and crosses it's center (2
+		// intersection points)
 		intersections = tube.findIntersections(new Ray(new Point(-2, 0, 1), v1));
 		// If null
 		assertNotNull(intersections, "Returns null");
@@ -278,7 +279,8 @@ class TubeTests {
 			intersections = List.of(intersections.get(1), intersections.get(0));
 		assertEquals(List.of(new Point(-1, 0, 1), new Point(1, 0, 1)), intersections, "Wrong point");
 
-		// TC4013: The ray starts after the tube and "crosses" it's center (0 intersection points)
+		// TC4013: The ray starts after the tube and "crosses" it's center (0
+		// intersection points)
 		assertNull(tube.findIntersections(new Ray(new Point(2, 0, 1), v1)), "Should be null");
 
 		// + The ray is parallel to the tube
@@ -294,36 +296,36 @@ class TubeTests {
 		// TC414: The ray is on the tube's axis
 		assertNull(tube.findIntersections(new Ray(new Point(0, 0, 2), new Vector(0, 0, 1))), "Should be null");
 
-		// TC140: The ray is outside of tube, facing back
-		assertNull(tube.findIntersections(new Ray(new Point(2, 2, 0), new Vector(0, -1, 0))), "Should be null");
+		// TC415: The ray is outside the tube, facing back
+		assertNull(tube.findIntersections(new Ray(new Point(2, 0, 2), new Vector(0, 0, -1))), "Should be null");
 
-		// TC141: The ray is on the tube, facing back
-		assertNull(tube.findIntersections(new Ray(new Point(-1, 2, 0), new Vector(0, -1, 0))), "Should be null");
+		// TC416: The ray is on the tube, facing back
+		assertNull(tube.findIntersections(new Ray(new Point(-1, 0, 2), new Vector(0, 0, -1))), "Should be null");
 
-		// TC142: The ray is in the tube, facing back
-		assertNull(tube.findIntersections(new Ray(new Point(-0.5, 2, 0), new Vector(0, -1, 0))), "Should be null");
+		// TC417: The ray is in the tube, facing back
+		assertNull(tube.findIntersections(new Ray(new Point(-0.5, 0, 2), new Vector(0, 0, -1))), "Should be null");
 
-		// TC143: The ray starts in origin point, perpendicular to tube
-		intersections = tube.findIntersections(new Ray(new Point(0, 1, 0), v1));
+		// TC418: The ray starts in the origin point and perpendicular to the tube
+		intersections = tube.findIntersections(new Ray(new Point(0, 0, 1), v1));
 		// If null
 		assertNotNull(intersections, "Returns null");
 		// Wrong amount
 		assertEquals(1, intersections.size(), "Should give only one point");
 		// Wrong point
-		assertEquals(new Point(1, 1, 0), intersections.get(0), "Wrong point");
+		assertEquals(new Point(1, 0, 1), intersections.get(0), "Wrong point");
 
-		// TC144: The ray starts in origin point, neither perpendicular nor parallel to
-		// tube
-		intersections = tube.findIntersections(new Ray(new Point(0, 1, 0), new Vector(1, 1, 0)));
+		// TC419: The ray starts in the origin point and neither perpendicular or
+		// parallel to the tube
+		intersections = tube.findIntersections(new Ray(new Point(0, 0, 1), new Vector(1, 0, 1)));
 		// If null
 		assertNotNull(intersections, "Returns null");
 		// Wrong amount
 		assertEquals(1, intersections.size(), "Should give only one point");
 		// Wrong point
-		assertEquals(new Point(1, 2, 0), intersections.get(0), "Wrong point");
+		assertEquals(new Point(1, 0, 2), intersections.get(0), "Wrong point");
 
-		// TC150: The ray starts outside, hits on circle (2 intersection points)
-		intersections = tube.findIntersections(new Ray(new Point(-2, 0, 0), new Vector(1, 1, 0)));
+		// TC4110: The ray starts outside, hits on circle (2 intersection points)
+		intersections = tube.findIntersections(new Ray(new Point(-2, 0, 0), new Vector(1, 0, 1)));
 		// If null
 		assertNotNull(intersections, "Returns null");
 		// Wrong amount
@@ -331,10 +333,10 @@ class TubeTests {
 		// Wrong points
 		if (intersections.get(0).getX() > intersections.get(1).getX())
 			intersections = List.of(intersections.get(1), intersections.get(0));
-		assertEquals(List.of(new Point(-1, 1, 0), new Point(1, 3, 0)), intersections, "Wrong point");
+		assertEquals(List.of(new Point(-1, 0, 1), new Point(1, 0, 3)), intersections, "Wrong point");
 
 		// TC151: The ray starts outside, hits origin point (2 intersection point2)
-		intersections = tube.findIntersections(new Ray(new Point(-2, -1, 0), new Vector(1, 1, 0)));
+		intersections = tube.findIntersections(new Ray(new Point(-2, 0, -1), new Vector(1, 0, 1)));
 		// If null
 		assertNotNull(intersections, "Returns null");
 		// Wrong amount
@@ -342,6 +344,6 @@ class TubeTests {
 		// Wrong points
 		if (intersections.get(0).getX() > intersections.get(1).getX())
 			intersections = List.of(intersections.get(1), intersections.get(0));
-		assertEquals(List.of(new Point(-1, 0, 0), new Point(1, 2, 0)), intersections, "Wrong point");
+		assertEquals(List.of(new Point(-1, 0, 0), new Point(1, 0, 2)), intersections, "Wrong point");
 	}
 }
