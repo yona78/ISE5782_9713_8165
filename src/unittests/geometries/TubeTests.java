@@ -335,7 +335,7 @@ class TubeTests {
 			intersections = List.of(intersections.get(1), intersections.get(0));
 		assertEquals(List.of(new Point(-1, 0, 1), new Point(1, 0, 3)), intersections, "Wrong point");
 
-		// TC151: The ray starts outside, hits origin point (2 intersection point2)
+		// TC4111: The ray starts outside, hits origin point (2 intersection point2)
 		intersections = tube.findIntersections(new Ray(new Point(-2, 0, -1), new Vector(1, 0, 1)));
 		// If null
 		assertNotNull(intersections, "Returns null");
